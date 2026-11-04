@@ -1,0 +1,26 @@
+{
+  "search_policy": {
+    "arguments": [
+      "query"
+    ],
+    "description": "Search the written Acorn Labs HR policy documents (leave, remote work, expenses, conduct, security, benefits, project addenda) and return the most relevant passages. Use this for any rule, limit, deadline, allowance or process question. Search one topic at a time with a short phrase, for example 'sick leave allowance' or 'ORCHID-77 expense deadline'. It cannot tell you anything about a specific employee."
+  },
+  "lookup_employee": {
+    "arguments": [
+      "employee_id"
+    ],
+    "description": "Look up one employee's HR record by id in the format EMP-1234. Returns their name, reporting manager, project code, work location, probation status, remaining annual leave days, sick leave already taken and carried-forward days. Use this whenever the question depends on a specific person's own situation, and before quoting any balance. It contains no policy text."
+  },
+  "calculate": {
+    "arguments": [
+      "expression"
+    ],
+    "description": "Evaluate ONE plain arithmetic expression built only from numbers and + - * / **, for example '12 - 8'. Use it to subtract or compare days, balances or amounts instead of doing the arithmetic yourself. It has no dates, units, words or functions: write '30 - 20', never '30 days - 20 days' or 'date(today) + 30'. It cannot read policies or employee records."
+  },
+  "finish": {
+    "arguments": [
+      "summary"
+    ],
+    "description": "Stop and write the final answer. Choose this as soon as the gathered evidence is enough to answer the question, or when the evidence shows the answer is not in the HR documents. `summary` is a one-line statement of the conclusion."
+  }
+}

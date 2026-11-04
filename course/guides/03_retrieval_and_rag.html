@@ -1,0 +1,179 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Week 3 Build an ask my documents application</title><style>body{margin:0;color:#192638;background:#f2f5f9;font:17px/1.7 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:880px;margin:32px auto;padding:40px 54px;background:white;border:1px solid #dbe2eb;border-radius:10px}
+h1{font-size:36px;line-height:1.2;margin:18px 0 30px}h2{font-size:25px;margin-top:40px;line-height:1.3}h3{font-size:20px;margin-top:26px}
+a{color:#164e9d}nav{font-size:15px;border-bottom:1px solid #ddd;padding-bottom:16px}pre{background:#f4f6f8;padding:18px;overflow:auto;font-size:14px;line-height:1.5}
+code{font-family:Consolas,monospace}table{border-collapse:collapse;width:100%;font-size:15px;margin:22px 0}
+td,th{border:1px solid #d5dce6;padding:10px;text-align:left;vertical-align:top}th{background:#eaf0f8}
+blockquote{margin-left:0;padding-left:18px;border-left:3px solid #cad5e4;color:#46576b}li{margin:7px 0}
+@media(max-width:700px){main{margin:0;padding:24px;border:0;border-radius:0}h1{font-size:29px}table{font-size:13px}}
+@media print{body{background:white;font-size:11pt}main{border:0;padding:0;margin:0;max-width:none}nav{display:none}h2,h3{break-after:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere}tr{break-inside:avoid}a{color:inherit}}
+</style><main><nav><a href="../index.html">All weeks</a> · <a href="03_retrieval_and_rag.md">Markdown source</a></nav><h1>Week 3 Build an ask my documents application</h1>
+<h2>Your destination this week</h2>
+<p>Load documents, retrieve relevant passages, and answer with inspectable sources. If the documents do not establish an answer, the app should say so. The practical deliverable is an HR-policy assistant using the fictional Acorn Labs corpus in this project.</p>
+<p>Think of a library helper. The helper first finds the right pages, puts them on the reader's desk, and then asks the reader to answer from those pages. Finding the pages and writing the answer are separate jobs.</p>
+<p><strong>What changed:</strong> multi-file upload support, DOCX table extraction, script-free HTML text extraction, bounded uploads, embedding batches, replacement of stale chunks, source links, structured evidence validation, and a repeatable two-size chunking experiment.</p>
+<h2>1 What RAG does</h2>
+<p>Retrieval-Augmented Generation adds relevant external information to the input of a generative model. It does not normally retrain that model.</p>
+<p>There are two workflows:</p>
+<p><strong>Ingestion:</strong> document bytes → extracted text → chunks → embeddings → persistent index.</p>
+<p><strong>Question answering:</strong> question → retrieval → context construction → model output → validation → answer and sources.</p>
+<p>The first workflow can happen hours before the second. If the first workflow loses a table or never indexes a policy addendum, the answer workflow cannot reliably recover that missing evidence.</p>
+<p>RAG is useful when answers must come from particular files, when content changes, or when users need provenance. It is not automatically the best choice for arithmetic, database transactions, or tasks better served by direct structured queries.</p>
+<h2>2 Understand the training corpus</h2>
+<p>The course corpus includes leave, remote work, expenses, security, conduct, benefits, a project-specific addendum, and a malicious-instruction example. Every policy is fictional training material.</p>
+<p>The historical corpus remains in knowledge_base. Its handbook contains unresolved template fields and should not be treated as approved real HR policy. We did not replace those placeholders with invented company decisions.</p>
+<p>The course uses .txt, .md, and .html fixtures because they are easy to inspect and version. PDF and DOCX extraction are supported and tested separately. You can create your own PDF or DOCX from the same fictional text and upload it to test those paths.</p>
+<p>Seed the running course API:</p>
+<pre><code class="language-powershell">.\.venv\Scripts\python.exe -m course.run seed
+</code></pre>
+<p>Open <strong>http://127.0.0.1:8001/documents</strong>. Confirm the expected filenames appear. Then open the home page and ask an annual leave question.</p>
+<h2>3 Loading documents without silently losing facts</h2>
+<p>A loader turns a file format into usable text:</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Application behavior</th>
+<th>Limitation to remember</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PDF</td>
+<td>Extract text by page, retain page number</td>
+<td>Scanned images need OCR first</td>
+</tr>
+<tr>
+<td>DOCX</td>
+<td>Read paragraphs and tables in order</td>
+<td>Headers, footnotes, and complex drawing content are not a complete archival extraction</td>
+</tr>
+<tr>
+<td>TXT and Markdown</td>
+<td>Decode UTF-8 text</td>
+<td>Other encodings can produce replacement characters</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td>Remove script/style content and extract visible text</td>
+<td>No browser rendering or remote URL fetching</td>
+</tr>
+</tbody>
+</table>
+<p>The app accepts uploaded HTML; it does not crawl arbitrary websites. This avoids quietly adding remote-fetch behavior such as SSRF exposure. Save a permitted web page locally before using it as a learning document.</p>
+<p>Empty or unreadable files return a controlled error. File size is limited to 10 MB by default and extracted text to one million characters. Limits prevent some resource problems but do not constitute malware scanning.</p>
+<p><strong>Test:</strong> create a DOCX with a table containing “Expense deadline: 30 days.” Upload it and inspect the extracted evidence. The old loader omitted tables; the upgraded loader includes them.</p>
+<h2>4 Chunking strategies</h2>
+<p>A chunk is a piece of source text small enough to retrieve and fit into the prompt.</p>
+<ul>
+<li>Fixed-length chunking is predictable but may cut a fact in half.</li>
+<li>Sentence or paragraph chunking respects natural boundaries but produces uneven sizes.</li>
+<li>Recursive splitting tries larger structural boundaries before smaller ones.</li>
+<li>Semantic chunking uses changes in meaning to choose boundaries; it adds cost and tuning.</li>
+<li>Parent-child retrieval searches small child chunks and supplies larger parent sections for context.</li>
+</ul>
+<p>The current TextChunker uses character limits, a preferred sentence boundary where available, and word boundaries as fallback. It normalizes whitespace. It does not preserve a full heading hierarchy or perform semantic segmentation.</p>
+<p><strong>Overlap</strong> repeats some characters between neighboring chunks. It reduces the chance that a boundary hides a condition, but increases storage and can return near-duplicate evidence. Overlap must be smaller than chunk size.</p>
+<p>Example: a policy says, “Expense claims are due in 30 days. Project ORCHID-77 uses 14 days.” A cut that isolates the exception can make the generic rule look universal. A bigger chunk may keep both together, but it may also mix irrelevant topics.</p>
+<h2>5 Embeddings and dense retrieval</h2>
+<p>A bi-encoder-style retrieval system independently embeds the question and each document passage. Document embeddings can be computed ahead of time. At query time, the system compares the question vector with stored vectors.</p>
+<p>A cross-encoder jointly reads a question-passage pair and scores it. It can inspect interactions more closely, but scoring every document at query time is expensive. A common design uses fast retrieval first and a cross-encoder on a short candidate list second.</p>
+<p>This project uses Ollama embeddings for dense search. The same embedding model must be used for indexing and querying. Matching vector dimensions alone is not enough: two unrelated models can both output 768 numbers but use incompatible spaces.</p>
+<p>New course collections record the embedding model name. Old legacy collections may lack that provenance; use a new collection when changing models or preparing a controlled experiment. Model tags can be updated in place, so serious reproducibility also records model digests, not just names.</p>
+<h3>MTEB BGE and E5</h3>
+<p>MTEB is an evaluation benchmark collection for embedding tasks. A leaderboard can help shortlist models, but your actual HR questions decide whether one is useful.</p>
+<p>BGE and E5 are embedding model families. Some versions require specific query/document prefixes or instructions. For example, the E5 model card documents query and passage prefixes. Applying those conventions to the wrong model can hurt results.</p>
+<p>The core app uses nomic-embed-text from the existing environment. It does not claim to benchmark every embedding model. If you switch models, create a new collection and rerun the same cases.</p>
+<h2>6 Vector databases and HNSW</h2>
+<p>A vector database stores vectors with associated text and metadata and supports similarity queries. In this app, Chroma persists locally.</p>
+<p>HNSW is an approximate nearest-neighbor graph method. A useful child-level picture is a map with shortcuts: the search follows promising links instead of checking every location. Approximation trades some recall for speed and memory behavior. HNSW does not itself understand policy meaning; the embedding model supplies the numerical representation.</p>
+<p>Chroma is convenient for this local exercise. Qdrant is another vector database option, and pgvector adds vector operations to PostgreSQL. You do not need to implement all three to understand the choice. Evaluate persistence, metadata filters, operational needs, indexing options, and existing infrastructure.</p>
+<h2>7 Similarity search and top K</h2>
+<p>A similarity search returns the k closest candidates under a distance measure. Our dense search uses cosine distance and exposes a derived similarity score.</p>
+<p>Top-k is a tradeoff. Too few chunks can omit an exception. Too many can distract the model or exceed context limits. More retrieved text is not automatically more evidence.</p>
+<p>The current default is four answer-context chunks. The inspection endpoint exposes the larger candidate pools and separate lexical and dense signals. A score is a retrieval signal, not a confidence probability.</p>
+<h2>8 Metadata filtering</h2>
+<p>Metadata describes a chunk, such as filename and page. Filtering can restrict search to a known document.</p>
+<p>Example request:</p>
+<pre><code class="language-json">{
+  &quot;question&quot;: &quot;How should emergency leave be requested?&quot;,
+  &quot;retrieval&quot;: {
+    &quot;mode&quot;: &quot;hybrid&quot;,
+    &quot;k&quot;: 4,
+    &quot;source&quot;: &quot;leave-policy.txt&quot;
+  }
+}
+</code></pre>
+<p>Use this with POST /inspect or POST /ask.</p>
+<p>Filtering is helpful for debugging, but choosing a filter because you already know the answer is a form of evaluation leakage if the real user will not provide it. Also, a filename filter is not tenant authorization. Production document access must be enforced independently.</p>
+<h2>9 Grounded generation and source links</h2>
+<p>The model receives numbered contexts. It returns claims with exact supporting quotes. Python checks quote membership and source bounds and renders source links such as /sources/CHUNK_ID.</p>
+<p>Clicking a source link opens the stored chunk with its filename and page. The app does not retain the original uploaded binary, so this is a source-excerpt link, not a download of the complete PDF.</p>
+<p>After replacing a document, a previous chunk link may return 404. This makes the lack of historical source version retention visible. For immutable audit links, add document version storage before production use.</p>
+<p>A genuine unknown returns exactly:</p>
+<p>“I don't know based on the uploaded documents.”</p>
+<p>No citation or high confidence is attached to that abstention. A model can still miss an answerable question or misinterpret evidence; those failures belong in the evaluation set.</p>
+<h2>10 Document replacement</h2>
+<p>Re-uploading the same filename replaces stale chunks from that source after new embeddings have been produced. Re-uploading identical content is idempotent at the chunk-ID level.</p>
+<p>This fixes the previous behavior where both old and revised leave allowances remained searchable. If embedding fails before writing, the old document stays available.</p>
+<p>The local write sequence is not a multi-document database transaction. A process crash during batched writes can leave partial state. This is a known production limitation, not a guarantee of atomic version replacement.</p>
+<h2>11 Run the chunk-size experiment</h2>
+<pre><code class="language-powershell">.\.venv\Scripts\python.exe -m course.run week3
+</code></pre>
+<p>This creates separate collections for 400-character and 900-character chunks. Overlap stays at 50 characters in both arms. The corpus, models, questions, retrieval mode, and k stay fixed.</p>
+<p>Read <strong>course/results/week3_retrieval.json</strong>. Compare chunk count, hit-rate@3, MRR, and individual retrieved passages.</p>
+<p>The measured first run tied at hit-rate@3 = 1.0 for both sizes. That means this small source-level test did not distinguish them. It does not prove equal answer completeness or equal performance on longer documents.</p>
+<p><strong>Extend the test honestly:</strong> add a longer fictional addendum with a condition near a boundary. Decide the expected evidence before running. Do not keep editing questions until one chunk size wins.</p>
+<h2>12 Quick test plan</h2>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>What you should inspect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Annual leave question</td>
+<td>20-day evidence and a valid source link</td>
+</tr>
+<tr>
+<td>Dental premium question</td>
+<td>Exact abstention</td>
+</tr>
+<tr>
+<td>ORCHID-77 expenses</td>
+<td>14-day project exception, not just generic 30 days</td>
+</tr>
+<tr>
+<td>Repeat the same upload</td>
+<td>No duplicate chunk accumulation</td>
+</tr>
+<tr>
+<td>Revise a same-named file</td>
+<td>Old statement disappears from retrieval</td>
+</tr>
+<tr>
+<td>Empty or scanned document</td>
+<td>Controlled unreadable-text error</td>
+</tr>
+<tr>
+<td>Query with filename filter</td>
+<td>Only that source appears</td>
+</tr>
+<tr>
+<td>Malicious instruction</td>
+<td>No adoption of the 999-day policy</td>
+</tr>
+</tbody>
+</table>
+<p>Run the automated tests with <strong>.\run_evals.ps1</strong>. Use the inspection screen for manual evidence checks; a passing unit suite is not a complete model evaluation.</p>
+<h2>13 Friday explanation and self-check</h2>
+<p>Demonstrate upload, a supported answer, a source link, an unknown question, and the two-size experiment. Explain why the no-gain result is still useful.</p>
+<p><strong>Questions:</strong> Does RAG train the chat model? No. Can the wrong loader cause a retrieval failure? Yes. Does a high cosine score prove a policy statement? No. Is source-level hit-rate enough to prove the right paragraph was retrieved? No.</p>
+<h2>References</h2>
+<ul>
+<li><a href="https://www.sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html">Retrieve and rerank with bi-encoders and cross-encoders</a></li>
+<li><a href="https://huggingface.co/intfloat/e5-small-v2">E5 model instructions</a></li>
+</ul>
+</main></html>

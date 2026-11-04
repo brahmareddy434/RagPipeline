@@ -1,0 +1,173 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Week 2 Prompting structured output and tool calling</title><style>body{margin:0;color:#192638;background:#f2f5f9;font:17px/1.7 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:880px;margin:32px auto;padding:40px 54px;background:white;border:1px solid #dbe2eb;border-radius:10px}
+h1{font-size:36px;line-height:1.2;margin:18px 0 30px}h2{font-size:25px;margin-top:40px;line-height:1.3}h3{font-size:20px;margin-top:26px}
+a{color:#164e9d}nav{font-size:15px;border-bottom:1px solid #ddd;padding-bottom:16px}pre{background:#f4f6f8;padding:18px;overflow:auto;font-size:14px;line-height:1.5}
+code{font-family:Consolas,monospace}table{border-collapse:collapse;width:100%;font-size:15px;margin:22px 0}
+td,th{border:1px solid #d5dce6;padding:10px;text-align:left;vertical-align:top}th{background:#eaf0f8}
+blockquote{margin-left:0;padding-left:18px;border-left:3px solid #cad5e4;color:#46576b}li{margin:7px 0}
+@media(max-width:700px){main{margin:0;padding:24px;border:0;border-radius:0}h1{font-size:29px}table{font-size:13px}}
+@media print{body{background:white;font-size:11pt}main{border:0;padding:0;margin:0;max-width:none}nav{display:none}h2,h3{break-after:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere}tr{break-inside:avoid}a{color:inherit}}
+</style><main><nav><a href="../index.html">All weeks</a> · <a href="02_prompting_and_tools.md">Markdown source</a></nav><h1>Week 2 Prompting structured output and tool calling</h1>
+<h2>Your destination this week</h2>
+<p>Build a small program that talks to a model, receives a validated object, and performs one bounded action. By the end, you should be able to point at the exact Python line that executes a tool and explain why valid JSON alone does not make a response trustworthy.</p>
+<p>Imagine ordering lunch. “Food please” leaves many decisions open. “One vegetarian sandwich, no peanuts, return the order number and total” is a clearer contract. A product prompt needs the equivalent of task, constraints, examples, and an output contract.</p>
+<p><strong>What changed:</strong> typed request models, a worked prompt example, bounded JSON retries, exact evidence validation, strict tool-argument validation, a safe calculator, controlled failures, and an endpoint for independent parallel tool requests. The application uses Ollama locally, so the core workflow needs no paid API key.</p>
+<h2>1 Start the application</h2>
+<p>Open PowerShell in the project folder. If dependencies are not already installed:</p>
+<pre><code class="language-powershell">py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+ollama pull llama3.2:3b
+ollama pull nomic-embed-text
+</code></pre>
+<p>Do not overwrite an existing .env blindly. Its values can differ from the defaults. Launch the course profile:</p>
+<pre><code class="language-powershell">.\start_course.ps1
+</code></pre>
+<p>Keep that terminal open. The course API is at <strong>http://127.0.0.1:8001</strong>. Open <strong>/docs</strong> for Swagger or <strong>/</strong> for the inspection screen. The older process on port 8000 may still be running the previous loaded code; use port 8001 for this course.</p>
+<p>The startup script selects <strong>course_hr_v2</strong> and a separate trace log. It does not replace the historical knowledge_base collection.</p>
+<h2>2 Prompt anatomy</h2>
+<p>A useful prompt explains:</p>
+<ul>
+<li><strong>Task:</strong> the result the model should produce.</li>
+<li><strong>Evidence:</strong> the inputs it may rely on.</li>
+<li><strong>Constraints:</strong> limits, exclusions, and refusal behavior.</li>
+<li><strong>Output contract:</strong> fields and their meanings.</li>
+<li><strong>Examples:</strong> representative successful and unsuccessful cases.</li>
+</ul>
+<p>The system instruction in <strong>app/prompts.py</strong> defines the behavior. The user message contains JSON with the question and numbered context objects. JSON escaping makes boundaries clearer, but does not turn malicious text into trusted instructions.</p>
+<p><strong>Zero-shot prompting</strong> gives a task without worked examples. <strong>Few-shot prompting</strong> includes examples. One carefully chosen example can resolve ambiguity better than several paragraphs of vague rules.</p>
+<p>An example is not magic. If every example has a positive answer, the model may over-answer negative cases. Include unknowns and exceptions in your tests even if the prompt examples stay short.</p>
+<h2>3 Chain of thought and self-consistency</h2>
+<p>Chain-of-thought research studies how intermediate reasoning can help some tasks. In an application, asking for a concise explanation or verifiable evidence is usually more useful than collecting private internal reasoning.</p>
+<p>Do not require the model to expose hidden reasoning. The course asks for <strong>source quotes and short grading explanations</strong>. These are inspectable evidence, not a transcript of internal thoughts.</p>
+<p>Self-consistency samples multiple candidate solutions and aggregates their final answers. For example, three arithmetic answers might be 12, 12, and 14; a majority vote selects 12. That is an illustrative example, not proof of correctness. Models can repeat the same mistake, and each sample adds cost.</p>
+<p>For this application, do not silently run several high-temperature policy answers and call the majority “truth.” Use evidence and deterministic checks. Self-consistency is an optional experiment to compare against that baseline.</p>
+<h2>4 Task decomposition</h2>
+<p>Separate work into steps with clear responsibilities:</p>
+<p>question → model chooses a tool → Python validates arguments → Python executes → response is returned.</p>
+<p>The model does not get to execute arbitrary Python. It emits a choice from an allowlist. The application decides whether that choice is valid.</p>
+<p>The same principle applies to RAG:</p>
+<p>load → chunk → embed → store → retrieve → generate → validate.</p>
+<p>Small explicit stages make errors easier to locate. A large prompt that tries to do everything hides the failure point.</p>
+<h2>5 JSON schema and Pydantic</h2>
+<p>JSON is a data syntax. JSON schema describes allowed shapes. Pydantic turns that contract into Python validation.</p>
+<p>The application's grounded output contains:</p>
+<pre><code class="language-json">{
+  &quot;answerable&quot;: true,
+  &quot;claims&quot;: [
+    {
+      &quot;statement&quot;: &quot;Employees receive 20 paid leave days per year.&quot;,
+      &quot;context_number&quot;: 1,
+      &quot;quote&quot;: &quot;Employees receive 20 paid leave days per year.&quot;
+    }
+  ]
+}
+</code></pre>
+<p>The model supplies claim content and a source number. Python checks that the source number exists and that the quote is actually present in the cited chunk. Python then renders the inline citation and its source link.</p>
+<p>There are at least three validation layers:</p>
+<ol>
+<li><strong>Syntax:</strong> can JSON be parsed?</li>
+<li><strong>Schema:</strong> are the fields, types, and bounds correct?</li>
+<li><strong>Meaning:</strong> is the claim true according to the cited evidence?</li>
+</ol>
+<p>The first two are not enough. A perfectly valid object can claim 100 leave days. The quote-membership guard catches invented quotes, but a misleading statement paired with a real quote still needs semantic review.</p>
+<p>Inspect <strong>app/models.py</strong>, <strong>app/ollama_client.py</strong>, and <strong>app/answer_quality.py</strong> together to see the whole contract.</p>
+<h2>6 Validation and bounded retry</h2>
+<p>The model client sends a JSON schema to Ollama. If the returned content fails validation, it adds a short correction request and retries. The retry count is bounded. Network errors become a controlled service-unavailable error instead of an endless loop.</p>
+<p>The application avoids mutating the caller's original message list while retrying. This matters when the same prompt is reused by concurrent requests.</p>
+<p>A retry is not free. It adds latency and tokens. Separate malformed model output, invalid user input, and a disconnected model server; they require different fixes.</p>
+<p>If evidence validation fails, the RAG service makes one targeted repair attempt and then safely abstains if evidence is still invalid. A legitimate unknown is not treated as an error requiring the model to invent something.</p>
+<h2>7 Tool execution in your code</h2>
+<p>In <strong>app/tools.py</strong>, the model returns calculator, order_lookup, or none.</p>
+<p>For calculator, <strong>CalculatorArguments</strong> permits only an expression. The calculator parses an AST rather than calling eval. It allows a small set of arithmetic operations, limits expression size and nesting, bounds exponents, and rejects non-finite or excessively large results.</p>
+<p>For order lookup, <strong>OrderArguments</strong> requires an ID shaped like ORD-1001. <strong>OrderRepository</strong> contains three demonstration records. It is not connected to a real order system.</p>
+<p>For none, the endpoint returns a fixed explanation of the supported scope. It does not accept an unconstrained model answer as an authoritative tool result.</p>
+<p><strong>Who runs the tool?</strong> Python. The response includes executed_by to make this visible.</p>
+<h2>8 Run the happy paths</h2>
+<p>Use Swagger to call POST /tools/run, or run:</p>
+<pre><code class="language-powershell">$body = @{ question = &quot;Calculate (15 + 5) * 3&quot; } | ConvertTo-Json
+Invoke-RestMethod http://127.0.0.1:8001/tools/run -Method Post -ContentType &quot;application/json&quot; -Body $body
+</code></pre>
+<p>Expected result: calculator, 60, executed_by Python.</p>
+<p>Then ask “Where is order ORD-1001?” Expected result: Shipped. Ask about ORD-9999. Expected result: Order not found, without inventing a shipping date.</p>
+<h2>9 Parallel tool calls</h2>
+<p>POST /tools/parallel accepts up to four independent questions:</p>
+<pre><code class="language-json">{
+  &quot;questions&quot;: [
+    {&quot;question&quot;: &quot;Calculate 2 + 3&quot;},
+    {&quot;question&quot;: &quot;Where is order ORD-1001?&quot;}
+  ]
+}
+</code></pre>
+<p>The application runs independent tasks concurrently and returns results in input order. Each result has its own completed or failed status.</p>
+<p>This is application-level orchestration of separate tool selections. It is not a claim that the model emitted a native batch of function calls in one response.</p>
+<p>Do not parallelize dependent actions. “Look up an order, then refund its total” requires the first result before the second action. The course has no refund or other external-write tool.</p>
+<h2>10 Broken-input and guardrail checklist</h2>
+<p>Test these cases:</p>
+<table>
+<thead>
+<tr>
+<th>Input or condition</th>
+<th>Expected behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Whitespace-only question</td>
+<td>HTTP 422</td>
+</tr>
+<tr>
+<td>Calculator 1/0</td>
+<td>Controlled invalid-expression error</td>
+</tr>
+<tr>
+<td>Calculator 2**99999999</td>
+<td>Rejected before huge computation</td>
+</tr>
+<tr>
+<td>A Python import expression</td>
+<td>Rejected by the AST allowlist</td>
+</tr>
+<tr>
+<td>Invalid order ID</td>
+<td>Validation error</td>
+</tr>
+<tr>
+<td>Ollama unavailable</td>
+<td>HTTP 503</td>
+</tr>
+<tr>
+<td>Unknown tool task</td>
+<td>Fixed scope response</td>
+</tr>
+<tr>
+<td>A forged source quote</td>
+<td>Abstention with validation issues</td>
+</tr>
+</tbody>
+</table>
+<p>The model may decline to choose a calculator for a suspicious request. Unit tests directly exercise the calculator to ensure the protection does not depend on the model's choice.</p>
+<pre><code class="language-powershell">.\.venv\Scripts\python.exe -m pytest -q tests/test_tools.py tests/test_course.py tests/test_answer_quality.py
+</code></pre>
+<h2>11 Prompt injection and secrets</h2>
+<p>Prompt injection is an attempt to turn untrusted input into controlling instructions. It can appear in a user question, a document, or a tool result.</p>
+<p>The fictional corpus includes an attack telling the model to claim 999 leave days. The system prompt treats it as data, and the regression suite checks that it does not become an approved policy.</p>
+<p>Prompt instructions alone are not a security boundary. Tool allowlists, argument validation, authentication, authorization, resource limits, and evidence checks are separate controls. This course is local and single-user; it is not a production access-control system.</p>
+<p>The core Ollama requests do not need an API key. Optional external providers must read keys from environment variables. The string “ollama” in the optional OpenAI-compatible local client is a non-secret placeholder for the local server, not a paid credential. The existing .gitignore excludes .env. Never commit real keys or print them in logs.</p>
+<h2>12 The instructor library</h2>
+<p>Instructor is an optional library that combines schema-driven model output and validation/retry patterns. Our core client implements those concepts directly so you can inspect them.</p>
+<p>The optional integration is a real library example, not a replacement required for the core app:</p>
+<pre><code class="language-powershell">.\.venv\Scripts\python.exe -m pip install -r requirements-optional.txt
+.\.venv\Scripts\python.exe -m course.labs.optional_integrations instructor
+</code></pre>
+<p>It extracts a name and age through the local Ollama-compatible endpoint. Optional dependencies can be large or change APIs; check the validation status document for what was actually exercised in this environment.</p>
+<h2>13 Build it again from understanding</h2>
+<p>Start with a Pydantic request model, then a tiny Ollama client. Add a schema for the response. Prove it rejects invalid output. Add one pure Python tool with direct tests. Only then let the model choose that tool. Finally add bounded retries and inspect errors.</p>
+<p><strong>Friday demonstration:</strong> show one valid JSON response, one safely rejected input, one successful tool execution, and the line in Python that performs it. Explain where a real provider key would be read without displaying one.</p>
+<p><strong>Self-check:</strong> Does valid JSON prove truth? No. Does the model execute the calculator? No. Are independent tasks always safe to parallelize? Only when their dependencies and resource limits allow it.</p>
+<h2>References</h2>
+<ul>
+<li><a href="https://docs.ollama.com/capabilities/structured-outputs">Ollama structured outputs</a></li>
+<li><a href="https://github.com/567-labs/instructor/blob/main/docs/integrations/ollama.md">Instructor Ollama integration</a></li>
+<li><a href="https://docs.ollama.com/api/openai-compatibility">Ollama compatibility API</a></li>
+</ul>
+</main></html>

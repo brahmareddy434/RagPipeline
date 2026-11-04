@@ -1,0 +1,45 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ask your documents</title>
+<style>
+body{font:16px/1.6 system-ui;margin:0;background:#f4f6fa;color:#17243a}main{max-width:1180px;margin:auto;padding:32px}
+h1{font-size:32px;margin-bottom:4px}.muted{color:#526177}label{display:block;font-weight:600;margin:12px 0 4px}
+textarea,input,select,button{font:inherit;padding:9px;border:1px solid #b9c6d8;border-radius:6px;max-width:100%;box-sizing:border-box}
+textarea{width:100%;min-height:90px}button{background:#1648a0;color:white;cursor:pointer;margin:12px 8px 12px 0}button:disabled{opacity:.5}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.panel{background:white;padding:20px;border:1px solid #dbe1e9;border-radius:8px;overflow-wrap:anywhere}
+pre{white-space:pre-wrap;font:13px/1.6 ui-monospace,monospace}a{color:#1648a0}.controls{display:flex;flex-wrap:wrap;gap:18px}
+@media(max-width:850px){.grid{grid-template-columns:1fr}}
+</style><main>
+<h1>Ask your documents</h1><p class="muted">Read the evidence, compare retrieval methods, and check the answer. Local learning application.</p>
+<p><a href="/agent">Week 7 agent vs workflow</a> · <a href="/docs">API playground</a> · <a href="/health">Model health</a> · <a href="/documents">Indexed documents</a> · <a href="/course/index.html">Six week learning guides</a></p>
+<button id="clear">Clear indexed documents</button>
+<label for="files">Upload documents</label><input type="file" id="files" multiple accept=".txt,.md,.pdf,.docx,.html,.htm"><button id="upload">Upload</button>
+<label for="q">Question</label><textarea id="q">How should emergency leave be requested?</textarea>
+<div class="controls">
+<div><label for="mode">Search</label><select id="mode"><option>hybrid</option><option>semantic</option><option>keyword</option></select></div>
+<div><label for="rerank">Second pass</label><select id="rerank"><option>none</option><option>mmr</option><option>cross_encoder</option></select></div>
+<div><label for="transform">Query transformation</label><select id="transform"><option>none</option><option>rewrite</option><option>hyde</option></select></div>
+<div><label for="k">Chunks</label><input id="k" type="number" min="1" max="20" value="4"></div>
+<div><label for="source">Filename filter</label><input id="source" placeholder="Optional exact filename"></div>
+</div><button id="inspect">Inspect retrieval</button><button id="ask">Ask with evidence</button>
+<p id="status" role="status"></p>
+<div class="grid"><section class="panel"><h2>Question and search</h2><pre id="query"></pre></section>
+<section class="panel"><h2>Retrieved evidence</h2><div id="evidence"></div></section>
+<section class="panel"><h2>Answer and citations</h2><div id="answer"></div></section></div>
+<details><summary>Full inspection data</summary><pre id="raw"></pre></details></main>
+<script>
+const el=id=>document.getElementById(id);
+function text(parent,tag,value){const node=document.createElement(tag);node.textContent=value;parent.appendChild(node);return node}
+async function request(path,options){const r=await fetch(path,options);let d=await r.json();if(!r.ok)throw Error(JSON.stringify(d.detail||d));return d}
+async function run(answer){el('status').textContent='Working...';el('ask').disabled=el('inspect').disabled=true;
+try{let body={question:el('q').value,retrieval:{mode:el('mode').value,rerank:el('rerank').value,query_transform:el('transform').value,k:Number(el('k').value),source:el('source').value||null}};
+let d=await request(answer?'/ask':'/inspect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+el('query').textContent=JSON.stringify({question:body.question,search_query:(d.inspection||d).search_query,options:body.retrieval},null,2);
+el('evidence').replaceChildren();(d.retrieved||[]).forEach((r,i)=>{text(el('evidence'),'h3',(i+1)+'. '+r.source+' · page '+(r.page||'n/a'));text(el('evidence'),'p',r.text);text(el('evidence'),'small','Semantic '+r.semantic_score.toFixed(3)+' · BM25 '+r.keyword_score.toFixed(3))});
+el('answer').replaceChildren();text(el('answer'),'p',d.answer||'Retrieval only. No answer generated.');
+(d.citations||[]).forEach(c=>{let a=text(el('answer'),'a','['+c.number+'] '+c.source);a.href=c.url;a.target='_blank';a.rel='noopener';text(el('answer'),'blockquote',c.quote)});
+el('raw').textContent=JSON.stringify(d,null,2);el('status').textContent=d.abstained?'Abstained. No supported answer was returned.':'Complete. Check that the evidence supports each claim.';
+}catch(e){el('status').textContent=e.message}finally{el('ask').disabled=el('inspect').disabled=false}}
+el('ask').onclick=()=>run(true);el('inspect').onclick=()=>run(false);
+el('upload').onclick=async()=>{try{el('status').textContent='Uploading...';const f=new FormData();for(const file of el('files').files)f.append('files',file);el('status').textContent=JSON.stringify(await request('/documents',{method:'POST',body:f}))}catch(e){el('status').textContent=e.message}};
+el('clear').onclick=async()=>{if(!confirm('Clear every indexed document in this local course collection?'))return;try{el('status').textContent=JSON.stringify(await request('/documents',{method:'DELETE'}))}catch(e){el('status').textContent=e.message}};
+</script></html>

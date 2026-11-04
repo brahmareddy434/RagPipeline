@@ -1,0 +1,129 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Week 4 Diagnose retrieval and measure one change</title><style>body{margin:0;color:#192638;background:#f2f5f9;font:17px/1.7 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:880px;margin:32px auto;padding:40px 54px;background:white;border:1px solid #dbe2eb;border-radius:10px}
+h1{font-size:36px;line-height:1.2;margin:18px 0 30px}h2{font-size:25px;margin-top:40px;line-height:1.3}h3{font-size:20px;margin-top:26px}
+a{color:#164e9d}nav{font-size:15px;border-bottom:1px solid #ddd;padding-bottom:16px}pre{background:#f4f6f8;padding:18px;overflow:auto;font-size:14px;line-height:1.5}
+code{font-family:Consolas,monospace}table{border-collapse:collapse;width:100%;font-size:15px;margin:22px 0}
+td,th{border:1px solid #d5dce6;padding:10px;text-align:left;vertical-align:top}th{background:#eaf0f8}
+blockquote{margin-left:0;padding-left:18px;border-left:3px solid #cad5e4;color:#46576b}li{margin:7px 0}
+@media(max-width:700px){main{margin:0;padding:24px;border:0;border-radius:0}h1{font-size:29px}table{font-size:13px}}
+@media print{body{background:white;font-size:11pt}main{border:0;padding:0;margin:0;max-width:none}nav{display:none}h2,h3{break-after:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere}tr{break-inside:avoid}a{color:inherit}}
+</style><main><nav><a href="../index.html">All weeks</a> · <a href="04_debugging_retrieval.md">Markdown source</a></nav><h1>Week 4 Diagnose retrieval and measure one change</h1>
+<h2>Your destination this week</h2>
+<p>Take failing questions, show where each failure occurs, make one controlled improvement, and calculate a before-and-after result. Do not change five settings at once and guess which helped.</p>
+<p>Imagine a student answers the wrong question because the librarian handed over the wrong book. A better writer does not fix that. But if the correct page is on the desk and the student ignores an exception, the failure is in answering rather than finding.</p>
+<p><strong>What changed:</strong> a side-by-side inspection screen, semantic/keyword/hybrid modes, separate score fields, Unicode-safe BM25, MMR, optional cross-encoder reranking, query rewriting, HyDE, and a repeatable single-variable retrieval experiment.</p>
+<h2>1 Classify the actual failure</h2>
+<p>Read the question, all retrieved chunks, and the final answer.</p>
+<p><strong>Retrieval failure:</strong> supporting evidence exists in the corpus but does not appear in the retrieved set.</p>
+<p><strong>Generation failure:</strong> the required evidence is in the retrieved set, but the answer omits, distorts, or contradicts it.</p>
+<p>There are other useful categories: source quality, document loading, invalid expected labels, and unsupported questions. Do not force every problem into retrieval or generation if the document itself is an unapproved template.</p>
+<p>A filename match is weaker than an evidence match. Retrieving a handbook's table of contents is not equivalent to retrieving its emergency-leave paragraph.</p>
+<h2>2 Use the inspection screen</h2>
+<p>Open <strong>http://127.0.0.1:8001/</strong>.</p>
+<p>The three columns show question/search settings, retrieved evidence, and final answer/citations. “Inspect retrieval” makes no answer-generation call. “Ask with evidence” runs both retrieval and generation.</p>
+<p>The full data includes dense candidates, keyword candidates, final fused results, transformed query if any, and score fields.</p>
+<p>Read the actual text, not just rank 1. An exception at rank 3 can be essential. A citation number should map to the chunk that supports the associated claim.</p>
+<h2>3 Keyword search and BM25</h2>
+<p>Keyword search rewards exact term overlap. It is useful for IDs, error codes, unusual names, and precise policy language.</p>
+<p>BM25 combines term frequency, inverse document frequency, and document-length normalization. Repeating a term helps less and less rather than increasing the score without bound. A rare useful term can be more informative than a common word.</p>
+<p>The current implementation uses the BM25Plus family with delta zero. It caches its index by chunk content, handles an empty token corpus, and excludes nonpositive matches. It does not normalize the strongest keyword hit into a confidence of one.</p>
+<p>The tokenizer supports Unicode word characters and preserves internal hyphens/underscores in codes. Tokenization is still language-dependent; a simple regular expression is not a high-quality segmenter for every language.</p>
+<h2>4 Dense versus keyword retrieval</h2>
+<p>Dense search can connect vacation with leave or fixing a bike with bicycle repair. Keyword search can preserve exact ERR-4032.</p>
+<p>Neither dominates every task. Dense search can confuse similar policies. Keyword search can miss a paraphrase with no shared terms. Both depend on source quality.</p>
+<p>Try “How much vacation annually?” in keyword mode and hybrid mode. Then inspect “How do I resolve ERR-4032?” Compare actual evidence, not only the score.</p>
+<h2>5 Reciprocal rank fusion</h2>
+<p>RRF combines ranked lists without assuming their raw scores share a scale:</p>
+<p>RRF(document) = sum over lists of 1 / (constant + rank).</p>
+<p>Our constant is 60. A document appearing near the top of both lists receives contributions from both.</p>
+<p>Illustration: rank 1 contributes 1/61, and rank 3 contributes 1/63. The sum is about 0.0323. Those numbers are ordering signals, not probabilities.</p>
+<p>The upgraded code stores semantic_score, keyword_score, and fusion_score separately. Zero-match keyword entries are not allowed to gain an RRF vote merely because they were returned in a fixed-length list.</p>
+<p>Hybrid search still does not guarantee relevance. It merges imperfect candidate lists.</p>
+<h2>6 Reranking with a cross-encoder</h2>
+<p>A cross-encoder reads the question and each candidate passage together. It produces a pair score, often improving the ordering of a small candidate set.</p>
+<p>It cannot rescue a relevant passage that never entered the candidate set. Candidate recall is therefore the first prerequisite.</p>
+<p>The app has a real optional Sentence Transformers integration:</p>
+<pre><code class="language-powershell">.\.venv\Scripts\python.exe -m pip install -r requirements-optional.txt
+.\.venv\Scripts\python.exe -m course.labs.optional_integrations cross_encoder
+</code></pre>
+<p>After installation and model download, choose cross_encoder on the inspection screen. The default model is cross-encoder/ms-marco-MiniLM-L-6-v2. Set RERANKER_MODEL before startup to try a compatible alternative such as a BGE reranker. Model download size and hardware cost are separate from the core app.</p>
+<p>Cohere Rerank is an external hosted alternative. The optional demo reads COHERE_API_KEY from the environment and sends a short demonstration query. Do not send confidential HR documents to an external provider without authorization.</p>
+<pre><code class="language-powershell">.\.venv\Scripts\python.exe -m course.labs.optional_integrations cohere
+</code></pre>
+<p>No external paid call was made merely to satisfy this course.</p>
+<h2>7 MMR and diversity</h2>
+<p>Maximal Marginal Relevance balances relevance to the query against similarity to already selected passages:</p>
+<p>candidate value = lambda × query similarity
+− (1 − lambda) × maximum similarity to a selected passage.</p>
+<p>The implementation uses lambda 0.7. A high value prioritizes relevance; a lower value favors diversity.</p>
+<p>Imagine the top four chunks are nearly identical overlapping sections of the leave policy. MMR may replace a duplicate with a separate exception. That can help, but diversity can also push out a useful near-duplicate. Measure the tradeoff.</p>
+<p>Choose mmr under second pass, inspect which chunks changed, and record whether the necessary condition remained.</p>
+<h2>8 Query rewriting</h2>
+<p>A rewrite turns a messy question into a cleaner search query while trying to preserve names, codes, and intent.</p>
+<p>Example: “umm my claim thing ORCHID-77 when must i send?” might become “ORCHID-77 expense claim submission deadline.”</p>
+<p>The app exposes the rewritten query. The original question remains the user's question for generation. Keyword search keeps the original query so exact identifiers are not silently lost.</p>
+<p>A rewrite can change meaning or erase negation. Always compare the transformed query and measure whether it helps. It adds a model call and can increase latency substantially on local hardware.</p>
+<h2>9 HyDE</h2>
+<p>Hypothetical Document Embeddings generates a short hypothetical answer-like passage, embeds it, and retrieves real passages nearby.</p>
+<p>The hypothetical text is a search aid. It must never be used as evidence or stored as an approved policy. In this app, only retrieved source chunks enter the answer context.</p>
+<p>HyDE may bridge a vocabulary gap, but it can also invent an assumption that steers retrieval away from the right policy. It costs an additional model call. Keep it off unless a measured experiment justifies it.</p>
+<p>Do not call every query rewrite HyDE: the hypothetical-document step is the distinguishing idea.</p>
+<h2>10 Metrics you can calculate by hand</h2>
+<p>Suppose four answerable questions find a relevant source at ranks 1, 3, missing, and 2.</p>
+<p><strong>Hit-rate@3:</strong> three of four questions have at least one relevant result, so 3/4 = 0.75.</p>
+<p><strong>MRR@3:</strong> average reciprocal rank, counting misses as zero:
+(1 + 1/3 + 0 + 1/2) / 4 = approximately 0.4583.</p>
+<p><strong>Recall@3:</strong> fraction of all relevant items retrieved. If a question has two relevant sources and only one is returned, source-level recall is 1/2 even though hit-rate for that question is one.</p>
+<p>Choose the evaluation unit: documents, chunks, or annotated evidence spans. This app's endpoint uses source-level labels. With one relevant source per case, source recall equals hit rate. Do not pretend it measures all relevant passages.</p>
+<p>Precision asks what fraction of returned items are relevant. It answers a different question from recall.</p>
+<p>Out-of-scope questions have no relevant source. Evaluate their abstention separately instead of fabricating a retrieval rank.</p>
+<h2>11 The single-change experiment</h2>
+<p>Run:</p>
+<pre><code class="language-powershell">.\.venv\Scripts\python.exe -m course.run week4
+</code></pre>
+<p>The before arm uses keyword retrieval. The after arm uses hybrid retrieval. Chunk size stays 900, overlap stays 50, k stays 3, and the corpus/questions/models stay fixed.</p>
+<p>Read <strong>course/results/week4_retrieval.json</strong>. It contains each question's rank and actual retrieved text.</p>
+<p>The measured initial result was:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th style="text-align:right">Keyword before</th>
+<th style="text-align:right">Hybrid after</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hit-rate@3</td>
+<td style="text-align:right">15/17 = 88.2%</td>
+<td style="text-align:right">17/17 = 100%</td>
+</tr>
+</tbody>
+</table>
+<p>The two recovered paraphrases demonstrate why meaning-based retrieval helps this particular set. The result does not establish performance on every HR corpus. The cases are curated training cases, not a random sample of real employee traffic.</p>
+<p>A source-level perfect score still leaves generation errors possible. Week 6 measures the answers separately.</p>
+<h2>12 Build an honest failure record</h2>
+<p>For every failure, record:</p>
+<ul>
+<li>Question and expected source/evidence.</li>
+<li>Actual retrieved chunks and their order.</li>
+<li>Whether the relevant passage is present.</li>
+<li>Final answer and the specific defect.</li>
+<li>Primary failure category.</li>
+<li>The proposed single change and predicted effect.</li>
+</ul>
+<p>Example from historical traces: a manager-involved harassment question retrieved the HR-routing exception at rank 2 but answered with the generic manager route. That is a generation failure. Adding hybrid retrieval alone would not fix it.</p>
+<p>Example from the course experiment: a paraphrase with no keyword overlap returned no relevant keyword result, while hybrid retrieval found the leave source. That is retrieval improvement.</p>
+<h2>13 What your change did not fix</h2>
+<p>Record unchanged failures as carefully as recovered ones. A retrieval change cannot approve unresolved policy placeholders, guarantee semantic faithfulness, fix missing original-file storage, or validate a human grading rubric.</p>
+<p>This week's measured hybrid change fixed the two source misses in the small course set. It did not prove that every answer contains every exception, that citations support every statement, or that a judge is reliable.</p>
+<h2>14 Friday demonstration</h2>
+<p>Show one concrete failure, the evidence that classifies it, the one setting changed, before/after ranks, and the resulting metric. Then name a failure category the change cannot solve.</p>
+<p><strong>Self-check:</strong> Can a reranker find a missing candidate? No. Is an RRF score a probability? No. Is HyDE output a source? No. Can source hit-rate be perfect while the answer is wrong? Yes.</p>
+<h2>References</h2>
+<ul>
+<li><a href="https://www.sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html">Sentence Transformers retrieval and reranking</a></li>
+<li><a href="https://docs.cohere.com/v2/reference/rerank">Cohere rerank API</a></li>
+<li><a href="https://arxiv.org/abs/2212.10496">HyDE paper</a></li>
+</ul>
+</main></html>

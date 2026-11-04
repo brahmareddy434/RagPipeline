@@ -1,0 +1,179 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agent loop vs fixed workflow</title>
+<style>
+body{font:16px/1.6 system-ui;margin:0;background:#f4f6fa;color:#17243a}main{max-width:1240px;margin:auto;padding:32px}
+h1{font-size:30px;margin-bottom:4px}h2{font-size:19px}.muted{color:#526177}label{display:block;font-weight:600;margin:12px 0 4px}
+textarea,input,select,button{font:inherit;padding:9px;border:1px solid #b9c6d8;border-radius:6px;max-width:100%;box-sizing:border-box}
+textarea{width:100%;min-height:74px}button{background:#1648a0;color:white;cursor:pointer;margin:12px 8px 12px 0}button:disabled{opacity:.5}
+button.ghost{background:#fff;color:#1648a0;border-color:#1648a0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.panel{background:white;padding:20px;border:1px solid #dbe1e9;border-radius:8px;overflow-wrap:anywhere}
+.controls{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.step{border-left:3px solid #1648a0;padding:2px 0 2px 12px;margin:14px 0}.step.bad{border-left-color:#b3261e}
+.step h3{font-size:14px;margin:0 0 4px;text-transform:uppercase;letter-spacing:.04em;color:#526177}
+.tool{font:13px ui-monospace,monospace;background:#eef2f9;padding:2px 6px;border-radius:4px}
+pre{white-space:pre-wrap;font:12.5px/1.55 ui-monospace,monospace;background:#f7f9fc;padding:10px;border-radius:6px;margin:6px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;padding:7px 9px;border-bottom:1px solid #e3e8ef}
+th{background:#1f4e78;color:#fff;font-size:12.5px}.win{background:#e7f5ec;font-weight:600}
+.badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:99px;background:#eef2f9;color:#31445f;margin-right:6px}
+.badge.stop{background:#fdecea;color:#8c1d18}.badge.ok{background:#e7f5ec;color:#11623a}
+blockquote{margin:6px 0;padding-left:10px;border-left:3px solid #c8d2e0;color:#3c4a60;font-size:14px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+</style><main>
+<h1>Agent loop vs fixed workflow</h1>
+<p class="muted">Week 7. The same HR task, run two ways. Every agent step is shown: what it thought, which tool it chose, what came back, and why it stopped.</p>
+<p><a href="/">Ask your documents</a> · <a href="/docs">API playground</a> · <a href="/agent/tools">Tool catalogue</a> · <a href="/health">Model health</a></p>
+
+<label for="task">Task</label>
+<textarea id="task">EMP-1001 paid for approved business travel 20 days ago and has not filed the expense claim yet. Can they still claim it?</textarea>
+<p class="muted" id="examples"></p>
+<div class="controls">
+<div><label for="session">Session id (long-term memory, optional)</label><input id="session" placeholder="e.g. demo-1" size="16"></div>
+<div><label for="steps">Max steps</label><input id="steps" type="number" min="1" max="20" value="6"></div>
+<div><label for="seconds">Max seconds</label><input id="seconds" type="number" min="5" max="900" value="180"></div>
+</div>
+<button id="race">Run both and compare</button>
+<button id="agent" class="ghost">Agent only</button>
+<button id="workflow" class="ghost">Fixed workflow only</button>
+<p id="status" role="status"></p>
+
+<section class="panel" id="scoreboard" hidden><h2>Scoreboard</h2><div id="score"></div>
+<p class="muted">One task is an anecdote. <code>python -m course.race</code> runs the whole scenario set with repeats for the real numbers.</p></section>
+
+<div class="grid">
+<section class="panel"><h2>Agent — think, act, observe, repeat</h2><div id="agentOut" class="muted">Not run yet.</div></section>
+<section class="panel"><h2>Fixed workflow — three hard-coded stages</h2><div id="workflowOut" class="muted">Not run yet.</div></section>
+</div>
+<details><summary>Raw response</summary><pre id="raw"></pre></details></main>
+<script>
+const el = id => document.getElementById(id);
+const node = (parent, tag, value, cls) => { const n = document.createElement(tag); if (value !== undefined) n.textContent = value; if (cls) n.className = cls; parent.appendChild(n); return n; };
+
+const EXAMPLES = [
+  ["Needs two searches", "EMP-1001 paid for approved business travel 20 days ago and has not filed the expense claim yet. Can they still claim it?"],
+  ["Needs a record", "EMP-1002 wants to take 8 days of annual leave in December. Do they have enough balance?"],
+  ["One hop", "How should emergency leave be requested?"],
+  ["Must refuse", "What is the dental premium reimbursement rate for employees?"]
+];
+EXAMPLES.forEach(([label, q]) => {
+  const a = node(el('examples'), 'a', label); a.href = '#'; a.style.marginRight = '14px';
+  a.onclick = e => { e.preventDefault(); el('task').value = q; };
+});
+
+async function request(path, body) {
+  const r = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  const d = await r.json();
+  if (!r.ok) throw Error(JSON.stringify(d.detail || d));
+  return d;
+}
+
+function renderAnswer(parent, run) {
+  node(parent, 'h3', 'Answer');
+  node(parent, 'p', run.answer);
+  (run.citations || []).forEach(c => {
+    const a = node(parent, 'a', '[' + c.number + '] ' + c.source);
+    a.href = c.url; a.target = '_blank'; a.rel = 'noopener';
+    node(parent, 'blockquote', c.quote);
+  });
+  if ((run.validation_issues || []).length) node(parent, 'pre', 'Evidence rejected: ' + run.validation_issues.join('; '));
+}
+
+function renderAgent(run) {
+  const out = el('agentOut'); out.replaceChildren(); out.className = '';
+  const head = node(out, 'p');
+  node(head, 'span', 'stop: ' + run.stop_reason, 'badge ' + (run.stop_reason === 'finished' ? 'ok' : 'stop'));
+  node(head, 'span', run.usage.steps + ' steps', 'badge');
+  node(head, 'span', run.usage.model_calls + ' model calls', 'badge');
+  node(head, 'span', run.usage.total_tokens + ' tokens', 'badge');
+  node(head, 'span', Math.round(run.usage.latency_ms) + ' ms', 'badge');
+  if (run.stop_detail) node(out, 'p', run.stop_detail, 'muted');
+  if ((run.recalled_memory || []).length) {
+    node(out, 'h3', 'Recalled from long-term memory');
+    run.recalled_memory.forEach(m => node(out, 'blockquote', m));
+  }
+  if (run.scratchpad_summary) { node(out, 'h3', 'Short-term memory was compressed'); node(out, 'blockquote', run.scratchpad_summary); }
+  (run.steps || []).forEach(s => {
+    const d = node(out, 'div', undefined, 'step' + (s.ok ? '' : ' bad'));
+    node(d, 'h3', 'Step ' + s.index + (s.ok ? '' : ' — tool failed'));
+    node(d, 'p', s.thought);
+    const line = node(d, 'p'); node(line, 'span', s.tool + '(' + JSON.stringify(s.arguments) + ')', 'tool');
+    node(d, 'pre', s.observation);
+    node(d, 'small', Math.round(s.latency_ms) + ' ms · ' + (s.prompt_tokens + s.completion_tokens) + ' tokens').className = 'muted';
+  });
+  renderAnswer(out, run);
+}
+
+function renderWorkflow(run) {
+  const out = el('workflowOut'); out.replaceChildren(); out.className = '';
+  const head = node(out, 'p');
+  node(head, 'span', run.usage.model_calls + ' model calls', 'badge');
+  node(head, 'span', run.usage.total_tokens + ' tokens', 'badge');
+  node(head, 'span', Math.round(run.usage.latency_ms) + ' ms', 'badge');
+  (run.steps || []).forEach((s, i) => {
+    const d = node(out, 'div', undefined, 'step' + (s.ok ? '' : ' bad'));
+    node(d, 'h3', 'Stage ' + (i + 1) + ' — ' + s.stage);
+    node(d, 'pre', String(s.output));
+  });
+  renderAnswer(out, run);
+}
+
+function scoreboard(agent, workflow) {
+  el('scoreboard').hidden = false;
+  const box = el('score'); box.replaceChildren();
+  const t = node(box, 'table');
+  const head = node(node(t, 'thead'), 'tr');
+  ['Measure', 'Agent', 'Fixed workflow', 'Reading'].forEach(h => node(head, 'th', h));
+  const body = node(t, 'tbody');
+  const rows = [
+    ['Wall clock', Math.round(agent.usage.latency_ms) + ' ms', Math.round(workflow.usage.latency_ms) + ' ms',
+      'lower is better', agent.usage.latency_ms <= workflow.usage.latency_ms],
+    ['Model calls', agent.usage.model_calls, workflow.usage.model_calls,
+      'one per agent step, plus the final answer', agent.usage.model_calls <= workflow.usage.model_calls],
+    ['Tokens', agent.usage.total_tokens, workflow.usage.total_tokens,
+      'this is the bill', agent.usage.total_tokens <= workflow.usage.total_tokens],
+    ['Citations', agent.citations.length, workflow.citations.length, 'evidence behind the answer', null],
+    ['Refused', String(agent.abstained), String(workflow.abstained), 'correct only when the answer is absent', null],
+  ];
+  rows.forEach(([label, a, w, note, agentWins]) => {
+    const tr = node(body, 'tr');
+    node(tr, 'td', label);
+    node(tr, 'td', a, agentWins === true ? 'win' : '');
+    node(tr, 'td', w, agentWins === false ? 'win' : '');
+    node(tr, 'td', note, 'muted');
+  });
+}
+
+function budget() {
+  return { max_steps: Number(el('steps').value), max_seconds: Number(el('seconds').value) };
+}
+function task() {
+  return { task: el('task').value, session_id: el('session').value || null, budget: budget() };
+}
+
+async function go(kind) {
+  const buttons = ['race', 'agent', 'workflow'].map(el);
+  buttons.forEach(b => b.disabled = true);
+  el('status').textContent = 'Running locally. A multi-step agent run takes a while on a small model...';
+  try {
+    if (kind === 'race') {
+      const d = await request('/agent/race', task());
+      renderAgent(d.agent_run); renderWorkflow(d.workflow_run);
+      scoreboard(d.agent_run, d.workflow_run);
+      el('raw').textContent = JSON.stringify(d, null, 2);
+    } else if (kind === 'agent') {
+      const d = await request('/agent/run', task());
+      renderAgent(d); el('raw').textContent = JSON.stringify(d, null, 2);
+    } else {
+      const d = await request('/workflow/run', { task: el('task').value });
+      renderWorkflow(d); el('raw').textContent = JSON.stringify(d, null, 2);
+    }
+    el('status').textContent = 'Complete. Read the steps before believing the answer.';
+  } catch (e) {
+    el('status').textContent = e.message;
+  } finally {
+    buttons.forEach(b => b.disabled = false);
+  }
+}
+el('race').onclick = () => go('race');
+el('agent').onclick = () => go('agent');
+el('workflow').onclick = () => go('workflow');
+</script></html>

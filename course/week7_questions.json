@@ -1,0 +1,119 @@
+{
+  "task_set": "Week 7 Practical — Task Set C (HR policy)",
+  "handbook": "course/handbook (v3.2)",
+  "records": "course/data/employees.json",
+  "written_before_any_run": true,
+  "note": "Ten employee questions. Six of them (branching=true) cannot be answered from the question text alone: the applicable clause depends on the employee's completed years of service or their jurisdiction, which only the record tool knows. The task set requires at least three. The remaining four are single-hop or general, and are here so the input mix does not hand the race to either side by construction.",
+  "questions": [
+    {
+      "id": "q01_notice_under_2y",
+      "branching": true,
+      "branch_on": "tenure_years",
+      "question": "EMP-1003 wants to book planned leave next month. How many working days notice must they give?",
+      "why": "EMP-1003 has 0.5 completed years, so clause 2.3 applies (10 working days), not the general 2.2 (5 working days). The question text contains no tenure, so the notice figure cannot be retrieved without reading the record first.",
+      "expect_abstention": false,
+      "required_facts": ["10"],
+      "forbidden_facts": [],
+      "expected_clause": "2.3"
+    },
+    {
+      "id": "q02_notice_just_under_2y",
+      "branching": true,
+      "branch_on": "tenure_years",
+      "question": "What planned leave notice period applies to EMP-1005?",
+      "why": "EMP-1005 has 1.8 completed years. It looks like a long-serving employee but is still under two years, so 2.3 applies. This is the case a human skim-reads wrongly too.",
+      "expect_abstention": false,
+      "required_facts": ["10"],
+      "forbidden_facts": [],
+      "expected_clause": "2.3"
+    },
+    {
+      "id": "q03_allowance_uk",
+      "branching": true,
+      "branch_on": "jurisdiction",
+      "question": "How many paid leave days per year does EMP-1002 receive?",
+      "why": "EMP-1002 is UK. Annex 9.2 sets 28 days including public holidays, which is higher than the general 20 in 2.1, so the annex wins. Retrieval on the question alone returns 2.1 and answers 20.",
+      "expect_abstention": false,
+      "required_facts": ["28"],
+      "forbidden_facts": [],
+      "expected_clause": "9.2"
+    },
+    {
+      "id": "q04_allowance_de",
+      "branching": true,
+      "branch_on": "jurisdiction",
+      "question": "How many paid leave days per year does EMP-1006 receive?",
+      "why": "EMP-1006 is DE. Annex 9.3 sets 24 days, again above the general 20.",
+      "expect_abstention": false,
+      "required_facts": ["24"],
+      "forbidden_facts": [],
+      "expected_clause": "9.3"
+    },
+    {
+      "id": "q05_notice_uk_double",
+      "branching": true,
+      "branch_on": "jurisdiction+tenure",
+      "question": "EMP-1007 wants to take 6 days of planned leave. How many working days notice must they give?",
+      "why": "EMP-1007 is UK with 7.4 years. Clause 2.2 gives a 5 day minimum, but annex 9.2 requires at least twice the length of the leave, so 12 days. Needs the record, the annex and arithmetic.",
+      "expect_abstention": false,
+      "required_facts": ["12"],
+      "forbidden_facts": [],
+      "expected_clause": "9.2"
+    },
+    {
+      "id": "q06_orchid_expense",
+      "branching": true,
+      "branch_on": "project_code",
+      "question": "EMP-1001 paid for approved business travel 20 days ago and has not filed the claim. Can they still claim it?",
+      "why": "EMP-1001 is on ORCHID-77, so clause 4.6 replaces the general 30 day deadline in 4.2 with 14 days. 20 days have passed, so the answer is no.",
+      "expect_abstention": false,
+      "required_facts": ["14"],
+      "forbidden_facts": [],
+      "expected_clause": "4.6"
+    },
+    {
+      "id": "q07_emergency_leave",
+      "branching": false,
+      "branch_on": null,
+      "question": "How should emergency leave be requested?",
+      "why": "One clause, no personal facts needed. The agent's extra laps buy nothing here.",
+      "expect_abstention": false,
+      "required_facts": ["same day", "reporting manager"],
+      "forbidden_facts": [],
+      "expected_clause": "2.4"
+    },
+    {
+      "id": "q08_remote_limit",
+      "branching": false,
+      "branch_on": null,
+      "question": "How many days per week may an employee work remotely?",
+      "why": "Single general fact in clause 3.1. Pure speed and cost comparison.",
+      "expect_abstention": false,
+      "required_facts": ["2"],
+      "forbidden_facts": [],
+      "expected_clause": "3.1"
+    },
+    {
+      "id": "q09_sick_remaining",
+      "branching": true,
+      "branch_on": "sick_leave_taken_days",
+      "question": "How many paid sick leave days does EMP-1002 have left this year?",
+      "why": "Needs the allowance from clause 2.6 (10 per year) and the 9 already taken from the record, then a subtraction. Both systems can gather both facts, so this measures whether the arithmetic survives.",
+      "expect_abstention": false,
+      "required_facts": ["1"],
+      "forbidden_facts": [],
+      "expected_clause": "2.6"
+    },
+    {
+      "id": "q10_out_of_scope",
+      "branching": false,
+      "branch_on": null,
+      "question": "What is the dental premium reimbursement rate for employees?",
+      "why": "Clause 7.3 says the handbook has no dental policy. Both systems must refuse rather than invent a rate. Extra agent laps must not turn a refusal into a guess.",
+      "expect_abstention": true,
+      "required_facts": [],
+      "forbidden_facts": [],
+      "expected_clause": null
+    }
+  ]
+}

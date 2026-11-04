@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Week 1 How language models work",
+    "html": "guides/01_language_models.html",
+    "markdown": "guides/01_language_models.md",
+    "words": 1813
+  },
+  {
+    "title": "Week 2 Prompting structured output and tool calling",
+    "html": "guides/02_prompting_and_tools.html",
+    "markdown": "guides/02_prompting_and_tools.md",
+    "words": 1726
+  },
+  {
+    "title": "Week 3 Build an ask my documents application",
+    "html": "guides/03_retrieval_and_rag.html",
+    "markdown": "guides/03_retrieval_and_rag.md",
+    "words": 1891
+  },
+  {
+    "title": "Week 4 Diagnose retrieval and measure one change",
+    "html": "guides/04_debugging_retrieval.html",
+    "markdown": "guides/04_debugging_retrieval.md",
+    "words": 1624
+  },
+  {
+    "title": "Week 5 Read traces and rank real problems",
+    "html": "guides/05_trace_analysis.html",
+    "markdown": "guides/05_trace_analysis.md",
+    "words": 1763
+  },
+  {
+    "title": "Week 6 Measure whether a change helped",
+    "html": "guides/06_evaluations_and_judges.html",
+    "markdown": "guides/06_evaluations_and_judges.md",
+    "words": 1910
+  },
+  {
+    "title": "Week 7 Agent loops and when not to use them",
+    "html": "guides/07_agents_and_workflows.html",
+    "markdown": "guides/07_agents_and_workflows.md",
+    "words": 2526
+  }
+]

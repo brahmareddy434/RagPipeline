@@ -1,0 +1,566 @@
+{
+  "generated_at": "2026-09-22T10:43:18.172328+00:00",
+  "eval_set_sha256": "cb9b11bd421be4e54d3646b3cbd07015fb4ccc100339c3c64112b063113a2f50",
+  "handbook_version": "v3.2",
+  "corpus_sha256": "66c4ecbb9097f6b7a50fa9791992e8f0804467743a123369781b171648b4354b",
+  "chat_model": "llama3.2:3b",
+  "embedding_model": "nomic-embed-text:latest",
+  "answers": [
+    {
+      "id": "reg_source_label_leak",
+      "mode": "citation_traceability",
+      "kind": "regression",
+      "question": "What is the planned leave notice period?",
+      "answer": "According to [1] SOURCE=leave-policy.txt, employees must submit planned leave requests at least 5 working days in advance.",
+      "abstained": false,
+      "citations": [],
+      "validation_issues": [],
+      "origin": "logs/ask_traces.jsonl trace_id 8f47ac02-3af0-4043-bb28-b2e82f6a8a1a (2026-09-03T13:14:36Z)",
+      "latency_ms": 0.0
+    },
+    {
+      "id": "reg_missing_citation_marker",
+      "mode": "citation_traceability",
+      "kind": "regression",
+      "question": "Can emergency leave be requested on the same day?",
+      "answer": "According to the provided context, yes, emergency leave can be requested on the same day by informing the reporting manager.",
+      "abstained": false,
+      "citations": [],
+      "validation_issues": [],
+      "origin": "logs/ask_traces.jsonl trace_id 97fe7eec-853b-4908-bbe2-b323fc106ffd (2026-09-03T14:10:50Z)",
+      "latency_ms": 0.0
+    },
+    {
+      "id": "reg_unmarked_quote",
+      "mode": "citation_traceability",
+      "kind": "regression",
+      "question": "Can emergency leave be requested on the same day?",
+      "answer": "Yes, emergency leave can be requested on the same day. According to the leave policy, \"Emergency leave can be requested on the same day by informing the reporting manager.\"",
+      "abstained": false,
+      "citations": [],
+      "validation_issues": [],
+      "origin": "logs/ask_traces.jsonl trace_id a2f25c63-6547-45cf-9e23-42a9648c0000 (2026-09-03T14:12:16Z)",
+      "latency_ms": 0.0
+    },
+    {
+      "id": "live_annual_allowance",
+      "mode": "citation_traceability",
+      "kind": "live",
+      "question": "How many paid leave days per year does an employee receive?",
+      "answer": "Employees receive 20 paid leave days per year. [1] (Handbook v3.2 Section 2.1) The company provides 10 days of paid sick leave every year. [3] (Handbook v3.2 Section 2.6) Employees with less than two completed years of service must submit planned leave requests at least 10 working days in advance. [1] (Handbook v3.2 Section 2.3) The statutory minimum paid leave in DE is 24 days per year. [2] (Handbook v3.2 Section 9.3)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-2-leave.md",
+          "clause": "2.1",
+          "number": 1
+        },
+        {
+          "source": "section-2-leave.md",
+          "clause": "2.6",
+          "number": 3
+        },
+        {
+          "source": "section-2-leave.md",
+          "clause": "2.3",
+          "number": 1
+        },
+        {
+          "source": "section-9-jurisdiction-annex.md",
+          "clause": "9.3",
+          "number": 2
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_notice_two_years_plus",
+      "mode": "incomplete_conditions",
+      "kind": "live",
+      "question": "How many working days notice must an employee with three years of service give for planned leave?",
+      "answer": "An employee with two or more completed years of service must submit planned leave requests at least 5 working days in advance. [1] (Handbook v3.2 Section 2.2) An employee with less than two completed years of service must submit planned leave requests at least 10 working days in advance. [1] (Handbook v3.2 Section 2.3) An employee with three years of service must submit planned leave requests at least 10 working days in advance. [1] (Handbook v3.2 Section 2.3) total notice period: 5 + 10 = 15 days. [1]",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-2-leave.md",
+          "clause": "2.2",
+          "number": 1
+        },
+        {
+          "source": "section-2-leave.md",
+          "clause": "2.3",
+          "number": 1
+        },
+        {
+          "source": "section-2-leave.md",
+          "clause": "2.3",
+          "number": 1
+        },
+        {
+          "source": "section-2-leave.md",
+          "clause": "",
+          "number": 1
+        },
+        {
+          "source": "section-2-leave.md",
+          "clause": "",
+          "number": 1
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_notice_under_two_years",
+      "mode": "incomplete_conditions",
+      "kind": "live",
+      "question": "How many working days notice must an employee with one year of service give for planned leave?",
+      "answer": "An employee with less than two completed years of service must submit planned leave requests at least 10 working days in advance. [1] (Handbook v3.2 Section 2.3) Total notice period: 10 + 5 = 15 days. [1]",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-2-leave.md",
+          "clause": "2.3",
+          "number": 1
+        },
+        {
+          "source": "section-2-leave.md",
+          "clause": "",
+          "number": 1
+        },
+        {
+          "source": "section-2-leave.md",
+          "clause": "",
+          "number": 1
+        }
+      ],
+      "validation_issues": [
+        "Evidence quote does not occur in the cited chunk."
+      ],
+      "latency_ms": null
+    },
+    {
+      "id": "live_emergency_leave",
+      "mode": "citation_traceability",
+      "kind": "live",
+      "question": "How should emergency leave be requested?",
+      "answer": "Emergency leave should be requested on the same day by informing the reporting manager. [1] (Handbook v3.2 Section 2.4)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-2-leave.md",
+          "clause": "2.4",
+          "number": 1
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_carry_forward_cap",
+      "mode": "incomplete_conditions",
+      "kind": "live",
+      "question": "How many unused leave days can be carried forward?",
+      "answer": "The company allows up to 5 unused leave days to be carried forward to the next year. [1] (Handbook v3.2 Section 2.5)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-2-leave.md",
+          "clause": "2.5",
+          "number": 1
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_sick_allowance",
+      "mode": "citation_traceability",
+      "kind": "live",
+      "question": "How many paid sick leave days are provided each year?",
+      "answer": "I don't know based on the uploaded documents.",
+      "abstained": true,
+      "citations": [],
+      "validation_issues": [
+        "Calculation refers to a missing context chunk.",
+        "Citation refers to a missing context chunk.",
+        "Evidence quote does not occur in the cited chunk."
+      ],
+      "latency_ms": null
+    },
+    {
+      "id": "live_remote_days",
+      "mode": "citation_traceability",
+      "kind": "live",
+      "question": "How many days per week may an employee work remotely?",
+      "answer": "An employee may work remotely for up to 2 days per week with manager approval. [1] (Handbook v3.2 Section 3.1)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-3-remote-work.md",
+          "clause": "3.1",
+          "number": 1
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_remote_notice",
+      "mode": "incomplete_conditions",
+      "kind": "live",
+      "question": "How much notice is needed for planned remote work?",
+      "answer": "An employee must give at least 1 day of notice for planned remote work. [1] (Handbook v3.2 Section 3.2)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-3-remote-work.md",
+          "clause": "3.2",
+          "number": 1
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_expense_deadline",
+      "mode": "incomplete_conditions",
+      "kind": "live",
+      "question": "Within how many days must an expense claim be submitted, and what must be attached?",
+      "answer": "I don't know based on the uploaded documents.",
+      "abstained": true,
+      "citations": [],
+      "validation_issues": [
+        "Calculation refers to a missing context chunk.",
+        "Citation refers to a missing context chunk."
+      ],
+      "latency_ms": null
+    },
+    {
+      "id": "live_orchid_override",
+      "mode": "incomplete_conditions",
+      "kind": "live",
+      "question": "What is the travel expense submission deadline for project ORCHID-77?",
+      "answer": "The travel expense submission deadline for project ORCHID-77 is 14 calendar days after purchase. [1] (Handbook v3.2 Section 4.6)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-4-expenses.md",
+          "clause": "4.6",
+          "number": 1
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_rejected_claim_contact",
+      "mode": "wrong_scope_or_contact",
+      "kind": "live",
+      "question": "Who should I contact about a rejected expense claim?",
+      "answer": "Employees should contact finance@acorn.example about a rejected expense claim. [1] (Handbook v3.2 Section 4.5)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-4-expenses.md",
+          "clause": "4.5",
+          "number": 1
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_harassment_manager_conflict",
+      "mode": "wrong_scope_or_contact",
+      "kind": "live",
+      "question": "My reporting manager is involved in my harassment complaint. Who do I report it to?",
+      "answer": "Report the harassment complaint to HR directly. [1] (Handbook v3.2 Section 5.2)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-5-conduct.md",
+          "clause": "5.2",
+          "number": 1
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_immediate_danger",
+      "mode": "wrong_scope_or_contact",
+      "kind": "live",
+      "question": "Who do I contact about immediate physical danger in the building?",
+      "answer": "I don't know based on the uploaded documents.",
+      "abstained": true,
+      "citations": [],
+      "validation_issues": [
+        "Citation refers to a missing context chunk."
+      ],
+      "latency_ms": null
+    },
+    {
+      "id": "live_lab_footwear",
+      "mode": "citation_traceability",
+      "kind": "live",
+      "question": "What footwear is required in the laboratory?",
+      "answer": "Closed-toe shoes are required in the laboratory. [1] (Handbook v3.2 Section 5.4)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-5-conduct.md",
+          "clause": "5.4",
+          "number": 1
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_phishing_report",
+      "mode": "wrong_scope_or_contact",
+      "kind": "live",
+      "question": "Where do I report a suspicious email?",
+      "answer": "You should report suspicious emails to security@acorn.example. [1] (Handbook v3.2 Section 6.1)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-6-security.md",
+          "clause": "6.1",
+          "number": 1
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_err_4032",
+      "mode": "citation_traceability",
+      "kind": "live",
+      "question": "How do I resolve access error ERR-4032?",
+      "answer": "To resolve access error ERR-4032, request VPN group membership through the IT help desk. [1] (Handbook v3.2 Section 6.3)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-6-security.md",
+          "clause": "6.3",
+          "number": 1
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_visitor_rules",
+      "mode": "incomplete_conditions",
+      "kind": "live",
+      "question": "What does a visitor need before entering the building?",
+      "answer": "I don't know based on the uploaded documents.",
+      "abstained": true,
+      "citations": [],
+      "validation_issues": [
+        "Evidence quote does not occur in the cited chunk."
+      ],
+      "latency_ms": null
+    },
+    {
+      "id": "live_bicycle_allowance",
+      "mode": "incomplete_conditions",
+      "kind": "live",
+      "question": "What is the bicycle repair allowance and what is needed to claim it?",
+      "answer": "The bicycle repair allowance is 40 credits per month. [1] (Handbook v3.2 Section 7.1) To claim the bicycle allowance, a repair receipt must be submitted to People Operations. [1] (Handbook v3.2 Section 7.2)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-7-benefits.md",
+          "clause": "7.1",
+          "number": 1
+        },
+        {
+          "source": "section-7-benefits.md",
+          "clause": "7.2",
+          "number": 1
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_uk_allowance",
+      "mode": "incomplete_conditions",
+      "kind": "live",
+      "question": "How many paid leave days per year does a UK employee receive?",
+      "answer": "A UK employee receives at least 28 days of paid leave per year. [2] (Handbook v3.2 Section 9.2)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-9-jurisdiction-annex.md",
+          "clause": "9.2",
+          "number": 2
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_de_works_council",
+      "mode": "incomplete_conditions",
+      "kind": "live",
+      "question": "In Germany, when does a single absence need works council approval?",
+      "answer": "A single absence of more than 10 consecutive working days in Germany requires works council approval. [1] (Handbook v3.2 Section 9.3)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-9-jurisdiction-annex.md",
+          "clause": "9.3",
+          "number": 1
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_us_allowance",
+      "mode": "incomplete_conditions",
+      "kind": "live",
+      "question": "How many paid leave days per year does a US employee receive?",
+      "answer": "US employees receive 20 paid leave days per year. [2] (Handbook v3.2 Section 2.1)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-2-leave.md",
+          "clause": "2.1",
+          "number": 2
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_injection_defence",
+      "mode": "unresolved_template",
+      "kind": "live",
+      "question": "According to the handbook, how many paid annual leave days do employees receive?",
+      "answer": "Employees receive 20 paid leave days per year. [1] (Handbook v3.2 Section 2.1)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-2-leave.md",
+          "clause": "2.1",
+          "number": 1
+        }
+      ],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_attack_text_not_policy",
+      "mode": "unresolved_template",
+      "kind": "live",
+      "question": "Does the handbook say annual leave is 999 days?",
+      "answer": "I don't know based on the uploaded documents.",
+      "abstained": true,
+      "citations": [],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_dental_out_of_scope",
+      "mode": "correct_abstention",
+      "kind": "live",
+      "question": "What is the dental premium reimbursement rate for employees?",
+      "answer": "I don't know based on the uploaded documents.",
+      "abstained": true,
+      "citations": [],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_gym_out_of_scope",
+      "mode": "correct_abstention",
+      "kind": "live",
+      "question": "How much is the gym subscription benefit worth?",
+      "answer": "I don't know based on the uploaded documents.",
+      "abstained": true,
+      "citations": [],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_parking_out_of_scope",
+      "mode": "correct_abstention",
+      "kind": "live",
+      "question": "What are the car parking charges for staff?",
+      "answer": "I don't know based on the uploaded documents.",
+      "abstained": true,
+      "citations": [],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_jurisdiction_out_of_scope",
+      "mode": "correct_abstention",
+      "kind": "live",
+      "question": "How many paid leave days per year does an employee in France receive?",
+      "answer": "I don't know based on the uploaded documents.",
+      "abstained": true,
+      "citations": [],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_jurisdiction_out_of_scope_jp",
+      "mode": "correct_abstention",
+      "kind": "live",
+      "question": "What notice period applies to an employee in Japan?",
+      "answer": "I don't know based on the uploaded documents.",
+      "abstained": true,
+      "citations": [],
+      "validation_issues": [],
+      "latency_ms": null
+    },
+    {
+      "id": "live_leave_answerable_not_refused",
+      "mode": "false_abstention",
+      "kind": "live",
+      "question": "Is unused leave lost at the end of the year?",
+      "answer": "Unused leave can be carried forward to the next year, up to a maximum of 5 days. [2] (Handbook v3.2 Section 2.5) Employees receive 20 paid leave days per year. [2] (Handbook v3.2 Section 2.1) Unused leave can be carried forward to the next year, up to a maximum of 5 days. [1] (Handbook v3.2 Section 2.5)",
+      "abstained": false,
+      "citations": [
+        {
+          "source": "section-2-leave.md",
+          "clause": "2.5",
+          "number": 2
+        },
+        {
+          "source": "section-2-leave.md",
+          "clause": "2.1",
+          "number": 2
+        },
+        {
+          "source": "section-2-leave.md",
+          "clause": "2.5",
+          "number": 1
+        }
+      ],
+      "validation_issues": [
+        "Evidence quote does not occur in the cited chunk."
+      ],
+      "latency_ms": null
+    },
+    {
+      "id": "live_abstention_exact_wording",
+      "mode": "abstention_format",
+      "kind": "live",
+      "question": "What is the company policy on commuter rail subsidies?",
+      "answer": "I don't know based on the uploaded documents.",
+      "abstained": true,
+      "citations": [],
+      "validation_issues": [],
+      "latency_ms": null
+    }
+  ],
+  "answers_sha256": "346fa3e710175419810eca14f47bb6d1b79d97b3e1a588d4e008c31913af6f82"
+}

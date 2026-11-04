@@ -1,0 +1,9 @@
+{
+  "what_this_proves": "These labels existed, with this content, at the sealed_at time below, which precedes the judge run recorded in course/results/week6_agreement.json.",
+  "sealed_at": "2026-09-22T13:33:21.293354+00:00",
+  "labels_sha256": "4621a8b9eea4436db7da4223adcbe544e953deeb3d9f822ee88cfaa2f0506df5",
+  "answers_sha256": "346fa3e710175419810eca14f47bb6d1b79d97b3e1a588d4e008c31913af6f82",
+  "labels_file": "evaluation\\week6\\labels_25.json",
+  "labelled": 25,
+  "unlabelled": 0
+}

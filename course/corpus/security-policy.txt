@@ -1,0 +1,6 @@
+FICTIONAL ACORN LABS SECURITY POLICY
+Report suspicious emails to security@acorn.example and do not open their attachments.
+Confidential paper documents must be shredded in the secure disposal bins.
+For access error ERR-4032, request VPN group membership through the IT help desk.
+Never share passwords with colleagues or visitors.
+Visitors need host approval and a reception badge and must remain with their host.

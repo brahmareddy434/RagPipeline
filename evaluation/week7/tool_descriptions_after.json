@@ -1,0 +1,44 @@
+{
+  "search_handbook": {
+    "arguments": [
+      "query"
+    ],
+    "description": "Read the general Acorn Labs employee handbook and return the matching numbered clauses. ONE JOB: the rule that applies to everybody. Use it for an allowance, limit, deadline, notice period or process. Search one topic in a short phrase, for example 'planned leave notice'. It knows nothing about any individual person and nothing about country-specific overrides.",
+    "enums": {}
+  },
+  "get_employee_record": {
+    "arguments": [
+      "employee_id"
+    ],
+    "description": "Return the HR record for ONE employee id such as EMP-1001. ONE JOB: facts about that person only - name, reporting manager, project code, jurisdiction code, completed years of service, leave balance, sick days taken, carry-forward days. Call it first whenever a question names an employee, because their years of service and jurisdiction decide which rule applies. It contains no handbook text and no country rules.",
+    "enums": {}
+  },
+  "get_jurisdiction_rules": {
+    "arguments": [
+      "jurisdiction"
+    ],
+    "description": "Return the handbook annex for ONE country code. ONE JOB: the country override that replaces a general handbook rule. Allowed values are exactly IN, UK, DE, US and nothing else. Call it after you know the employee's jurisdiction, and before you state any allowance or notice period for them. It holds no general rules and no personal data.",
+    "enums": {
+      "jurisdiction": [
+        "IN",
+        "UK",
+        "DE",
+        "US"
+      ]
+    }
+  },
+  "calculate": {
+    "arguments": [
+      "expression"
+    ],
+    "description": "Evaluate ONE plain arithmetic expression built only from numbers and + - * / **, for example '12 - 8'. Use it to subtract or compare days or balances instead of doing the arithmetic yourself. It has no dates, units, words or functions: write '30 - 20', never '30 days - 20 days' or 'date(today) + 30'.",
+    "enums": {}
+  },
+  "finish": {
+    "arguments": [
+      "summary"
+    ],
+    "description": "Stop and write the final answer. Choose this as soon as the gathered evidence can answer the question, or as soon as it is clear the handbook does not cover it. `summary` is a one-line statement of the conclusion.",
+    "enums": {}
+  }
+}

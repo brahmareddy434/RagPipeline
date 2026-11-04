@@ -1,0 +1,8 @@
+{
+  "cases": [
+    {"question": "What is the refund period?", "expected_source": "refund-policy.txt"},
+    {"question": "What does error ERR-4032 mean?", "expected_source": "sdk-errors.md"}
+  ],
+  "k": 3
+}
+

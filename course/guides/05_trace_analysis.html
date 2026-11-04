@@ -1,0 +1,194 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Week 5 Read traces and rank real problems</title><style>body{margin:0;color:#192638;background:#f2f5f9;font:17px/1.7 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:880px;margin:32px auto;padding:40px 54px;background:white;border:1px solid #dbe2eb;border-radius:10px}
+h1{font-size:36px;line-height:1.2;margin:18px 0 30px}h2{font-size:25px;margin-top:40px;line-height:1.3}h3{font-size:20px;margin-top:26px}
+a{color:#164e9d}nav{font-size:15px;border-bottom:1px solid #ddd;padding-bottom:16px}pre{background:#f4f6f8;padding:18px;overflow:auto;font-size:14px;line-height:1.5}
+code{font-family:Consolas,monospace}table{border-collapse:collapse;width:100%;font-size:15px;margin:22px 0}
+td,th{border:1px solid #d5dce6;padding:10px;text-align:left;vertical-align:top}th{background:#eaf0f8}
+blockquote{margin-left:0;padding-left:18px;border-left:3px solid #cad5e4;color:#46576b}li{margin:7px 0}
+@media(max-width:700px){main{margin:0;padding:24px;border:0;border-radius:0}h1{font-size:29px}table{font-size:13px}}
+@media print{body{background:white;font-size:11pt}main{border:0;padding:0;margin:0;max-width:none}nav{display:none}h2,h3{break-after:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere}tr{break-inside:avoid}a{color:inherit}}
+</style><main><nav><a href="../index.html">All weeks</a> · <a href="05_trace_analysis.md">Markdown source</a></nav><h1>Week 5 Read traces and rank real problems</h1>
+<h2>Your destination this week</h2>
+<p>Read approximately twenty real application answers, write observations before categories, group the observations, and choose a fix target using frequency and impact.</p>
+<p>Think of a teacher reviewing a stack of homework. A total score says how much went wrong; the teacher's notes reveal whether students misunderstood the question, forgot a condition, or used the wrong rule. Error analysis is that diagnostic work for your application.</p>
+<p><strong>What was done:</strong> the existing fifty historical traces were preserved; a reproducible random sample of twenty was selected; every selected answer and all of its retrieved chunks were read; an assistant-authored note was written for each; and a ranked taxonomy was generated. Human labels remain blank for you to supply. These are not presented as your personal review.</p>
+<h2>1 What a complete trace contains</h2>
+<p>A trace should make it possible to reconstruct what happened:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Question and request options</td>
+<td>Shows the actual input and retrieval settings</td>
+</tr>
+<tr>
+<td>Retrieved text and ordering</td>
+<td>Shows what evidence the model saw</td>
+</tr>
+<tr>
+<td>Answer and citations</td>
+<td>Shows the behavior being evaluated</td>
+</tr>
+<tr>
+<td>Timestamp and IDs</td>
+<td>Supports correlation and provenance</td>
+</tr>
+<tr>
+<td>Model and prompt identity</td>
+<td>Identifies the system variant</td>
+</tr>
+<tr>
+<td>Corpus fingerprint</td>
+<td>Detects a changed knowledge base</td>
+</tr>
+<tr>
+<td>Latency and model usage</td>
+<td>Exposes cost and performance tradeoffs</td>
+</tr>
+<tr>
+<td>Errors</td>
+<td>Keeps failures visible rather than silently dropping them</td>
+</tr>
+</tbody>
+</table>
+<p>New /ask traces include configuration, prompt hash, corpus hash, model-call counters, and response data. The API echoes a generated X-Trace-ID header.</p>
+<p>Historical traces are useful real outputs, but they lack some of the stronger configuration identity now recorded. Model version, source content, and runtime state can change. “Replayable” means sufficiently documented to repeat the experiment; it does not guarantee identical output.</p>
+<p>The original corpus files are not retained in uploads. The historical trace evidence is therefore valuable, but should not be described as a perfect original-document archive.</p>
+<h2>2 Random and curated sampling</h2>
+<p>A curated set deliberately chooses cases: known bugs, edge cases, and important user journeys. It is excellent for regression tests but cannot estimate real traffic frequency without careful qualification.</p>
+<p>A random sample selects cases according to a defined procedure. State the population first. Twenty randomly chosen records from a curated fifty-question experiment remain a sample of that experiment, not a random sample of every employee's needs.</p>
+<p>The course samples twenty records without replacement using seed 42 from evaluation/traces_hr_agent.json. It stores the population hash, population size, seed, and selected trace IDs.</p>
+<pre><code class="language-powershell">.\.venv\Scripts\python.exe -m course.run week5
+</code></pre>
+<p>This writes <strong>course/results/week5_sample.json</strong> with blank review fields. Running it again recreates that worksheet, so save your annotated copy under a different name before rerunning.</p>
+<p>Do not remove ugly answers, timeouts, or abstentions to make the report look better. If a record is excluded, document the reason and how it affects the denominator.</p>
+<h2>3 Open coding before categories</h2>
+<p>First read the answer and all retrieved evidence. Write one concrete sentence about what happened.</p>
+<p>Weak note: “Bad generation.”</p>
+<p>Better note: “The answer sends a manager-involved harassment complaint to the manager even though retrieved page 9 explicitly directs that case to HR.”</p>
+<p>The better note identifies the output, conflicting evidence, and consequence. It does not require a category first.</p>
+<p>Use your own words. Avoid writing the solution into every observation. “Needs a reranker” is a hypothesis, not an observation.</p>
+<p>For correct answers, record that you found no defect under the stated rubric. For correct unknowns, mark an abstention control. You should be able to distinguish a success from a case you forgot to inspect.</p>
+<h2>4 Read the actual evidence</h2>
+<p>Do not grade only by whether the answer sounds sensible. Compare each material statement to the retrieved passage.</p>
+<p>A useful sequence is:</p>
+<ol>
+<li>What exactly did the user ask?</li>
+<li>Which passage could support the answer?</li>
+<li>Is the needed exception or condition present?</li>
+<li>Does the answer preserve the employee group, deadline, contact, and scope?</li>
+<li>Does the citation point to the supporting chunk?</li>
+<li>Is the source itself authoritative, complete, and free of unresolved template choices?</li>
+</ol>
+<p>An answer can be faithful to a bad source. If a handbook says “[Business / Casual / Smart Casual]” and the model chooses one, the problem is not solved by making citations prettier.</p>
+<p>This course reviews historical HR text as application evidence, not as current legal or employment advice.</p>
+<h2>5 Two serious observed failures</h2>
+<p><strong>Wrong contact:</strong> a historical question asked what to do when the reporting manager is involved in harassment. The retrieved evidence included an explicit HR exception. The answer instead described the generic manager route. Relevant evidence was retrieved, so this is a generation error with high user impact.</p>
+<p><strong>Wrong employee group:</strong> an overtime question received an answer assigning a ten-hour cap to non-exempt employees. The retrieved template assigned that cap to exempt employees. The answer also failed to flag template status. This is a scope error, not merely a missing citation.</p>
+<p>These examples explain why “the correct document appeared” is an incomplete quality measure.</p>
+<h2>6 Name problem groups after reading</h2>
+<p>A taxonomy is a set of understandable problem categories.</p>
+<p>The assistant review uses categories such as:</p>
+<ul>
+<li>Citation traceability: missing numbered citations, incorrect context reference, or internal label leakage.</li>
+<li>Wrong scope or contact: a policy rule applies to the wrong group or sends the user to the wrong responsible person.</li>
+<li>Incomplete conditions: a material qualification is omitted.</li>
+<li>Unresolved template: unapproved bracketed choices are treated as settled policy.</li>
+<li>False abstention: the app declines despite relevant evidence.</li>
+<li>Abstention format: the answer declines correctly but breaks the exact output contract.</li>
+<li>Correct abstention: a successful control, with severity zero.</li>
+</ul>
+<p>These are provisional categories. If two reviewers interpret a category differently, refine its definition and examples. Keep a short rubric so future reviewers can use the same boundaries.</p>
+<p>One trace can have secondary defects. For the main frequency table, assign one primary group to avoid double-counting. Preserve secondary notes in the observation text.</p>
+<h2>7 Frequency times severity</h2>
+<p>Frequency measures how often a group occurs in the defined sample. Severity estimates the harm when it occurs.</p>
+<p>A simple severity scale is:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Score</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td>Successful control or no observed defect</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td>Cosmetic or minor format issue</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>Traceability or usability problem</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>Material omission or avoidable wrong abstention</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>Wrong actionable scope or unapproved policy presented as fact</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>High-impact wrong routing or similar serious consequence</td>
+</tr>
+</tbody>
+</table>
+<p>A category with four severity-three cases has priority score 12. A category with one severity-five case scores five. The multiplication helps organize work, but it does not mean frequent cosmetic issues should always outrank rare serious risks. Document any risk-based override.</p>
+<p>The ranker uses count × mean severity, which equals the sum of case severities. It also reports count and frequency separately. Successful controls remain visible with priority zero.</p>
+<h2>8 Your review files</h2>
+<ul>
+<li><strong>week5_sample.json:</strong> blank human worksheet with the sampled traces.</li>
+<li><strong>week5_assistant_review.json:</strong> observations written by the assistant, with human_pass still null.</li>
+<li><strong>week5_taxonomy.json:</strong> ranked groups from the assistant review.</li>
+<li><strong>course/review_notes.py:</strong> reproducible record of those assistant notes.</li>
+</ul>
+<p>To regenerate the assistant example:</p>
+<pre><code class="language-powershell">.\.venv\Scripts\python.exe -m course.review_notes
+</code></pre>
+<p>To rank your own annotated copy:</p>
+<pre><code class="language-powershell">.\.venv\Scripts\python.exe -m course.run rank --notes course/results/my_review.json
+</code></pre>
+<p>Every row needs an open_note, problem_type, and severity from zero to five. Set reviewer to your name or an agreed identifier. Preserve your notes separately from the assistant example.</p>
+<h2>9 Choose a target and write a prediction first</h2>
+<p>A good prediction is narrow and testable:</p>
+<p>“If the prompt explicitly preserves exception contacts, then manager-involved harassment questions should cite the HR route, while ordinary reporting questions should remain correct.”</p>
+<p>Specify the cases and scoring rule before changing the prompt. Otherwise it is easy to redefine success after seeing outputs.</p>
+<p>The assistant's frequency ranking makes citation traceability a substantial group. However, wrong-contact and wrong-scope cases have higher individual impact. A responsible next target could prioritize those serious cases even if they are less frequent. Explain that choice.</p>
+<p>Week 6's controlled prompt experiment tests material completeness and exceptions. It records its prediction before generating results.</p>
+<h2>10 Benchmarks versus your application</h2>
+<p>MMLU measures broad academic/professional knowledge tasks. HumanEval evaluates code-generation solutions to programming problems. They answer useful model-level questions, but they do not establish whether your assistant retrieves the right HR paragraph or preserves a local approval condition.</p>
+<p>Your application needs its own test set, grounded in its inputs and failure modes. A larger public benchmark score does not repair an unindexed policy file.</p>
+<p>Do not compare percentages across unrelated benchmarks as if they meant the same thing. A ninety-percent source hit rate, a ninety-percent human agreement rate, and a ninety-percent coding benchmark score have different denominators and meanings.</p>
+<h2>11 Avoid these traps</h2>
+<p><strong>Cherry-picking:</strong> reading only successful cases.</p>
+<p><strong>Category-first thinking:</strong> forcing observations into a preferred diagnosis before examining evidence.</p>
+<p><strong>Unfair denominators:</strong> omitting failures or mixing answerable and unanswerable retrieval cases.</p>
+<p><strong>Label laundering:</strong> calling assistant-generated or imported labels “independent human review.”</p>
+<p><strong>Confusing provenance and correctness:</strong> a citation can identify a source without proving the claim follows.</p>
+<p><strong>Ignoring source quality:</strong> a template is not an approved policy just because it is in a PDF.</p>
+<p><strong>Changing several things:</strong> a better score does not reveal causality if the model, corpus, prompt, and k all change together.</p>
+<h2>12 Brief testing workflow</h2>
+<ol>
+<li>Generate the seeded sample.</li>
+<li>Copy it to your own review file.</li>
+<li>Read every answer and retrieved chunk.</li>
+<li>Write observations first.</li>
+<li>Assign primary categories and severity.</li>
+<li>Run the ranker.</li>
+<li>Choose one target and record a prediction.</li>
+<li>Carry representative failures and successful controls into Week 6.</li>
+</ol>
+<p>If you disagree with the assistant note, write why and cite the source passage. The purpose is evidence-based judgment, not agreement with the assistant.</p>
+<h2>13 Friday demonstration</h2>
+<p>Show the population and seed, one open note, its supporting passage, the final category definitions, the ranked table, and your chosen target. Be able to explain why a correct abstention is a success and why a high source hit rate can coexist with a serious answer error.</p>
+<p><strong>Self-check:</strong> Is random sampling from curated questions equivalent to random production traffic? No. Does the assistant review count as your independent human grading? No. Must the most frequent category always be fixed first? No; severity and risk can justify a different choice.</p>
+</main></html>

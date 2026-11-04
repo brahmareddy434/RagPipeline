@@ -1,0 +1,32 @@
+{
+  "track": "C - HR policy",
+  "k": 3,
+  "cases": [
+    {"question": "How many paid leave days does an employee receive each year?", "expected_source": "leave-policy.txt"},
+    {"question": "How far in advance must planned leave be submitted?", "expected_source": "leave-policy.txt"},
+    {"question": "How should emergency leave be requested?", "expected_source": "leave-policy.txt"},
+    {"question": "What is the company dress code?", "expected_source": "Employee-Handbook.pdf"},
+    {"question": "Can employees use email for personal reasons?", "expected_source": "Employee-Handbook.pdf"},
+    {"question": "What should I do if I receive a suspicious phishing email?", "expected_source": "Employee-Handbook.pdf"},
+    {"question": "Can employees use a company phone while driving?", "expected_source": "Employee-Handbook.pdf"},
+    {"question": "What are the rules for smoking at work?", "expected_source": "Employee-Handbook.pdf"},
+    {"question": "How should confidential documents be disposed of?", "expected_source": "Employee-Handbook.pdf"},
+    {"question": "Who should I contact about harassment?", "expected_source": "Employee-Handbook.pdf"},
+    {"question": "What should I do if I witness severe physical violence?", "expected_source": "Employee-Handbook.pdf"},
+    {"question": "Are employees allowed to date their managers?", "expected_source": "Employee-Handbook.pdf"},
+    {"question": "What is the policy for visitors?", "expected_source": "Employee-Handbook.pdf"},
+    {"question": "How much overtime can an employee work?", "expected_source": "Employee-Handbook.pdf"},
+    {"question": "When are reimbursable expenses submitted?", "expected_source": "Employee-Handbook.pdf"},
+    {"question": "How quickly are approved expenses reimbursed?", "expected_source": "Employee-Handbook.pdf"},
+    {"question": "Can employees work remotely?", "expected_source": "Employee-Handbook.pdf"},
+    {"question": "What happens to accrued PTO when employment ends?", "expected_source": "Employee-Handbook.pdf"}
+  ],
+  "out_of_scope_controls": [
+    "Does the company cover gym memberships?",
+    "What is the office parking fee?"
+  ],
+  "replay_request": {
+    "question": "<copy one question from cases or week5_traces.json>",
+    "temperature": 0.1
+  }
+}

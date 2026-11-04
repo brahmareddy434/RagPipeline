@@ -1,0 +1,48 @@
+# Local configuration and credentials (keep the safe configuration template)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.aws/
+
+# Python environments, caches, and build outputs
+.venv/
+.venv-*/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Local backups, databases, uploaded documents, and generated run results
+backups/
+data/
+logs/
+*.log
+course/results/
+uploads/*
+!uploads/.gitkeep
+
+# Generated document exports (Markdown documentation stays versioned)
+docs/*.docx
+docs/*_render/
+
+# Editor, OS, and local agent state
+.idea/
+.vscode/
+.codex/
+.agents/
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+~$*

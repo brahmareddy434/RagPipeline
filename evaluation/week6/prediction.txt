@@ -1,0 +1,30 @@
+PREDICTION — written before the judge prompt was iterated
+=========================================================
+Written: 2026-09-22 (before agreement_after was measured; see the sealed receipt in
+evaluation/week6/labels_receipt.json for the ordering of the label file, and
+course/results/week6_agreement.json for the run timestamps.)
+
+One sentence:
+
+  Adding two of the judge's own disagreements as few-shot examples will fix its tendency to
+  FAIL answers that are correct but terse - answers that give the right figure without
+  restating every condition - and agreement will rise mainly on the incomplete_conditions
+  and citation_traceability modes, with no change on correct_abstention.
+
+Why I expect that:
+
+  The v1 prompt tells the judge to fail an answer when "a material condition is missing".
+  A small judge model reads that strictly and treats brevity as incompleteness, so I expect
+  its errors to be concentrated in false FAILs on short-but-correct answers rather than
+  false PASSes. Showing it two real cases where a short answer was still complete should
+  recalibrate that boundary.
+
+What would make this prediction wrong:
+
+  If the disagreements turn out to be mostly false PASSes (the judge accepting answers a
+  human failed), then my model of the failure is backwards, and few-shot examples of the
+  opposite kind would be needed. It would also be wrong if agreement moved on
+  correct_abstention, which I expect to be already at ceiling because refusal is an exact
+  string match.
+
+Scored against the outcome in: docs/DEMO_Week6_Evals.md section 6.

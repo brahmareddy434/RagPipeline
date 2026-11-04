@@ -1,0 +1,110 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Week 1 How language models work</title><style>body{margin:0;color:#192638;background:#f2f5f9;font:17px/1.7 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:880px;margin:32px auto;padding:40px 54px;background:white;border:1px solid #dbe2eb;border-radius:10px}
+h1{font-size:36px;line-height:1.2;margin:18px 0 30px}h2{font-size:25px;margin-top:40px;line-height:1.3}h3{font-size:20px;margin-top:26px}
+a{color:#164e9d}nav{font-size:15px;border-bottom:1px solid #ddd;padding-bottom:16px}pre{background:#f4f6f8;padding:18px;overflow:auto;font-size:14px;line-height:1.5}
+code{font-family:Consolas,monospace}table{border-collapse:collapse;width:100%;font-size:15px;margin:22px 0}
+td,th{border:1px solid #d5dce6;padding:10px;text-align:left;vertical-align:top}th{background:#eaf0f8}
+blockquote{margin-left:0;padding-left:18px;border-left:3px solid #cad5e4;color:#46576b}li{margin:7px 0}
+@media(max-width:700px){main{margin:0;padding:24px;border:0;border-radius:0}h1{font-size:29px}table{font-size:13px}}
+@media print{body{background:white;font-size:11pt}main{border:0;padding:0;margin:0;max-width:none}nav{display:none}h2,h3{break-after:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere}tr{break-inside:avoid}a{color:inherit}}
+</style><main><nav><a href="../index.html">All weeks</a> · <a href="01_language_models.md">Markdown source</a></nav><h1>Week 1 How language models work</h1>
+<h2>Your destination this week</h2>
+<p>This is the theory-only week. You do not need to write or run Python. By the end, you should be able to explain how a model makes a sentence, why an answer can sound certain and still be wrong, how tokens affect a bill, and why searching your documents is different from training a model.</p>
+<p>Imagine a very experienced sentence-completion player. You say, “The kitten drank some…” and the player considers “milk,” “water,” and many other endings. A language model performs a numerical version of that task. The analogy helps you begin, but a modern model learns much richer patterns than a simple phrase lookup.</p>
+<p><strong>What was done in the application:</strong> the code already separated the chat model from the embedding model. We kept that separation, added actual Ollama usage counters to traces, documented sampling, and added optional demonstrations for later weeks. None of these demonstrations is compulsory coding for Week 1.</p>
+<h2>1 From text to an answer</h2>
+<p>A simplified decoder language model follows this sequence:</p>
+<ol>
+<li>A tokenizer converts text into token IDs.</li>
+<li>An embedding table converts each ID into a numerical representation.</li>
+<li>Transformer layers combine representations using attention and other learned operations.</li>
+<li>The output layer produces a score, called a logit, for each possible next token.</li>
+<li>A decoding rule selects one token.</li>
+<li>The new token is appended, and the process repeats until a stop condition.</li>
+</ol>
+<p>During training, the system adjusts weights to improve predictions over many examples. During ordinary inference, those weights are usually fixed. Asking a question does not normally retrain the model. Putting a handbook in the prompt gives it temporary evidence; indexing that handbook gives the application searchable data.</p>
+<p>The model learns from a mixture of sources determined by its maker. “All models were trained only on public internet text” is too broad. Training may involve licensed data, code, human-created examples, and other data. Whatever the mix, it does not guarantee knowledge of your private files.</p>
+<p><strong>Explain it to a child:</strong> training is practicing with many books; inference is answering now; retrieval is being allowed to open the right book before answering.</p>
+<h2>2 Tokens and tokenization</h2>
+<p>A token can be a whole word, a word fragment, punctuation, whitespace, or part of a non-English character sequence. The exact split depends on the tokenizer. The word “unbelievable” might be represented by one token in one tokenizer and several in another.</p>
+<p>A token ID is a label in a vocabulary. The ID itself is not the word's meaning. Meaning-related representations come from learned vectors and subsequent processing.</p>
+<p>Do not assume one word equals one token. The rough English heuristic of about four characters per token is an estimate, not a billing measurement. Code, numbers, punctuation, and different languages can behave very differently.</p>
+<p><strong>Token budget exercise:</strong> imagine the input contains 200 instruction tokens, 100 question tokens, and four document chunks of 250 tokens each. The input is approximately 1,300 tokens before any additional message-format overhead. A 200-token answer makes approximately 1,500 processed tokens across input and output. A retry processes additional tokens too.</p>
+<p>Our application's chunk size is measured in <strong>characters</strong>, not model tokens. A 900-character chunk is not a 900-token chunk.</p>
+<h2>3 The context window</h2>
+<p>The context window is the model's working space for a request. It includes the instructions, supplied conversation, retrieved evidence, and room needed for output, subject to the model/runtime's accounting rules.</p>
+<p>Think of a desk. A bigger desk fits more paper, but filling it with irrelevant paper does not necessarily improve the answer. Important text can still be overlooked. A model's advertised maximum context is also different from the context actually configured in a local runtime.</p>
+<p>This application does not remember a conversation automatically. Each request supplies a question and retrieved chunks. The vector database persists documents, but persistence is not conversational memory and does not alter model weights.</p>
+<p><strong>Check your understanding:</strong> if the answer is present in a file on your laptop but the application never loads or retrieves that file, should the model know it? No.</p>
+<h2>4 Temperature and sampling</h2>
+<p>Temperature changes the sharpness of the next-token distribution. It does not insert facts or measure confidence.</p>
+<p>Suppose four possible next tokens have probabilities 0.60, 0.25, 0.10, and 0.05. Greedy decoding chooses the largest. Sampled decoding draws from a distribution, so a less likely token can be selected.</p>
+<p>Lower temperature generally makes strong candidates dominate more. Higher temperature generally spreads probability more widely. Temperature zero is commonly used for greedy-like behavior in serving APIs; it is not a universal promise of byte-for-byte reproducibility. Hardware, runtime, model version, and other settings matter.</p>
+<p><strong>Top-k sampling</strong> keeps a fixed number of likely token candidates. If k is 2, the other candidates are excluded.</p>
+<p><strong>Top-p sampling</strong>, also called nucleus sampling, keeps the smallest probability-ranked prefix whose cumulative mass reaches p. With p = 0.8, the first two candidates in our example reach 0.85.</p>
+<p>These are generation settings. <strong>Retrieval top-k is different:</strong> it is the number of document chunks returned by search.</p>
+<p><strong>No-code experiment:</strong> ask a model to invent a bakery name three times. Then ask a factual handbook question three times. Record variation and correctness separately. A creative name can vary usefully; a policy deadline should not drift. Do not infer that variation alone proves hallucination.</p>
+<h2>5 Embeddings and meaning</h2>
+<p>An embedding represents something as a vector: a list of numbers. A useful text embedding places related texts near each other according to a chosen similarity measure.</p>
+<p>“Annual leave allowance” and “How much vacation do I receive?” can have high similarity even though they share few words. “A bicycle has two wheels” should usually be less similar, but the actual result depends on the embedding model.</p>
+<p>Cosine similarity measures the angle between vectors:</p>
+<p>cosine similarity = dot product of vectors / product of their lengths.</p>
+<p>It is not the probability that an answer is true. High similarity can connect contradictory sentences: “Leave is 20 days” and “Leave is not 20 days” discuss the same subject.</p>
+<h3>Word2Vec and GloVe</h3>
+<p>Word2Vec learns static word vectors from local word-context prediction tasks. CBOW predicts a target word from surrounding words; skip-gram predicts context words from a target.</p>
+<p>GloVe learns vectors using global word co-occurrence statistics. Both approaches make useful patterns in language available to numerical algorithms.</p>
+<p>A <strong>static embedding</strong> normally gives a word the same vector wherever it appears. “Bank” in a river sentence and a finance sentence therefore shares the same word lookup vector in a basic static model.</p>
+<p>A <strong>contextual representation</strong> changes with surrounding words. Transformer hidden states can represent the financial bank differently from the river bank. A sentence embedding then pools or otherwise derives a representation for a whole text. A contextual token representation and a sentence embedding are related concepts, not identical objects.</p>
+<p>The project's Ollama embedding model produces representations for chunks and questions. It is not a Word2Vec or GloVe implementation.</p>
+<h2>6 Encoder and decoder models</h2>
+<p>An encoder is commonly used to understand an input and create representations, often using bidirectional attention. A decoder is commonly used for autoregressive generation, predicting the next token from available preceding context. Encoder-decoder models combine both patterns.</p>
+<p>This is a useful design distinction, not a rule that every embedding model must have one architecture. Decoder-based embedding systems also exist.</p>
+<p>GPT, Claude, and Llama are model families, not interchangeable versions of one model. Different models within a family vary in size, capabilities, licensing, runtime support, and costs. Our active local chat model is llama3.2:3b; our embedding model is nomic-embed-text:latest. The code defaults may differ from the values loaded from the local environment.</p>
+<h2>7 Hallucination and apparent confidence</h2>
+<p>A hallucination is an unsupported or false generated claim. Causes include missing evidence, misleading context, ambiguous instructions, distribution gaps, and generation behavior.</p>
+<p>Fluent wording is not verification. “The rule is definitely 30 days” and “Maybe it is 30 days” can both be wrong. Likewise, an API field named confidence is only meaningful if its definition and calibration justify it.</p>
+<p>The previous app labelled an unknown dental-premium answer “high” because a retrieved chunk ranked strongly. The upgraded app uses low confidence for abstentions and medium for validated evidence-backed output. Medium is a conservative category, not a calibrated probability.</p>
+<p>RAG reduces some unsupported answers but does not eliminate hallucination. Exact-quote checking proves that a quote appears in a chunk; it does not prove that the generated statement follows from that quote.</p>
+<h2>8 Costs and choosing a model</h2>
+<p>For a simple hosted model with separate input and output prices:</p>
+<p>cost = input tokens × input price per million / 1,000,000</p>
+<ul>
+<li>output tokens × output price per million / 1,000,000.</li>
+</ul>
+<p><strong>Hypothetical arithmetic, not vendor pricing:</strong> at $1 per million input tokens and $4 per million output tokens, 2,000 input tokens plus 500 output tokens cost $0.004. One thousand such calls cost $4 before other charges.</p>
+<p>Include embeddings, retries, judges, query rewriting, and reranking in your budget. Some services separately price caching, tools, or other usage. Local Ollama does not charge a hosted per-token API fee for these local calls, but hardware, electricity, memory, and time still cost something.</p>
+<p>Choose a model by measuring the job: answer quality on your cases, structured-output reliability, latency, memory, privacy requirements, context needs, and total cost. Do not choose only by a public leaderboard or parameter count.</p>
+<p>Price sheets change. Check the official provider's current price sheet before making a budget. This guide uses hypothetical rates so the arithmetic stays valid without pretending a dated price is current.</p>
+<h2>9 Where to look in this project</h2>
+<ul>
+<li><strong>app/ollama_client.py:</strong> separate chat and embedding requests; actual token counts when Ollama returns them.</li>
+<li><strong>app/config.py:</strong> active model names and retrieval settings.</li>
+<li><strong>course/labs/foundations.py:</strong> optional numerical and live demonstrations for Week 2 onward.</li>
+<li><strong>course/results/ask_traces.jsonl:</strong> model call counts from requests to the course API.</li>
+</ul>
+<p>Later, you can run:</p>
+<pre><code class="language-powershell">.\.venv\Scripts\python.exe -m course.labs.foundations sampling
+.\.venv\Scripts\python.exe -m course.labs.foundations cost
+.\.venv\Scripts\python.exe -m course.labs.foundations embeddings
+.\.venv\Scripts\python.exe -m course.labs.foundations temperature
+</code></pre>
+<p>The sampling distribution is explicitly invented teaching data. The live embedding similarities and Ollama usage counts are measured.</p>
+<h2>10 Friday self-check</h2>
+<p>Explain these aloud without opening the code:</p>
+<ol>
+<li>What changes during training but normally stays fixed during inference?</li>
+<li>Why is “one word equals one token” unreliable?</li>
+<li>Can raising temperature repair missing handbook evidence?</li>
+<li>What is the difference between an embedding and a generated answer?</li>
+<li>Why can two contradictory sentences have similar embeddings?</li>
+<li>Why does local inference still have a cost?</li>
+</ol>
+<p><strong>Answer key:</strong> weights; tokenization varies; no; numerical representation versus text generation; semantic subject overlap; hardware and operating resources.</p>
+<p><strong>Deliverable:</strong> one page of your own explanations, a hypothetical cost calculation, and observations from a small no-code experiment. No programming submission is required this week.</p>
+<h2>References</h2>
+<ul>
+<li><a href="https://nlp.stanford.edu/projects/glove/">GloVe project and paper</a></li>
+<li><a href="https://docs.ollama.com/modelfile">Ollama sampling parameter reference</a></li>
+<li><a href="https://docs.ollama.com/api/generate">Ollama generation API</a></li>
+</ul>
+</main></html>
