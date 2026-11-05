@@ -2,6 +2,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { HashRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { ApiClient } from '../lib/api';
 import { Tools } from '../features/tools/Tools';
+import { Documents } from '../features/documents/Documents';
+import { Ask } from '../features/ask/Ask';
+import { Inspection } from '../features/inspection/Inspection';
 
 type Identity = {tenant: string; role: string};
 export function App() {
@@ -17,7 +20,7 @@ export function App() {
   }, [api]);
   return <HashRouter><div className="layout">
     <aside><a className="brand" href="#/">Claims<br/><strong>Workbench</strong></a><p className="eyebrow">AI ENGINEERING · WEEKS 01–09</p>
-      <nav aria-label="Main navigation"><NavLink to="/">Overview</NavLink><NavLink to="/tools">Structured tools</NavLink></nav>
+      <nav aria-label="Main navigation"><NavLink to="/">Overview</NavLink><NavLink to="/tools">Structured tools</NavLink><NavLink to="/documents">Documents</NavLink><NavLink to="/ask">Policy Q&amp;A</NavLink><NavLink to="/inspect">Retrieval inspection</NavLink></nav>
       <div className="sidebar-note">Fictional training data<br/>Human review required</div>
     </aside>
     <main><header><div><p className="eyebrow">INSURANCE CLAIMS</p><h1>Evidence before answers.</h1></div><span className="badge">{identity ? `${identity.tenant} · ${identity.role}` : 'Connecting'}</span></header>
@@ -27,6 +30,9 @@ export function App() {
         : <div key={identity.tenant + token}><Routes>
           <Route path="/" element={<section className="panel"><h2>A traceable claims assistant</h2><p>Explore structured tools, policy evidence, agent trajectories and MCP discovery as each weekly capability is integrated.</p><div className="cards"><article><span className="eyebrow">FOUNDATIONS</span><h3>Predict, validate, act</h3><p>Models propose outputs. Application code validates and executes them.</p></article><article><span className="eyebrow">REVIEW</span><h3>Show the evidence</h3><p>Learning materials distinguish measured results from human acceptance still needed.</p></article></div><a href="/course/guides/01_language_models.md">Read Week 01 foundations</a></section>}/>
           <Route path="/tools" element={<Tools api={api}/>}/>
+          <Route path="/documents" element={<Documents api={api}/>}/>
+          <Route path="/ask" element={<Ask api={api}/>}/>
+          <Route path="/inspect" element={<Inspection api={api}/>}/>
           <Route path="*" element={<section className="panel"><h2>Page not found</h2><a href="#/">Return to overview</a></section>}/>
         </Routes></div>}
       <footer>Claims Workbench · Read-only training decisions, never payment authorization.</footer>

@@ -1,5 +1,6 @@
 import io
 import re
+import zipfile
 from pathlib import Path
 from bs4 import BeautifulSoup
 from docx import Document
@@ -43,6 +44,9 @@ class DocumentLoader:
             reader = PdfReader(io.BytesIO(content))
             return [(number, page.extract_text() or "") for number, page in enumerate(reader.pages, 1)]
         if suffix == ".docx":
+            with zipfile.ZipFile(io.BytesIO(content)) as archive:
+                if len(archive.infolist()) > 2000 or sum(i.file_size for i in archive.infolist()) > 25_000_000:
+                    raise ValueError("DOCX expanded content exceeds the parsing limit.")
             def text_of(container):
                 for block in container.iter_inner_content():
                     if isinstance(block, Table):

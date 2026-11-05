@@ -37,7 +37,8 @@ class VectorStore:
                     batch = chunks[offset:offset + self.batch_size]
                     self.collection.upsert(ids=[c.id for c in batch], documents=[c.text for c in batch],
                         embeddings=vectors[offset:offset + self.batch_size],
-                        metadatas=[{**c.metadata, "source": c.source, "page": c.page or 0} for c in batch])
+                        metadatas=[{**c.metadata, "source": c.source, "page": c.page or 0,
+                                    "embedding_model": self.ollama.embed_model} for c in batch])
                 stale = sorted(set(old) - {c.id for c in chunks})
                 if stale:
                     self.collection.delete(ids=stale)
@@ -97,7 +98,7 @@ class VectorStore:
         if not data["ids"]:
             return None
         meta = data["metadatas"][0]
-        return Chunk(id=chunk_id, text=data["documents"][0], source=meta["source"], page=meta.get("page") or None)
+        return Chunk(id=chunk_id, text=data["documents"][0], source=meta["source"], page=meta.get("page") or None, metadata=meta)
 
     def fingerprint(self) -> str:
         return hashlib.sha256("\n".join(sorted(c.id + ':' + c.text for c in self.all_chunks())).encode()).hexdigest()

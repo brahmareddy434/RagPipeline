@@ -1,4 +1,5 @@
 import asyncio
+import hashlib
 from app.domain.ports import ChunkSink
 from pathlib import PurePosixPath
 from app.rag.grounding import ABSTENTION, validate_grounded_answer
@@ -24,6 +25,11 @@ class IngestionService:
             pieces = await asyncio.to_thread(self.chunker.split, filename, pages)
             if not pieces:
                 raise ValueError(f"No readable text in {filename}; scanned PDFs need OCR.")
+            version = hashlib.sha256(content).hexdigest()
+            for piece in pieces:
+                piece.id = hashlib.sha256(f"{version}:{piece.id}".encode()).hexdigest()[:24]
+                piece.metadata.update(document_version=version, chunk_size=self.chunker.chunk_size,
+                                      chunk_overlap=self.chunker.overlap)
             chunks.extend(pieces)
         await self.store.upsert(chunks)
         return len(chunks)

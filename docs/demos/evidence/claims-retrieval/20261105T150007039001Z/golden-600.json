@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q01",
+    "question": "What does EX-WEAR-01 exclude?",
+    "needle": "Gradual deterioration, corrosion and ordinary wear are excluded.",
+    "exact_token": true,
+    "correct_chunk_ids": [
+      "52ee60bb93a5ab751876c636"
+    ]
+  },
+  {
+    "id": "Q02",
+    "question": "Does EX-FLOOD-02 treat a pipe escape as external flooding?",
+    "needle": "An escape from an internal water pipe is a different cause",
+    "exact_token": true,
+    "correct_chunk_ids": [
+      "1f4c25eb52fa8f39360e1b9c"
+    ]
+  },
+  {
+    "id": "Q03",
+    "question": "What evidence is needed under EX-DELIB-03?",
+    "needle": "Suspicion alone is not proof of deliberate conduct.",
+    "exact_token": true,
+    "correct_chunk_ids": [
+      "1f4c25eb52fa8f39360e1b9c"
+    ]
+  },
+  {
+    "id": "Q04",
+    "question": "What deductible applies with END-GLASS-04?",
+    "needle": "reduces the glass-only deductible to 100 currency units.",
+    "exact_token": true,
+    "correct_chunk_ids": [
+      "9214eca687cc166f844eb933"
+    ]
+  },
+  {
+    "id": "Q05",
+    "question": "What is the standard motor deductible?",
+    "needle": "standard accidental vehicle damage deductible is 500 currency units.",
+    "exact_token": false,
+    "correct_chunk_ids": [
+      "9214eca687cc166f844eb933"
+    ]
+  },
+  {
+    "id": "Q06",
+    "question": "What is the home water damage deductible?",
+    "needle": "home escape-of-water deductible is 750 currency units.",
+    "exact_token": false,
+    "correct_chunk_ids": [
+      "f852730f703a885af4708a25"
+    ]
+  },
+  {
+    "id": "Q07",
+    "question": "When must accidental motor damage be reported?",
+    "needle": "within seven calendar days of discovery.",
+    "exact_token": false,
+    "correct_chunk_ids": [
+      "f852730f703a885af4708a25"
+    ]
+  },
+  {
+    "id": "Q08",
+    "question": "When must a home pipe leak be reported?",
+    "needle": "within fourteen calendar days of discovery.",
+    "exact_token": false,
+    "correct_chunk_ids": [
+      "8c66d4eb576b20f9f355b1a5"
+    ]
+  },
+  {
+    "id": "Q09",
+    "question": "What documents are needed for a motor repair claim?",
+    "needle": "damage photographs and an itemized repair estimate.",
+    "exact_token": false,
+    "correct_chunk_ids": [
+      "8c66d4eb576b20f9f355b1a5"
+    ]
+  },
+  {
+    "id": "Q10",
+    "question": "Does a closed claim mean coverage is approved?",
+    "needle": "closed never means approved by itself.",
+    "exact_token": false,
+    "correct_chunk_ids": [
+      "422ab3332c492062e8716c94"
+    ]
+  },
+  {
+    "id": "Q11",
+    "question": "Which policy edition applies to an earlier loss?",
+    "needle": "effective on the date of loss.",
+    "exact_token": false,
+    "correct_chunk_ids": [
+      "422ab3332c492062e8716c94"
+    ]
+  },
+  {
+    "id": "Q12",
+    "question": "How should pre-existing damage be checked?",
+    "needle": "Compare dated photographs and inception records",
+    "exact_token": false,
+    "correct_chunk_ids": [
+      "30da765f853875c58ccd4a1b"
+    ]
+  }
+]

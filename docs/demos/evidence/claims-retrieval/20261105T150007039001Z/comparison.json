@@ -1,0 +1,13 @@
+{
+  "only_change": "retrieval.mode: semantic -> hybrid (BM25 + RRF k=60)",
+  "before": {
+    "hit_rate_at_3": 1.0,
+    "p50_latency_ms": 3.275
+  },
+  "after": {
+    "hit_rate_at_3": 1.0,
+    "p50_latency_ms": 3.63
+  },
+  "fixed": [],
+  "regressed": []
+}

@@ -9,3 +9,6 @@ Fresh baseline: 176 backend tests passed (32.82s, three deprecation warnings), f
 Separate self-review examined access/roles, tenant collection and source isolation, client cancellation, static routes, schema validation and lifecycle cleanup. Corrected model argument validation to avoid reflecting invalid values in HTTP errors. No introduced Critical/High findings remain in this increment. Pre-existing trace redaction and agent budget findings remain release blockers until later increments. Token access is a single-worker local training boundary, not enterprise OIDC.
 
 Browser integration and later-week validation will be recorded below as executed. No independent reviewer was used.
+
+## Weeks 03-04 checkpoint
+26 targeted backend tests passed; five frontend tests and production build passed. Two real headless Edge journeys passed in 20.0s against an isolated Uvicorn/Chroma instance and live Ollama: upload/ask/source/delete and structured calculator. Port 8765 was occupied; tests use 18765 without stopping the existing service. Live chunking and retrieval outputs are linked in the weekly demos. The retrieval fixture reaches 12/12 in both arms; no accuracy gain claimed. Review is self-review. Authentic policy and adjuster provenance remain pending.

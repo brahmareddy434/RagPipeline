@@ -71,3 +71,6 @@ Model changes, simultaneous hybrid+reranker changes, invented questions labelled
 User's Week 4 theory repeats Week 3; the distinct Week 4 Task D practical defines this scope. Real adjuster questions and edition-specific corpus are missing.
 
 Amend approved scope using [change control](README.md).
+
+## Execution amendment - 2026-11-05
+Authorized runner and React inspection implemented. W04-AC02-04 fictional experiment: semantic 12/12 -> RRF 12/12, p50 3.275ms -> 3.63ms; no gain claimed. See docs/demos/week-04-demo.md and dated manifests. W04-AC01 remains pending authentic adjuster questions. W04-AC05 optional MMR not run. No approved criterion is relaxed by the fixture demonstration.

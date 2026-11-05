@@ -71,3 +71,6 @@ OCR, malware-service selection, distributed vector deployment and a paid reranke
 No approved insurance corpus supplied. Existing HR documents and small insurance fixtures cannot be described as real company coverage wording.
 
 Amend approved scope using [change control](README.md).
+
+## Execution amendment - 2026-11-05
+Authorized implementation adds React upload/list/delete/Q&A/source views, version metadata, DOCX expansion limit and isolated live chunking comparison. W03-AC02-05 map to tests/test_claims_documents.py, tests/test_access.py, frontend/e2e/journeys.spec.ts and docs/demos/week-03-demo.md. W03-AC01 is demonstrated with explicitly fictional wording; real approved insurance wording remains an external input. Exact live outputs and limitations are retained, including the less focused 400-character answer.
