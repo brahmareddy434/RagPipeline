@@ -73,3 +73,6 @@ Fixing failures during coding; fabricating real traces/human notes; category-fir
 Current TraceLogger writes unredacted payloads. Existing saved traces are HR; the required random claims corpus and human notes are unavailable.
 
 Amend approved scope using [change control](README.md).
+
+## Execution amendment - 2026-11-05
+Pre-write redaction, exact provider payload capture, tenant-private trace reader/React view and seeded sample/replay/freeze verification implemented. W05-AC01 has a replay runner; W05-AC02-05 remain dependent on a real sample and human observation/taxonomy/prediction sequence. No human notes were generated. Optional curated comparison is not run. See docs/demos/week-05-demo.md for commands and explicit privacy/replay limitations.

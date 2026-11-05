@@ -41,6 +41,7 @@ class OllamaClient:
             metrics = call_metrics.get()
             if metrics is not None:
                 metrics.append({"endpoint": path, "model": (payload or {}).get("model"),
+                                "request": payload, "response": data,
                                 **{k: data.get(k) for k in ("prompt_eval_count", "eval_count", "total_duration", "load_duration")}})
             return data
         except (httpx.HTTPError, ValueError) as exc:

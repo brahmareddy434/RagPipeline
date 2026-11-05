@@ -49,6 +49,7 @@ class Settings(BaseSettings):
     allowed_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
     allowed_hosts: list[str] = ["localhost", "127.0.0.1", "[::1]", "testserver"]
     requests_per_minute: int = Field(120, ge=1, le=10000)
+    redact_names: list[str] = Field(default_factory=list, repr=False)
 
     @model_validator(mode="after")
     def valid_overlap(self):

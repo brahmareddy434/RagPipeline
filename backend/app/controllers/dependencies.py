@@ -26,5 +26,5 @@ def trace_logger(request: Request):
     loggers = request.app.state.tenant_loggers
     if tenant not in loggers:
         suffix = hashlib.sha256(tenant.encode()).hexdigest()[:24]
-        loggers[tenant] = TraceLogger(request.app.state.settings.trace_log_path.parent / (suffix + ".jsonl"))
+        loggers[tenant] = TraceLogger(request.app.state.settings.trace_log_path.parent / (suffix + ".jsonl"), request.app.state.settings.redact_names)
     return loggers[tenant]

@@ -12,3 +12,6 @@ Browser integration and later-week validation will be recorded below as executed
 
 ## Weeks 03-04 checkpoint
 26 targeted backend tests passed; five frontend tests and production build passed. Two real headless Edge journeys passed in 20.0s against an isolated Uvicorn/Chroma instance and live Ollama: upload/ask/source/delete and structured calculator. Port 8765 was occupied; tests use 18765 without stopping the existing service. Live chunking and retrieval outputs are linked in the weekly demos. The retrieval fixture reaches 12/12 in both arms; no accuracy gain claimed. Review is self-review. Authentic policy and adjuster provenance remain pending.
+
+## Week 05 checkpoint
+27 targeted backend tests passed, including pre-write redaction and seeded 1,100-record synthetic sampling; five frontend tests/build passed. Separate self-review checked raw/error/nested fields, export isolation, replay side effects and source freeze checks. No human coding/labels were authored. Redaction covers the documented fields/patterns/configured names; arbitrary unlabelled personal names and production retention remain release limitations. Raw MCP wire recording remains explicitly restricted to fictional protocol experiments because altering its bytes would invalidate that evidence.
