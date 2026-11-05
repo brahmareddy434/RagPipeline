@@ -1,0 +1,18 @@
+{
+  "notice": "Locally authored claims-platform stand-in; fictional records only.",
+  "claims": {
+    "CLM-2024-88120": {
+      "policy_number": "POL-2024-0001",
+      "status": "awaiting repair estimate",
+      "notes": [
+        {"date": "2024-11-01", "note": "Damage photographs received. Repair estimate requested."},
+        {"date": "2024-11-03", "note": "Customer contacted; estimate is still outstanding. No coverage decision recorded."}
+      ]
+    },
+    "CLM-2024-88121": {
+      "policy_number": "POL-2024-0002",
+      "status": "under adjuster review",
+      "notes": [{"date": "2024-11-02", "note": "Plumber report received. Cause of damage requires review."}]
+    }
+  }
+}

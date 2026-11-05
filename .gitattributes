@@ -1,0 +1,2 @@
+# Evidence hashes and raw protocol lines must survive checkout byte-for-byte.
+evaluation/week9/** -text

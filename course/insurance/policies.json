@@ -1,0 +1,8 @@
+{
+  "notice": "Fictional training policies, not insurance advice or a real insurer's contract.",
+  "policies": {
+    "POL-2024-0001": "Policy POL-2024-0001 is a fictional motor policy. Report accidental vehicle damage within 7 days. Submit photographs and a repair estimate. A claim status is administrative progress, not a coverage decision.",
+    "POL-2024-0002": "Policy POL-2024-0002 is a fictional home policy. Report escape-of-water damage within 14 days. Submit photographs and the plumber's report. An adjuster must review the evidence before a coverage decision."
+  },
+  "exclusions": "Fictional exclusions schedule: wear and tear, deliberate damage, and pre-existing damage are excluded. This context does not decide coverage for any individual claim. Never infer approval from a claim status or an adjuster note."
+}

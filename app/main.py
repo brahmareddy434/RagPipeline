@@ -37,6 +37,23 @@ app.mount("/course", StaticFiles(directory=ROOT / "course", html=True), name="co
 app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:3000", "http://localhost:5173"], allow_methods=["*"], allow_headers=["*"])
 
 
+@app.get("/mcp/tools")
+async def mcp_tools():
+    """Week 9 catalogue from real tools/list responses (finish is host-local)."""
+    from app.mcp_registry import connect, load_config
+    from app.week9 import configured_path
+    async with connect(load_config(configured_path())) as registry:
+        return {"count": len(registry.tools), "names": list(registry.tools),
+                "tools_list_responses": registry.discovery}
+
+
+@app.post("/mcp/agent/run")
+async def mcp_agent_run(body: AgentRequest):
+    """Same bounded agent with MCP tools; server commands come only from operator config."""
+    from app.week9 import run_task
+    return await run_task(body.task, budget=body.budget)
+
+
 def container(request):
     return request.app.state.container
 

@@ -1,0 +1,9 @@
+{
+  "created_utc": "20261105T073424940798Z",
+  "live_model": true,
+  "model": "llama3.2:3b",
+  "claims_server": "local fictional stand-in",
+  "agent_changed_lines": 0,
+  "tools_before": 2,
+  "tools_after": 4
+}

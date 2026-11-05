@@ -1,0 +1,7 @@
+{"time": "2026-11-05T07:33:20.901552+00:00", "caller": "triage-status-demo", "tool": "claims__get_claim_status", "claim_number": "CLM-2024-88120", "outcome": "ok"}
+{"time": "2026-11-05T07:33:20.905558+00:00", "caller": "triage-status-demo", "tool": "claims__get_adjuster_notes", "claim_number": "CLM-2024-88120", "outcome": "denied"}
+{"time": "2026-11-05T07:33:44.044259+00:00", "caller": "triage-status-demo", "tool": "claims__get_adjuster_notes", "claim_number": "CLM-2024-88120", "outcome": "denied"}
+{"time": "2026-11-05T07:33:55.631764+00:00", "caller": "triage-status-demo", "tool": "claims__get_claim_status", "claim_number": "CLM-2024-88120", "outcome": "ok"}
+{"time": "2026-11-05T07:34:09.040723+00:00", "caller": "triage-status-demo", "tool": "policy__search_policy_documents", "claim_number": null, "outcome": "ok"}
+{"time": "2026-11-05T07:34:26.776846+00:00", "caller": "triage-status-demo", "tool": "policy__search_policy_documents", "claim_number": null, "outcome": "ok"}
+{"time": "2026-11-05T07:38:16.023573+00:00", "caller": "triage-full-demo", "tool": "claims__get_adjuster_notes", "claim_number": "CLM-2024-88120", "outcome": "ok"}

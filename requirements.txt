@@ -12,3 +12,5 @@ pytest>=8,<9
 pytest-asyncio>=0.24,<2
 numpy>=1.26,<3
 markdown-it-py>=3,<5
+mcp==1.30.0
+jsonschema>=4.23,<5

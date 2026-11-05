@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "gateway": {
+      "transport": "stdio",
+      "command": "@python",
+      "args": ["-m", "mcp_servers.gateway"],
+      "resources": ["policy://exclusions"],
+      "env_names": ["WEEK9_GATEWAY_TOKEN", "WEEK9_STATUS_TOKEN", "WEEK9_FULL_TOKEN", "WEEK9_AUDIT_PATH"]
+    }
+  }
+}

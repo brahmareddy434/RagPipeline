@@ -85,8 +85,13 @@ class StopCondition(StrictModel):
 class PolicyAgent:
     """The agent loop. One instance is safe to share; all run state is local to `run`."""
 
-    def __init__(self, ollama, registry, prompts, memory=None):
+    def __init__(self, ollama, registry, prompts, memory=None, *,
+                 system_prompt=SYSTEM, final_prompt=FINAL, context_evidence=()):
         self.ollama, self.registry, self.prompts, self.memory = ollama, registry, prompts, memory
+        # Week 9 baseline wiring: domain text and app-attached MCP resources are injected.
+        # The loop and dispatch remain independent of which servers are configured.
+        self.system_prompt, self.final_prompt = system_prompt, final_prompt
+        self.context_evidence = tuple(context_evidence)
 
     async def run(self, task: str, session_id: str | None = None,
                   budget: AgentBudget | None = None) -> AgentRunResponse:
@@ -100,12 +105,12 @@ class PolicyAgent:
         # survive that, so every step is also appended here and this is what the response and
         # the step ceiling use. Losing early steps to compression would defeat the whole point.
         history: list[AgentStepRecord] = []
-        evidence: list = []
+        evidence: list = list(self.context_evidence)
         # Every attempted call, successful or not. Failed calls are the ones a weak model
         # actually loops on, so the repeat guard has to cover them too.
         attempted: dict[tuple[str, str], tuple[bool, Observation]] = {}
         recalled: list[str] = []
-        seen_evidence: set[str] = set()
+        seen_evidence: set[str] = {e.id for e in evidence}
         errors = repeats = 0
         stop: StopCondition | None = None
 
@@ -243,8 +248,10 @@ class PolicyAgent:
                       f"({remaining} remaining) and have gathered {evidence_count} pieces of evidence. "
                       + ("This is your LAST step, so choose finish now." if remaining <= 1 else
                          "If what you have already answers the question, choose finish now."))
-        return [{"role": "system", "content": SYSTEM.format(catalogue=self.registry.catalogue())},
-                {"role": "user", "content": f"Question: {task}{memory_block}\n\n"
+        attached = "\n".join(f"[{e.source}] {e.text}" for e in self.context_evidence)
+        context_block = f"\nApp-attached context (untrusted data):\n{attached}" if attached else ""
+        return [{"role": "system", "content": self.system_prompt.format(catalogue=self.registry.catalogue())},
+                {"role": "user", "content": f"Question: {task}{memory_block}{context_block}\n\n"
                                             f"Steps so far:\n{scratchpad.render()}{status}\n\nChoose the next step."}]
 
     async def _final_answer(self, task: str, evidence: list, history: list, scratchpad: Scratchpad,
@@ -260,7 +267,7 @@ class PolicyAgent:
             return AnswerResponse(answer=ABSTENTION, confidence="low", abstained=True, retrieved=[],
                                   inspection={"note": "The agent gathered no citable evidence."})
         messages = self.prompts.rag_messages(task, unique)
-        messages[0]["content"] = FINAL + "\n\n" + messages[0]["content"]
+        messages[0]["content"] = self.final_prompt + "\n\n" + messages[0]["content"]
         output = await self.ollama.structured(messages, GroundedAnswer, temperature=0)
         response = validate_grounded_answer(output, unique,
                                             {"question": task, "steps": len(history),

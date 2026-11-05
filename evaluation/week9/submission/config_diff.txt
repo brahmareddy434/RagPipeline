@@ -1,0 +1,17 @@
+--- config/mcp.policy.json
++++ config/mcp.claims.json
+@@ -10,6 +10,14 @@
+       "resources": [
+         "policy://exclusions"
+       ]
++    },
++    "claims": {
++      "transport": "stdio",
++      "command": "@python",
++      "args": [
++        "-m",
++        "mcp_servers.claims"
++      ]
+     }
+   }
+ }

@@ -1,0 +1,10 @@
+{
+  "status": {
+    "caller": "triage-status-demo",
+    "tools": ["policy__search_policy_documents", "policy__read_policy", "claims__get_claim_status"]
+  },
+  "full": {
+    "caller": "triage-full-demo",
+    "tools": ["policy__search_policy_documents", "policy__read_policy", "claims__get_claim_status", "claims__get_adjuster_notes"]
+  }
+}

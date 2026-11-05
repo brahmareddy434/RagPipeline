@@ -1,0 +1,12 @@
+{
+  "baseline": {
+    "app/agent.py": "3a865186a5ca4a6ea62c1fc3517adac8305a73c67e97aa5deaffa3c6e92d776f",
+    "app/week9.py": "b0cc6b70bcdbb6dcda92f7b7a08da56d20b6692b32129e230b83e6f2b3e259ce",
+    "app/mcp_registry.py": "3f84807a4657de616f384ccbc14a2d00fa89348fb57ba94d860eb983a2f2ccbf"
+  },
+  "with_claims": {
+    "app/agent.py": "3a865186a5ca4a6ea62c1fc3517adac8305a73c67e97aa5deaffa3c6e92d776f",
+    "app/week9.py": "b0cc6b70bcdbb6dcda92f7b7a08da56d20b6692b32129e230b83e6f2b3e259ce",
+    "app/mcp_registry.py": "3f84807a4657de616f384ccbc14a2d00fa89348fb57ba94d860eb983a2f2ccbf"
+  }
+}
