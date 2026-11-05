@@ -1,5 +1,16 @@
 # Local Ollama RAG Tutor - FastAPI
 
+**Architecture and requirements:** [project documentation](docs/README.md) records
+the current audit, proposed backend/React structure, Week 01–09 requirements and
+staged migration plan. The active code is still in `app/`; the new structure is
+preparation, not a completed production migration. See [AGENTS.md](AGENTS.md) for
+the explicit weekly implementation gate and reusable skills.
+
+**Week 9 MCP extension:** see the single [Week 9 demo guide](docs/DEMO_Week9_MCP.md)
+for insurance claims, automatic tool discovery, config-only server addition,
+captured protocol evidence, and a file-by-file walkthrough. The existing HR routes
+and Week 8 exercises remain available.
+
 This is one complete learning project built from your Week 1-7 documents. It runs locally: FastAPI is the waiter, Ollama is the brain, Chroma is the memory cupboard, and RAG is the rule that makes the brain read the cupboard before answering.
 
 ## 1. What you will learn

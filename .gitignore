@@ -25,7 +25,8 @@ dist/
 
 # Local backups, databases, uploaded documents, and generated run results
 backups/
-data/
+/data/
+# Keep fictional course/data inputs; only the root data directory is runtime storage.
 logs/
 *.log
 course/results/
@@ -40,9 +41,12 @@ docs/*_render/
 .idea/
 .vscode/
 .codex/
-.agents/
+.agents/*
+!.agents/skills/
+!.agents/skills/**
 .DS_Store
 Thumbs.db
 *.tmp
 *.swp
 ~$*
+config/mcp.local.json
