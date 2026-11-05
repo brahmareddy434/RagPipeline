@@ -16,7 +16,7 @@ import time
 from dataclasses import dataclass, field
 from typing import Any
 
-from app.models import Chunk
+from app.schemas import Chunk
 
 
 @dataclass

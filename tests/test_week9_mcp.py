@@ -6,9 +6,9 @@ import sys
 import pytest
 from mcp.types import ListToolsResult, Tool
 
-from app.agent_tools import ToolFailure
-from app.mcp_registry import MCPRegistry, ROOT, connect, load_config
-from app.week9 import build_agent
+from app.agents.tools import ToolFailure
+from app.infrastructure.mcp.registry import MCPRegistry, ROOT, connect, load_config
+from app.services.mcp_host import build_agent
 
 
 @pytest.mark.asyncio
@@ -117,7 +117,7 @@ async def test_unsafe_remote_url_rejected_before_credentials_sent():
 
 @pytest.mark.asyncio
 async def test_existing_agent_receives_resource_and_discovered_schema():
-    from app.memory import Scratchpad
+    from app.agents.memory import Scratchpad
     async with connect(load_config(ROOT / "config/mcp.policy.json")) as registry:
         agent = build_agent(None, registry)
         messages = agent._messages("deadline?", Scratchpad(), [])

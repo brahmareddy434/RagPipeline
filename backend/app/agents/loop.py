@@ -23,11 +23,11 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field, create_model
 
-from app.agent_tools import Observation, ToolFailure
-from app.answer_quality import ABSTENTION, flag_injected_language, validate_grounded_answer
-from app.memory import AgentStepRecord, Scratchpad
-from app.models import AgentBudget, AgentRunResponse, GroundedAnswer, StrictModel, usd_cost
-from app.ollama_client import call_metrics
+from app.agents.tools import Observation, ToolFailure
+from app.rag.grounding import ABSTENTION, flag_injected_language, validate_grounded_answer
+from app.agents.memory import AgentStepRecord, Scratchpad
+from app.schemas import AgentBudget, AgentRunResponse, GroundedAnswer, StrictModel, usd_cost
+from app.infrastructure.ollama import call_metrics
 
 SYSTEM = """You are an HR policy agent. You answer one employee question by taking steps.
 
@@ -263,7 +263,7 @@ class PolicyAgent:
                 seen.add(item.id)
                 unique.append(item.model_copy(update={"rank": len(unique) + 1}))
         if not unique:
-            from app.models import AnswerResponse
+            from app.schemas import AnswerResponse
             return AnswerResponse(answer=ABSTENTION, confidence="low", abstained=True, retrieved=[],
                                   inspection={"note": "The agent gathered no citable evidence."})
         messages = self.prompts.rag_messages(task, unique)
@@ -286,7 +286,7 @@ class PolicyAgent:
             if flag_injected_language(response.answer):
                 # Fail safe: a second miss means untrusted text is still steering the
                 # answer, so refuse rather than ship it.
-                from app.models import AnswerResponse
+                from app.schemas import AnswerResponse
                 return AnswerResponse(answer=ABSTENTION, confidence="low", abstained=True, retrieved=unique,
                                       validation_issues=sorted(set(issues)), inspection=response.inspection)
         return response

@@ -8,14 +8,14 @@ import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
-from app.agent_tools import ToolFailure
-from app.config import get_settings
-from app.mcp_registry import ROOT, connect, load_config
-from app.models import AgentBudget
-from app.ollama_client import OllamaClient
-from app.week9 import build_agent
+from app.agents.tools import ToolFailure
+from app.config.settings import get_settings
+from app.infrastructure.mcp.registry import ROOT, connect, load_config
+from app.schemas import AgentBudget
+from app.infrastructure.ollama import OllamaClient
+from app.services.mcp_host import build_agent
 
-SOURCE_FILES = ("app/agent.py", "app/week9.py", "app/mcp_registry.py")
+SOURCE_FILES = ("backend/app/agents/loop.py", "backend/app/services/mcp_host.py", "backend/app/infrastructure/mcp/registry.py")
 TASK = "What is the current status of claim CLM-2024-88120?"
 ANNOTATIONS = {
     "jsonrpc": "JSON-RPC protocol envelope version, exactly 2.0; not the negotiated MCP version.",
@@ -163,7 +163,7 @@ async def run(live, output):
             message = json.loads(row["raw"])
             exchanges.append({**row, "message": message,
                               "annotations": {key: ANNOTATIONS[key] for key in message}})
-        save(out / "wire.json", {"source": "actual local stdio bytes captured by app.mcp_wire; raw preserves each line",
+        save(out / "wire.json", {"source": "actual local stdio bytes captured by app.infrastructure.mcp.wire; raw preserves each line",
              "annotation_note": "Authored explanations supplied for study; student must review and explain them personally.",
              "model_location": "Ollama runs in the host via app/agent.py -> app/ollama_client.py; initialize, tools/list, tools/call and both servers make no model calls.",
              "exchanges": exchanges})

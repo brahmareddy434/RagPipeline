@@ -21,7 +21,7 @@ from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-from app.week6_assertions import run_assertions, split_counts
+from app.legacy.week6_assertions import run_assertions, split_counts
 
 ROOT = Path(__file__).resolve().parents[2]
 HERE = ROOT / "evaluation" / "week6"

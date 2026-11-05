@@ -13,9 +13,9 @@ from jsonschema import Draft202012Validator, ValidationError
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from mcp.client.streamable_http import streamablehttp_client
-from app.agent_tools import Observation, ToolFailure, as_evidence
+from app.agents.tools import Observation, ToolFailure, as_evidence
 
-ROOT = Path(__file__).resolve().parents[1]
+from app.config.paths import PROJECT_ROOT as ROOT
 
 
 def load_config(path):
@@ -103,7 +103,7 @@ async def connect(config, wire_dir=None):
                 args = list(spec.get("args", []))
                 if wire_dir is not None:
                     path = Path(wire_dir).resolve() / f"{name}.jsonl"
-                    args = ["-m", "app.mcp_wire", "--output", str(path), "--", command, *args]
+                    args = ["-m", "app.infrastructure.mcp.wire", "--output", str(path), "--", command, *args]
                     command = sys.executable
                 env = {key: os.environ[key] for key in spec.get("env_names", [])}
                 env["PYTHONUTF8"] = "1"

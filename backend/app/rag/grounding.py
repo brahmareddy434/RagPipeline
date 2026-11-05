@@ -1,12 +1,12 @@
 import re
 from decimal import Decimal
-from app import handbook
-from app.models import AnswerResponse, Citation, GroundedAnswer
+from app.legacy import handbook
+from app.schemas import AnswerResponse, Citation, GroundedAnswer
 
 ABSTENTION = "I don't know based on the uploaded documents."
 _CITATION = re.compile(r"\[(\d+)\]")
 
-# Output guardrail, the last line of defense after tool-output sanitising (app.agent_tools.
+# Output guardrail, the last line of defense after tool-output sanitising (app.agents.tools.
 # sanitize_free_text) and the per-claim source check below. It does not look at where a
 # phrase came from, only whether the DRAFTED ANSWER itself states something no legitimate
 # HR fact would ever contain - an unlimited/999-day balance, an auto-approval, a claim to

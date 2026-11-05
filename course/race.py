@@ -30,12 +30,12 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-from app import handbook
-from app.config import get_settings
-from app.dependencies import Container
-from app.models import AgentBudget, RetrievalOptions
+from app.legacy import handbook
+from app.config.settings import get_settings
+from app.bootstrap import Container
+from app.schemas import AgentBudget, RetrievalOptions
 
-ROOT = Path(__file__).resolve().parents[1]
+from app.config.paths import PROJECT_ROOT as ROOT
 OUT = ROOT / "course" / "results"
 QUESTION_FILE = ROOT / "course" / "week7_questions.json"
 QUESTIONS = json.loads(QUESTION_FILE.read_text(encoding="utf-8"))["questions"]

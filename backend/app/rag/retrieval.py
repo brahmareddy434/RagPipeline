@@ -3,7 +3,7 @@ import re
 from functools import lru_cache
 import numpy as np
 from rank_bm25 import BM25Plus
-from app.models import Chunk, RetrievalOptions, SearchResult
+from app.schemas import Chunk, RetrievalOptions, SearchResult
 
 
 def tokenize(text: str) -> list[str]:

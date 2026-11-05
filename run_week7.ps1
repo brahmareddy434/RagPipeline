@@ -29,7 +29,7 @@ if ($Serve) {
     & $python -m uvicorn app.main:app --host 127.0.0.1 --port 8001
 }
 elseif ($Tools) {
-    & $python -c "from app.agent_tools import ToolRegistry; from app.tools import Calculator; print(ToolRegistry(None, Calculator()).catalogue())"
+    & $python -c "from app.agents.tools import ToolRegistry; from app.services.tools import Calculator; print(ToolRegistry(None, Calculator()).catalogue())"
 }
 elseif ($BudgetDemo) {
     & $python -m course.race --budget-demo $BudgetDemo

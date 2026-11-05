@@ -5,12 +5,12 @@ from pathlib import Path
 
 import pytest
 
-from app import handbook
-from app import week6_assertions as wa
-from app.answer_quality import ABSTENTION, attribute
+from app.legacy import handbook
+from app.legacy import week6_assertions as wa
+from app.rag.grounding import ABSTENTION, attribute
 from course import race
 
-ROOT = Path(__file__).resolve().parents[1]
+from app.config.paths import PROJECT_ROOT as ROOT
 WEEK6 = ROOT / "evaluation" / "week6"
 
 
@@ -60,7 +60,7 @@ def test_clause_and_version_are_read_from_the_chunk_not_invented():
 
 def test_markdown_is_stripped_so_quotes_are_plain_prose():
     """A model quotes the sentence it can read; '**2.1 ...**' in the stored chunk breaks that."""
-    from app.document_loader import DocumentLoader
+    from app.rag.loading import DocumentLoader
     raw = b"# Heading\n\n**2.1 Annual leave allowance.** Employees receive 20 paid leave days per year.\n"
     text = DocumentLoader().load("s.md", raw)[0][1]
     assert "**" not in text and "#" not in text
@@ -73,7 +73,7 @@ def test_the_prompt_contains_no_sentence_that_could_be_copied_as_policy():
     Observed: the model returned 'Staff receive 12 annual leave days per year.' as an
     evidence quote. That sentence existed only in the prompt's addition example.
     """
-    from app.prompts import PromptBuilder
+    from app.rag.prompts import PromptBuilder
     for prompt in (PromptBuilder.SYSTEM, PromptBuilder.COMPACT):
         assert "Staff receive" not in prompt
         for banned in ("annual leave days per year", "sick leave days per year"):

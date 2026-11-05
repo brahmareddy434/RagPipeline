@@ -1,10 +1,10 @@
 import pytest
 
-from app.answer_quality import validate_grounded_answer
-from app.models import GroundedAnswer, SearchResult
-from app.prompts import PromptBuilder
+from app.rag.grounding import validate_grounded_answer
+from app.schemas import GroundedAnswer, SearchResult
+from app.rag.prompts import PromptBuilder
 from app.services import RagService
-from app.leave_totals import annual_leave_total
+from app.legacy.leave_totals import annual_leave_total
 
 
 def policy(paid=20, sick=10):

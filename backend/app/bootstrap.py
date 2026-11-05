@@ -1,16 +1,16 @@
 from dataclasses import dataclass
-from app.agent import PolicyAgent
-from app.agent_tools import ToolRegistry
-from app.chunker import TextChunker
-from app.memory import VectorMemory
-from app.document_loader import DocumentLoader
-from app.ollama_client import OllamaClient
-from app.prompts import PromptBuilder
-from app.retrieval import HybridRetriever, KeywordRetriever
+from app.agents.loop import PolicyAgent
+from app.agents.tools import ToolRegistry
+from app.rag.chunking import TextChunker
+from app.agents.memory import VectorMemory
+from app.rag.loading import DocumentLoader
+from app.infrastructure.ollama import OllamaClient
+from app.rag.prompts import PromptBuilder
+from app.rag.retrieval import HybridRetriever, KeywordRetriever
 from app.services import EvaluationService, IngestionService, RagService
-from app.tools import Calculator, OrderRepository, ToolService
-from app.vector_store import VectorStore
-from app.workflow import FixedWorkflow
+from app.services.tools import Calculator, OrderRepository, ToolService
+from app.repositories.vector_store import VectorStore
+from app.agents.workflow import FixedWorkflow
 
 
 @dataclass

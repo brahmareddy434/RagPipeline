@@ -16,7 +16,7 @@ from pathlib import Path
 
 from pydantic import BaseModel, Field
 
-ROOT = Path(__file__).resolve().parents[1]
+from app.config.paths import PROJECT_ROOT as ROOT
 PROMPT_DIR = ROOT / "evaluation" / "week6"
 
 

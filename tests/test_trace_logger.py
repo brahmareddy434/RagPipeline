@@ -1,7 +1,7 @@
 import json
 import uuid
 
-from app.trace_logger import TraceLogger
+from app.infrastructure.tracing import TraceLogger
 
 
 def test_trace_logger_appends_jsonl_with_uuid(tmp_path):

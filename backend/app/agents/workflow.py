@@ -22,10 +22,10 @@ case actually occurs in your traffic is what the race measures.
 import re
 import time
 
-from app.agent_tools import ToolFailure
-from app.answer_quality import ABSTENTION, validate_grounded_answer
-from app.models import AnswerResponse, GroundedAnswer, RetrievalOptions, WorkflowRunResponse, usd_cost
-from app.ollama_client import call_metrics
+from app.agents.tools import ToolFailure
+from app.rag.grounding import ABSTENTION, validate_grounded_answer
+from app.schemas import AnswerResponse, GroundedAnswer, RetrievalOptions, WorkflowRunResponse, usd_cost
+from app.infrastructure.ollama import call_metrics
 
 EMPLOYEE_ID = re.compile(r"\bEMP-\d{4}\b", re.IGNORECASE)
 JURISDICTION = re.compile(r"jurisdiction ([A-Z]{2})")

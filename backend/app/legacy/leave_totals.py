@@ -6,7 +6,7 @@ and conflicting allowances are left to the normal grounded-answer path.
 """
 import re
 
-from app.models import GroundedAnswer
+from app.schemas import GroundedAnswer
 
 
 # Words that carry no meaning for this decision. Stripped before the whitelist check so an

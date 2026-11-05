@@ -14,9 +14,9 @@ if ($Serve) {
     if ($Live) { & $python -m course.week9_demo --live }
     else { & $python -m course.week9_demo }
 } elseif ($List) {
-    & $python -m app.week9 --list
+    & $python -m app.services.mcp_host --list
 } elseif ($Live) {
-    & $python -m app.week9 --task $Task
+    & $python -m app.services.mcp_host --task $Task
 } else {
     & $python -m pytest tests/test_week9_mcp.py -q
 }

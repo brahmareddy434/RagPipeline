@@ -5,12 +5,12 @@ import os
 import secrets
 from datetime import datetime, timezone
 
-from app.agent_tools import ToolFailure
-from app.config import get_settings
-from app.mcp_registry import ROOT, connect, load_config
-from app.models import AgentBudget
-from app.ollama_client import OllamaClient
-from app.week9 import build_agent
+from app.agents.tools import ToolFailure
+from app.config.settings import get_settings
+from app.infrastructure.mcp.registry import ROOT, connect, load_config
+from app.schemas import AgentBudget
+from app.infrastructure.ollama import OllamaClient
+from app.services.mcp_host import build_agent
 from course.week9_demo import save
 
 

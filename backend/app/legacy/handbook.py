@@ -15,7 +15,7 @@ import re
 from functools import lru_cache
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+from app.config.paths import PROJECT_ROOT as ROOT
 HANDBOOK_DIR = ROOT / "course" / "handbook"
 VERSION = "v3.2"
 EFFECTIVE_FROM = "2026-01-01"

@@ -5,10 +5,10 @@ import re
 from pathlib import Path
 
 from mcp.server.fastmcp import FastMCP
-from app.models import Chunk
-from app.retrieval import KeywordRetriever
+from app.schemas import Chunk
+from app.rag.retrieval import KeywordRetriever
 
-ROOT = Path(__file__).resolve().parents[1]
+from app.config.paths import PROJECT_ROOT as ROOT
 
 
 def build_server(error_style="after", port=8019):

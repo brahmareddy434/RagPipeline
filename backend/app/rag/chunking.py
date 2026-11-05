@@ -1,7 +1,7 @@
 import hashlib
 import re
 
-from app.models import Chunk
+from app.schemas import Chunk
 
 
 class TextChunker:

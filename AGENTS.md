@@ -45,3 +45,6 @@ Run relevant checks and regressions; report only actual results. Review Critical
 Before removal, inspect references, uniqueness, Git tracking and recovery path. Cache cleanup may remove only verified in-workspace Python/pytest caches; preserve .env, .venv, databases, uploads, historical evidence and unknown files. No bulk deletion or source move solely to make the root look tidy.
 
 Use scoped Conventional Commits after validation. Keep unrelated pre-existing changes separate; no force pushes, destructive resets, deployment or external publication without the applicable user authorization.
+
+## Active authorization - 2026-11-05
+The user authorized Weeks 01-09 sequentially, the backend/controller/service/configuration migration, React integration, validated commits and safe cleanup. Proceed without design reconfirmations. Preserve evidence and do not fabricate human/real-provider requirements. Platform permission boundaries still apply. Active source is now backend/app; root app is a compatibility package.

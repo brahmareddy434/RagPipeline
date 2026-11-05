@@ -31,10 +31,10 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, ValidationError
 
-from app import handbook
-from app.models import RetrievalOptions, SearchResult, StrictModel
+from app.legacy import handbook
+from app.schemas import RetrievalOptions, SearchResult, StrictModel
 
-ROOT = Path(__file__).resolve().parents[1]
+from app.config.paths import PROJECT_ROOT as ROOT
 EMPLOYEE_FILE = ROOT / "course" / "data" / "employees.json"
 
 # A free-text HR field (a manager's comment) is written by a person, not by policy, and an

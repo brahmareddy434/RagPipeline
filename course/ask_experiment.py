@@ -25,15 +25,15 @@ from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-from app.config import get_settings
-from app.dependencies import Container
-from app.models import RetrievalOptions
-from app.ollama_client import call_metrics
-from app.prompts import PromptBuilder
+from app.config.settings import get_settings
+from app.bootstrap import Container
+from app.schemas import RetrievalOptions
+from app.infrastructure.ollama import call_metrics
+from app.rag.prompts import PromptBuilder
 from app.services import RagService
 from course.run import CASES, assertions
 
-ROOT = Path(__file__).resolve().parents[1]
+from app.config.paths import PROJECT_ROOT as ROOT
 OUT = ROOT / "course" / "results"
 
 ARMS = {

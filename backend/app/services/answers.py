@@ -1,31 +1,8 @@
 import asyncio
 from pathlib import PurePosixPath
-from app.answer_quality import ABSTENTION, validate_grounded_answer
-from app.models import AnswerResponse, GroundedAnswer, RetrievalOptions
-from app.leave_totals import annual_leave_total
-
-
-class IngestionService:
-    def __init__(self, loader, chunker, store, max_chars=1_000_000):
-        self.loader, self.chunker, self.store, self.max_chars = loader, chunker, store, max_chars
-
-    async def ingest(self, files):
-        chunks = []
-        seen = set()
-        for filename, content in files:
-            filename = PurePosixPath(filename.replace("\\", "/")).name
-            if not filename or len(filename) > 255 or filename in seen:
-                raise ValueError("Each file must have a distinct filename of at most 255 characters.")
-            seen.add(filename)
-            pages = await asyncio.to_thread(self.loader.load, filename, content)
-            if sum(len(text) for _, text in pages) > self.max_chars:
-                raise ValueError("Extracted document exceeds the character limit.")
-            pieces = await asyncio.to_thread(self.chunker.split, filename, pages)
-            if not pieces:
-                raise ValueError(f"No readable text in {filename}; scanned PDFs need OCR.")
-            chunks.extend(pieces)
-        await self.store.upsert(chunks)
-        return len(chunks)
+from app.rag.grounding import ABSTENTION, validate_grounded_answer
+from app.schemas import AnswerResponse, GroundedAnswer, RetrievalOptions
+from app.legacy.leave_totals import annual_leave_total
 
 
 class RagService:
@@ -91,22 +68,3 @@ class RagService:
                 GroundedAnswer, retries=0, temperature=0)
             response = validate_grounded_answer(output, results, inspection)
         return response
-
-
-class EvaluationService:
-    def __init__(self, retriever):
-        self.retriever = retriever
-
-    async def evaluate(self, cases, k, mode="hybrid"):
-        rows, hits, reciprocal_sum, recall_sum = [], 0, 0., 0.
-        for case in cases:
-            results = await self.retriever.search(case.question, k, RetrievalOptions(k=k, mode=mode))
-            relevant = set(case.relevant_sources or [case.expected_source])
-            rank = next((r.rank for r in results if r.source in relevant), None)
-            recall = len({r.source for r in results} & relevant) / len(relevant)
-            hits += int(rank is not None)
-            reciprocal_sum += 1 / rank if rank else 0
-            recall_sum += recall
-            rows.append({"question": case.question, "expected_source": case.expected_source, "found_rank": rank,
-                         "recall_at_k": recall, "retrieved_sources": [r.source for r in results]})
-        return hits / len(cases), reciprocal_sum / len(cases), recall_sum / len(cases), rows

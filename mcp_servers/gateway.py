@@ -15,7 +15,7 @@ from mcp.server.lowlevel import Server
 from mcp.server.lowlevel.helper_types import ReadResourceContents
 from mcp.server.stdio import stdio_server
 from mcp.types import CallToolResult, Resource, TextContent
-from app.mcp_registry import ROOT, connect, load_config
+from app.infrastructure.mcp.registry import ROOT, connect, load_config
 
 
 def identity():

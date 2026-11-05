@@ -1,7 +1,7 @@
 import asyncio
 import hashlib
 import chromadb
-from app.models import Chunk, SearchResult
+from app.schemas import Chunk, SearchResult
 
 
 class VectorStore:

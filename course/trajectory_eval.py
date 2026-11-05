@@ -17,7 +17,7 @@ additionally walks each run's `steps` trace against a PRE-DECLARED expected traj
                              jurisdiction code passed to get_jurisdiction_rules, and every
                              handbook section number the final answer cites, how many resolve
                              to something real (course/data/employees.json, the handbook's own
-                             annex codes, app.handbook.clause_exists) rather than fluent fiction?
+                             annex codes, app.legacy.handbook.clause_exists) rather than fluent fiction?
   * step efficiency        - steps actually taken / the minimum steps this question needs.
   * cost per question      - p50 AND max, not the mean: one runaway run is the number that
                              shows up on the bill, and a mean buries it.
@@ -43,13 +43,13 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
-from app import handbook
-from app.agent_tools import load_employees
-from app.config import get_settings
-from app.dependencies import Container
-from app.models import AgentBudget
+from app.legacy import handbook
+from app.agents.tools import load_employees
+from app.config.settings import get_settings
+from app.bootstrap import Container
+from app.schemas import AgentBudget
 
-ROOT = Path(__file__).resolve().parents[1]
+from app.config.paths import PROJECT_ROOT as ROOT
 OUT = ROOT / "course" / "results"
 QUESTION_FILE = ROOT / "course" / "week8_questions.json"
 QUESTIONS = json.loads(QUESTION_FILE.read_text(encoding="utf-8"))["questions"]

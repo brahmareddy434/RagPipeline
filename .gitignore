@@ -50,3 +50,11 @@ Thumbs.db
 *.swp
 ~$*
 config/mcp.local.json
+
+# Frontend dependencies, build and test outputs
+node_modules/
+frontend/dist/
+frontend/coverage/
+frontend/playwright-report/
+frontend/test-results/
+*.tsbuildinfo

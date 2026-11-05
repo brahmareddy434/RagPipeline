@@ -4,7 +4,7 @@ import re
 from pathlib import Path
 from mcp.server.fastmcp import FastMCP
 
-ROOT = Path(__file__).resolve().parents[1]
+from app.config.paths import PROJECT_ROOT as ROOT
 server = FastMCP("fictional-claims-system")
 CLAIMS = json.loads((ROOT / "course/insurance/claims.json").read_text(encoding="utf-8"))["claims"]
 

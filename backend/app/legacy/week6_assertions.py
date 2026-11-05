@@ -13,8 +13,8 @@ import re
 from dataclasses import dataclass
 from typing import Callable
 
-from app import handbook
-from app.answer_quality import ABSTENTION
+from app.legacy import handbook
+from app.rag.grounding import ABSTENTION
 
 _SECTION = re.compile(r"(?:Section|section|§)\s*\d+\.\d+")
 _NOTICE_FIGURE = re.compile(r"\b\d+(?:\.\d+)?\s*(?:working\s+)?days?\b", re.I)

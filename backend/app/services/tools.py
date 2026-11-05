@@ -3,7 +3,7 @@ import asyncio
 import math
 import operator
 from pydantic import ValidationError
-from app.models import CalculatorArguments, OrderArguments, ToolDecision
+from app.schemas import CalculatorArguments, OrderArguments, ToolDecision
 
 
 class Calculator:

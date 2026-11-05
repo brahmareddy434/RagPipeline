@@ -5,12 +5,12 @@ import json
 import os
 from pathlib import Path
 
-from app.agent import PolicyAgent
-from app.config import get_settings
-from app.mcp_registry import ROOT, connect, load_config
-from app.models import AgentBudget
-from app.ollama_client import OllamaClient
-from app.prompts import PromptBuilder
+from app.agents.loop import PolicyAgent
+from app.config.settings import get_settings
+from app.infrastructure.mcp.registry import ROOT, connect, load_config
+from app.schemas import AgentBudget
+from app.infrastructure.ollama import OllamaClient
+from app.rag.prompts import PromptBuilder
 
 SYSTEM = """You are an insurance claims triage assistant using fictional training data.
 Choose one step as JSON: thought (brief reason), tool, arguments.
