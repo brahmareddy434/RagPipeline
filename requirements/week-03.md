@@ -62,7 +62,7 @@ Reuse test_chunker.py, test_grounded_calculations.py, test_answer_quality.py and
 
 Reusable source/evidence: app/document_loader.py, chunker.py, vector_store.py, retrieval.py, services.py; existing document/ask browser screen.
 
-Current status: **Working local RAG exists; insurance corpus, tenancy and production file lifecycle pending.** See [cross-week traceability](../docs/architecture/traceability.md). A generic test-suite pass does not replace acceptance evidence.
+Current status: **Fictional claims RAG, document/source lifecycle and React views delivered; local browser journeys passed.** Real claims documents/provenance and production multi-user storage remain pending. See [cross-week traceability](../docs/architecture/traceability.md).
 
 ## 17. Out-of-scope items
 OCR, malware-service selection, distributed vector deployment and a paid reranker unless separately justified.

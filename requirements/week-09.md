@@ -21,7 +21,7 @@ Use standard SDK stdio/HTTP transports; paginated discovery, schema validation, 
 Host owns model calls; reusable servers expose data/capabilities; operator-controlled config and lifecycle cleanup. Establish baseline after initial MCP wiring, then freeze agent sources for server-two proof.
 
 ## 7. Frontend requirements
-Discoverable tool inventory, run trace and error display when React is implemented; existing Swagger and HTML/CLI demos remain interim interfaces.
+React exposes the configured discovered-tool inventory, raw `tools/list` replies, bounded MCP host run and trace/error details. Existing Swagger and HTML/CLI demos remain available for protocol-level inspection.
 
 ## 8. Database requirements
 No new claims source of truth; fictional fixtures until real platform configured. Evidence capture private and sanitized.
@@ -68,7 +68,7 @@ tests/test_week9_mcp.py exercises real local SDK servers, pagination, errors, ra
 
 Reusable source/evidence: app/mcp_registry.py, app/week9.py, mcp_servers/*, config/mcp.*.json; evaluation/week9/submission.
 
-Current status: **Local Task D mechanics and evidence exist (2→4, zero diff); real platform/peer review/React/production isolation pending.** See [cross-week traceability](../docs/architecture/traceability.md). A generic test-suite pass does not replace acceptance evidence.
+Current status: **Local Task D MCP mechanics/evidence, tested integration and React inventory/run trace delivered.** Actual platform credentials/data, personal wire annotation, peer call and production isolation remain pending. See [cross-week traceability](../docs/architecture/traceability.md).
 
 ## 17. Out-of-scope items
 Pretending local fixtures are the real platform; inventing peer approval/handwritten annotations; claiming lookup recovery means correct final answer.
@@ -77,3 +77,6 @@ Pretending local fixtures are the real platform; inventing peer approval/handwri
 Actual claims URL/provenance/token scopes and human peer call are absent. Gateway is a process-scoped local token demo. Historical zero diff applies to its frozen baseline, not future refactors.
 
 Amend approved scope using [change control](README.md).
+
+## Execution amendment - 2026-11-06
+User-authorized integration adds claims benchmark/run APIs and React MCP inventory plus discovered-tool run traces while retaining the separately reviewed Week 09 local SDK evidence and zero-agent-diff snapshot. Local MCP fixture and gateway behavior are covered by integration tests. Real platform credentials/data, personal annotation and a separate person's peer call remain pending.

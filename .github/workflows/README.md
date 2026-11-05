@@ -1,6 +1,6 @@
 # CI rollout plan
 
-No executable workflow is enabled in this initial design pass. Backend packaging and the future React lockfile must be stable first.
+`validate.yml` now runs Python regression tests (including local MCP fixture processes), React build and component tests on push/PR with read-only repository permissions. It has not been executed on GitHub in this local session. Python dependencies retain the repository's existing ranges; a portable lock remains a release improvement. Frontend uses its committed lockfile. Live Ollama/Edge journeys run explicitly on a configured local machine.
 
 Planned PR checks: pinned Python install, backend regression suite with real local MCP fixture servers, frontend install/build/component checks once present, API compatibility fixtures, secret/dependency scan, and retained sanitized failure reports. Live Ollama evaluation must be an explicit job with a configured runner and model; an unavailable provider cannot be reported as a passing evaluation.
 

@@ -1,6 +1,20 @@
 # API baseline and versioning plan
 
-Current routes are defined in app/main.py; runtime discovery is /openapi.json. No /api/v1 router exists yet. This inventory is a source-review baseline, not a claim that every endpoint was live-tested.
+Current routes are defined in `backend/app/controllers/`; runtime discovery is `/openapi.json`. Original paths and `/api/v1` aliases use the same handlers. The table below retains the historical baseline; current additions are listed here.
+
+| Added route under `/api/v1` | Contract |
+|---|---|
+| GET `/session` | Server-resolved tenant/role; local loopback or configured token digest |
+| GET `/traces`, `/traces/{uuid}` | Tenant-private bounded redacted trace window; missing IDs return 404 |
+| GET `/claims/fixtures` | Ten explicitly fictional claim choices and three typed tools |
+| POST `/claims/run` | `{claim_id, approach: agent/workflow/race, budget}`; shared grounded run contract, stop reason, usage and evidence |
+| GET `/claims/evaluation` | Thirty-case fictional assertion report; no private labels |
+| GET `/claims/benchmarks` | Completed baseline/mitigation summaries; partial attempts are not aggregated |
+| GET `/claims/benchmarks/{phase}/{approach}/{case_id}` | Fixed phase-name pattern plus exact approach/case checks; no arbitrary file access |
+
+Document/source calls enforce tenant isolation. Document replacement changes content-version IDs and invalidates old source links (404). Tool/resource citations resolve inside the returned run evidence; their URL is empty instead of pointing at Chroma. Static coursework is limited to `/course/guides`.
+
+Use `docs/postman/Claims_Workbench.postman_collection.json` for read-only local contract checks, with `--no-report-events`. Live results are recorded in the completion report. API errors use safe detail strings/validation fields and request IDs; client cancellation stops waiting, while backend agent budgets bound ongoing work.
 
 | Current route | Responsibility / compatibility requirement |
 |---|---|

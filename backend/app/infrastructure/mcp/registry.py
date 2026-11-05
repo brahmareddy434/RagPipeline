@@ -13,7 +13,7 @@ from jsonschema import Draft202012Validator, ValidationError
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from mcp.client.streamable_http import streamablehttp_client
-from app.agents.tools import Observation, ToolFailure, as_evidence
+from app.domain.tools import Observation, ToolFailure, as_evidence
 
 from app.config.paths import PROJECT_ROOT as ROOT
 

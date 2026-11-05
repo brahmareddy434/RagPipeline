@@ -165,7 +165,7 @@ async def run(live, output):
                               "annotations": {key: ANNOTATIONS[key] for key in message}})
         save(out / "wire.json", {"source": "actual local stdio bytes captured by app.infrastructure.mcp.wire; raw preserves each line",
              "annotation_note": "Authored explanations supplied for study; student must review and explain them personally.",
-             "model_location": "Ollama runs in the host via app/agent.py -> app/ollama_client.py; initialize, tools/list, tools/call and both servers make no model calls.",
+             "model_location": "Ollama runs in the host via backend/app/agents/loop.py -> backend/app/infrastructure/ollama.py; initialize, tools/list, tools/call and both servers make no model calls.",
              "exchanges": exchanges})
         (out / "risk_note.md").write_text(
             "Author: this repository's locally authored fictional claims stand-in; actual platform vendor/provenance not supplied.\n"

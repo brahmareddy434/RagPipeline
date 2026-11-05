@@ -4,6 +4,10 @@ from app.legacy import handbook
 from app.schemas import AnswerResponse, Citation, GroundedAnswer
 
 ABSTENTION = "I don't know based on the uploaded documents."
+
+def source_url(source):
+    # Tool/resource evidence is embedded in the authorized run; it is not a Chroma ID.
+    return "" if source.metadata.get("origin")=="tool" else f"/sources/{source.id}"
 _CITATION = re.compile(r"\[(\d+)\]")
 
 # Output guardrail, the last line of defense after tool-output sanitising (app.agents.tools.
@@ -101,7 +105,7 @@ def validate_grounded_answer(output: GroundedAnswer, results, inspection=None):
             continue
         clause, version = attribute(source.text, claim.quote)
         citations.append(Citation(source=source.source, page=source.page, chunk_id=source.id,
-                                  number=claim.context_number, url=f"/sources/{source.id}", quote=claim.quote,
+                                  number=claim.context_number, url=source_url(source), quote=claim.quote,
                                   clause=clause, handbook_version=version if clause else ""))
         # Attribution is appended by Python, so a Week 6 assertion can require a resolvable
         # section and a handbook version without asking the model for either.
@@ -142,7 +146,7 @@ def validate_grounded_answer(output: GroundedAnswer, results, inspection=None):
             values.append(value)
             refs.append(operand.context_number)
             pending.append(Citation(source=source.source, page=source.page, chunk_id=source.id,
-                                    number=operand.context_number, url=f"/sources/{source.id}", quote=operand.quote))
+                                    number=operand.context_number, url=source_url(source), quote=operand.quote))
         if re.search(r"\d|SOURCE=|\[|\]", calculation.label + calculation.unit):
             faults.append("Calculation labels and units cannot contain numbers or citation markers.")
         if len(values) != len(calculation.operands):

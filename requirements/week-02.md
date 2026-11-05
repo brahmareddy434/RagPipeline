@@ -62,7 +62,7 @@ Reuse tests/test_tools.py, test_course.py and test_answer_quality.py; add target
 
 Reusable source/evidence: app/ollama_client.py, app/tools.py, app/models.py; tests/test_tools.py and tests/test_course.py.
 
-Current status: **Core local capabilities exist; React and production identity controls pending.** See [cross-week traceability](../docs/architecture/traceability.md). A generic test-suite pass does not replace acceptance evidence.
+Current status: **Backend and React implementation delivered and tested.** Production identity provider and real deployment controls remain separate gates. See [cross-week traceability](../docs/architecture/traceability.md).
 
 ## 17. Out-of-scope items
 An autonomous multi-step agent, vector storage and unnecessary orchestration libraries.

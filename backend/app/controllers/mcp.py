@@ -1,6 +1,8 @@
 from app.schemas import AgentRequest
 
-from fastapi import APIRouter
+import time
+from fastapi import APIRouter,Request
+from app.controllers.agents import _trace
 
 router = APIRouter()
 
@@ -15,7 +17,10 @@ async def mcp_tools():
 
 
 @router.post("/mcp/agent/run")
-async def mcp_agent_run(body: AgentRequest):
+async def mcp_agent_run(body: AgentRequest,request:Request):
     """Same bounded agent with MCP tools; server commands come only from operator config."""
     from app.services.mcp_host import run_task
-    return await run_task(body.task, budget=body.budget)
+    started=time.perf_counter()
+    result=await run_task(body.task, budget=body.budget)
+    result["trace_id"]=await _trace(request,"/mcp/agent/run",body.model_dump(mode="json"),result,started)
+    return result

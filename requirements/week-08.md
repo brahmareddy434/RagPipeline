@@ -62,7 +62,7 @@ Existing course/trajectory_eval.py and test_agent.py are HR foundations; add cla
 
 Reusable source/evidence: course/trajectory_eval.py, course/week8_questions.json, docs/KT_Week8_Failure_Modes_and_Trajectory_Evals.md.
 
-Current status: **HR trajectory evidence exists; Task D ten-claim results pending.** See [cross-week traceability](../docs/architecture/traceability.md). A generic test-suite pass does not replace acceptance evidence.
+Current status: **Ten-claim baseline, one prompt mitigation, actual before/after traces and regression table complete.** The mitigation improved outcome/argument validity but introduced repeated calls and did not improve path pass rate. See [Week 08 demo](../docs/demos/week-08-demo.md).
 
 ## 17. Out-of-scope items
 Multiple simultaneous mitigations; claims of robustness from one injection phrase; invented before/after scores.
@@ -71,3 +71,8 @@ Multiple simultaneous mitigations; claims of robustness from one injection phras
 The supplied Week 8 text is truncated; the five explicit criteria above are retained. Existing HR numerical results are historical and cannot be relabelled as claims.
 
 Amend approved scope using [change control](README.md).
+
+## Execution amendment - 2026-11-06
+User-authorized implementation adds predeclared expected paths, repository-backed argument checks, outcome/trajectory separation, cost p50/max, React case inspection and one prompt-only mitigation selected from the completed baseline's top failure mode. Baseline and mitigation runs preserve model, budgets, frozen source hashes and fixtures. No real-world labels or generalized robustness claims are made. See [Week 08 demo](../docs/demos/week-08-demo.md).
+
+Baseline result: agent outcome/path pass 0/0 (gap 0), tool choice 1.00, argument validity 0.69, step efficiency 0.935, estimated cost p50 $0.001087 and max $0.001608. The fixed workflow was outcome/path pass 0.50/1.00 (gap -0.50), argument validity 1.00, step efficiency 1.00, estimated cost p50 $0.000524 and max $0.000757. The mitigation is one added instruction to omit an unrequested optional status filter, selected because invalid arguments were the measured agent failure mode in all 10 baseline cases. Invalid arguments fell 10 -> 2, but repeated calls rose 0 -> 8; the mode table shows zero baseline/mitigation counts for the other classifier modes. Outcome pass rate improved 0% -> 50%, but trajectory pass remained 0%. The tradeoff was p50 latency +27,081 ms, total tokens +8,653 and estimated mean cost +$0.000237/claim (p50 $0.001484, max $0.001695 after). Tool-choice accuracy fell 100% -> 95%, argument validity rose 69% -> 93%, and step efficiency fell 93.5% -> 79%. Actual outcome-pass/path-fail cases are C04, C06, C07, C09 and C10 in `mitigation-r4`; their traces are retained. These deterministic proxy outcomes are not human labels or proof of general reliability.

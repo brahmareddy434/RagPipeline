@@ -1,8 +1,13 @@
-# Mentor demos
+﻿# Mentor demos
 
-- [Week 01 foundations demo](week-01-demo.md): concepts, actual local experiments, cost calculation, startup and repeatable mentor steps; learner/mentor review pending.
-- Weeks 02–07: draft specifications are in ../../requirements/; historical reading material is in ../../course/guides/. Create new claims guides from actual work/evidence when requested.
-- [Week 08 historical HR demo](../DEMO_Week8_Trajectory_Evals.md): HR results, not claims Task D.
-- [Week 09 current MCP demo](../DEMO_Week9_MCP.md): fictional claims discovery and protocol evidence.
+- [Week 01 foundations](week-01-demo.md): theory and actual local experiments; learner explanation/mentor review pending.
+- [Week 02 structured tools and access](week-02-demo.md)
+- [Week 03 claims documents and Q&A](week-03-demo.md)
+- [Week 04 retrieval experiment](week-04-demo.md)
+- [Week 05 redaction, replay and human review](week-05-demo.md)
+- [Week 06 claims assertions and judge gates](week-06-demo.md)
+- [Week 07 claims agent vs fixed workflow](week-07-demo.md)
+- [Week 08 claims trajectory evaluation](week-08-demo.md)
+- [Week 09 claims MCP integration](../DEMO_Week9_MCP.md)
 
-New/migrated guides use week-NN-demo.md. Existing paths remain valid until their documentation migration; keep one full guide per week and use links rather than duplicated content.
+Legacy HR guides remain in their historical locations and are labeled as HR evidence. Current architecture and execution status: [traceability](../architecture/traceability.md) and [completion report](../architecture/completion-report.md).

@@ -11,6 +11,8 @@ from app.services import EvaluationService, IngestionService, RagService
 from app.services.tools import Calculator, OrderRepository, ToolService
 from app.repositories.vector_store import VectorStore
 from app.agents.workflow import FixedWorkflow
+from app.agents.claims import ClaimsTools, ClaimsWorkflow, claims_agent
+from app.repositories.claims import FictionalClaims
 
 
 @dataclass
@@ -25,6 +27,9 @@ class Container:
     workflow: FixedWorkflow
     memory: VectorMemory
     registry: ToolRegistry
+    claims_registry: ClaimsTools
+    claims_agent: PolicyAgent
+    claims_workflow: ClaimsWorkflow
 
     @classmethod
     def build(cls, settings):
@@ -40,6 +45,7 @@ class Container:
         memory_store = VectorStore(str(settings.chroma_path), settings.memory_collection_name,
                                    ollama, settings.embedding_batch_size)
         memory = VectorMemory(memory_store)
+        claims_registry=ClaimsTools(FictionalClaims())
         return cls(ollama=ollama,
             ingestion=IngestionService(DocumentLoader(), TextChunker(settings.chunk_size, settings.chunk_overlap), store, settings.max_document_chars),
             rag=RagService(retriever, ollama, prompts, settings.min_relevance,
@@ -48,4 +54,5 @@ class Container:
             tools=ToolService(ollama, calculator, OrderRepository()), store=store,
             agent=PolicyAgent(ollama, registry, prompts, memory),
             workflow=FixedWorkflow(retriever, ollama, prompts, registry, settings.workflow_search_k),
-            memory=memory, registry=registry)
+            memory=memory, registry=registry, claims_registry=claims_registry,
+            claims_agent=claims_agent(ollama,claims_registry), claims_workflow=ClaimsWorkflow(ollama,claims_registry))

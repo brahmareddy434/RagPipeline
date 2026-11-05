@@ -64,7 +64,7 @@ Reuse test_agent.py and workflow-related checks; planned claims contract parity,
 
 Reusable source/evidence: app/agent.py, agent_tools.py, workflow.py, memory.py, course/race.py, tests/test_agent.py.
 
-Current status: **Core orchestration exists; comparable ten-claim race and strict production budgets pending.** See [cross-week traceability](../docs/architecture/traceability.md). A generic test-suite pass does not replace acceptance evidence.
+Current status: **Ten-claim local race and budget-stop evidence complete.** The fictional baseline favors the fixed workflow; it does not establish real-world reliability. See the execution amendment below and [Week 07 demo](../docs/demos/week-07-demo.md).
 
 ## 17. Out-of-scope items
 Claims payment execution, hidden workflow agent, unsupported production memory guarantees.
@@ -73,3 +73,8 @@ Claims payment execution, hidden workflow agent, unsupported production memory g
 Current workflow/case mix is HR; budget checks have audit gaps. Fictional Week 9 claims fixtures contain only two claims, not the required ten.
 
 Amend approved scope using [change control](README.md).
+
+## Execution amendment - 2026-11-06
+User-authorized implementation adds the typed claims status tool, shared claims evidence contract, bounded agent/provider execution, deterministic fixed workflow, ten fictional cases, browser comparison and benchmark report. Required clauses are named in fictional notes and fetched by the fixed workflow. The completed `baseline-r4` artifact is linked from the evidence index; older partial attempts are retained and are not acceptance evidence. See [Week 07 demo](../docs/demos/week-07-demo.md). Real adjuster inputs, real claims data and mentor review remain pending.
+
+Baseline `baseline-r4`, model `llama3.2:3b`, ten assistant-authored fictional cases: agent outcome/path pass 0/0, p50 47,677 ms, 54,264 tokens, estimated mean cost $0.001237/claim (p50 $0.001087, max $0.001608); tool choice 1.00, argument validity 0.69, step efficiency 0.935. Fixed workflow outcome/path pass 0.50/1.00, p50 33,343 ms, 19,054 tokens, estimated mean $0.000510/claim (p50 $0.000524, max $0.000757); tool choice/argument validity/efficiency 1.00. Agent's top mode was invalid arguments (10/10); workflow modes were abstention (5) and pass (5). The 500-token admission test stopped before provider calls (0 tokens, clean abstention); admission and finalization limits are also covered by tests. Verdict (under 150 words): These fictional inputs show no need for variable planning. The fixed sequence was faster, used fewer tokens and passed more deterministic answer checks; it still abstained on half the cases. The agent's invalid optional status filter prevented all ten cases from passing. Choose the fixed workflow for this fixture only; authentic adjuster cases could require different paths. The optional long-note/cross-process memory demonstration was not run.

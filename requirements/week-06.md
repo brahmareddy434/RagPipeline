@@ -64,7 +64,7 @@ Existing test_week6_week7.py covers portions of HR agreement/sealing. Claims ass
 
 Reusable source/evidence: evaluation/week6/*, app/week6_assertions.py, tests/test_week6_week7.py; domain is HR.
 
-Current status: **Reusable evaluator pattern exists; Task D data, assertions and judge-validation evidence pending.** See [cross-week traceability](../docs/architecture/traceability.md). A generic test-suite pass does not replace acceptance evidence.
+Current status: **Thirty synthetic claims cases, deterministic assertions, sealed judge gates and React evaluation delivered/tested.** Real regressions, blind human labels and judge agreement remain pending. See [cross-week traceability](../docs/architecture/traceability.md).
 
 ## 17. Out-of-scope items
 Operational routing by an unvalidated judge; synthetic human labels; changing the scoring ruler to force a gain.

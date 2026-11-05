@@ -16,6 +16,7 @@ from mcp.server.lowlevel.helper_types import ReadResourceContents
 from mcp.server.stdio import stdio_server
 from mcp.types import CallToolResult, Resource, TextContent
 from app.infrastructure.mcp.registry import ROOT, connect, load_config
+from app.infrastructure.redaction import redact
 
 
 def identity():
@@ -71,9 +72,9 @@ async def main():
             finally:
                 # Exactly one audit line per attempted call, including denials and failures.
                 with audit_path.open("a", encoding="utf-8") as log:
-                    log.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(),
+                    log.write(json.dumps(redact({"time": datetime.now(timezone.utc).isoformat(),
                         "caller": access["caller"], "tool": name,
-                        "claim_number": arguments.get("claim_number"), "outcome": outcome}) + "\n")
+                        "claim_number": arguments.get("claim_number"), "outcome": outcome})) + "\n")
 
         async with stdio_server() as (read, write):
             await gateway.run(read, write, gateway.create_initialization_options())

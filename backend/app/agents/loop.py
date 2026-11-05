@@ -18,6 +18,7 @@ Three properties are load-bearing:
   evidence the tools actually returned, so an agent answer is as citable as a RAG answer.
 """
 import time
+import asyncio
 from functools import lru_cache
 from typing import Any, Literal
 
@@ -28,6 +29,7 @@ from app.rag.grounding import ABSTENTION, flag_injected_language, validate_groun
 from app.agents.memory import AgentStepRecord, Scratchpad
 from app.schemas import AgentBudget, AgentRunResponse, GroundedAnswer, StrictModel, usd_cost
 from app.infrastructure.ollama import call_metrics
+from app.infrastructure.budgets import BudgetExceeded, ProviderBudget, active_budget
 
 SYSTEM = """You are an HR policy agent. You answer one employee question by taking steps.
 
@@ -100,6 +102,7 @@ class PolicyAgent:
         outer = call_metrics.get()
         metrics: list[dict] = []
         token = call_metrics.set(metrics)
+        budget_token = active_budget.set(ProviderBudget(budget,metrics))
         scratchpad = Scratchpad(char_budget=budget.scratchpad_chars)
         # Compression trims `scratchpad.steps` to keep the PROMPT small. The audit trail must
         # survive that, so every step is also appended here and this is what the response and
@@ -129,9 +132,22 @@ class PolicyAgent:
         def elapsed() -> float:
             return time.perf_counter() - started
 
+        async def bounded(coroutine):
+            reason=("timeout" if elapsed()>=budget.max_seconds else
+                    "token_budget" if used_tokens()>=budget.max_tokens else
+                    "cost_budget" if used_cost()>=budget.max_cost_usd else None)
+            if reason:
+                coroutine.close()
+                raise BudgetExceeded(reason)
+            try:
+                return await asyncio.wait_for(coroutine,timeout=max(.001,budget.max_seconds-elapsed()))
+            except asyncio.TimeoutError as exc:
+                raise BudgetExceeded("timeout") from exc
+
         try:
             if self.memory and session_id:
-                recalled = await self.memory.recall(session_id, task, k=3)
+                try: recalled = await bounded(self.memory.recall(session_id, task, k=3))
+                except BudgetExceeded as exc: stop=StopCondition(reason=exc.reason,detail="Budget exhausted during memory recall.")
 
             while True:
                 if len(history) >= budget.max_steps:
@@ -154,10 +170,13 @@ class PolicyAgent:
                 step_started = time.perf_counter()
                 before = len(metrics)
                 try:
-                    decision = await self.ollama.structured(
+                    decision = await bounded(self.ollama.structured(
                         self._messages(task, scratchpad, recalled, len(history), budget, len(evidence)),
                         decision_schema(self.registry.names),
-                        retries=1, temperature=0)
+                        retries=1, temperature=0))
+                except BudgetExceeded as exc:
+                    stop=StopCondition(reason=exc.reason,detail="Budget exhausted before or during a model call.")
+                    break
                 except Exception as exc:  # a model that cannot pick a tool must not spin
                     stop = StopCondition(reason="model_error", detail=str(exc)[:300])
                     break
@@ -170,6 +189,9 @@ class PolicyAgent:
                 if key in attempted:
                     repeats += 1
                     previous_ok, previous = attempted[key]
+                    if repeats >= budget.max_repeats:
+                        stop=StopCondition(reason="repeated_call",detail="The agent kept requesting a call it had already made.")
+                        break
                     observation, ok = Observation(
                         ("You already ran this exact call. Its result is unchanged:\n" + previous.text)
                         if previous_ok else
@@ -178,7 +200,7 @@ class PolicyAgent:
                         []), previous_ok
                 else:
                     try:
-                        observation = await self.registry.execute(decision.tool, decision.arguments)
+                        observation = await bounded(self.registry.execute(decision.tool, decision.arguments))
                         new = [e for e in observation.evidence if e.id not in seen_evidence]
                         # The exact-match repeat guard cannot catch a *rephrased* search, and
                         # that is what a weak model actually does: "leave allowance", then
@@ -191,6 +213,11 @@ class PolicyAgent:
                         seen_evidence.update(e.id for e in observation.evidence)
                         evidence.extend(new)
                         ok = True
+                    except BudgetExceeded as exc:
+                        stop=StopCondition(reason=exc.reason,detail="Budget exhausted during tool execution.")
+                        history.append(AgentStepRecord(index=len(history)+1,thought=decision.thought,tool=decision.tool,
+                            arguments=decision.arguments,observation="Tool execution cancelled by budget.",ok=False))
+                        break
                     except ToolFailure as exc:
                         errors += 1
                         observation, ok = Observation(f"Tool error: {exc}", []), False
@@ -210,11 +237,20 @@ class PolicyAgent:
                 scratchpad.add(record)
 
                 if scratchpad.over_budget():
-                    await scratchpad.compress(self.ollama)
+                    try: await bounded(scratchpad.compress(self.ollama))
+                    except BudgetExceeded as exc:
+                        stop=StopCondition(reason=exc.reason,detail="Budget exhausted during compression.")
+                        break
 
-            answer = await self._final_answer(task, evidence, history, scratchpad, recalled)
+            from app.schemas import AnswerResponse
+            answer=AnswerResponse(answer=ABSTENTION,confidence="low",abstained=True,retrieved=evidence)
+            if not stop or stop.reason not in {"timeout","token_budget","cost_budget"}:
+                try: answer = await bounded(self._final_answer(task, evidence, history, scratchpad, recalled))
+                except BudgetExceeded as exc: stop=StopCondition(reason=exc.reason,detail="Budget exhausted during finalization; no unsupported answer returned.")
+                except Exception as exc: stop=StopCondition(reason="model_error",detail=f"Finalization failed ({type(exc).__name__}); retry when the provider is available.")
             if self.memory and session_id:
-                await self.memory.remember(session_id, self._durable_facts(history))
+                try: await bounded(self.memory.remember(session_id, self._durable_facts(history)))
+                except BudgetExceeded as exc: stop=StopCondition(reason=exc.reason,detail="Budget exhausted during memory persistence.")
             return AgentRunResponse(
                 task=task, session_id=session_id, answer=answer.answer, citations=answer.citations,
                 confidence=answer.confidence, abstained=answer.abstained,
@@ -229,8 +265,11 @@ class PolicyAgent:
                        "prompt_tokens": prompt_tokens(), "completion_tokens": completion_tokens(),
                        "total_tokens": used_tokens(), "cost_usd": used_cost(),
                        "tool_errors": errors, "repeated_calls": repeats,
+                       "provider_calls": metrics,
+                       "usage_complete": all(m.get("usage_status")!="reserved_upper_bound" for m in metrics),
                        "latency_ms": round(elapsed() * 1000, 2)})
         finally:
+            active_budget.reset(budget_token)
             call_metrics.reset(token)
             if outer is not None:
                 outer.extend(metrics)

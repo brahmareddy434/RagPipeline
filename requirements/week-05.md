@@ -64,7 +64,7 @@ Reuse trace logger tests as baseline; add redaction/replay/sampling invariants w
 
 Reusable source/evidence: app/trace_logger.py, evaluation/collect_week5_traces.py, course/review_notes.py, tests/test_trace_logger.py.
 
-Current status: **Trace/sampling building blocks exist; pre-write privacy, complete claims replay and authentic human analysis pending.** See [cross-week traceability](../docs/architecture/traceability.md). A generic test-suite pass does not replace acceptance evidence.
+Current status: **Pre-write redaction, fictional trace replay, synthetic sampling and React trace view delivered/tested.** Authentic human trace analysis remains pending. See [cross-week traceability](../docs/architecture/traceability.md).
 
 ## 17. Out-of-scope items
 Fixing failures during coding; fabricating real traces/human notes; category-first sampling.

@@ -154,7 +154,8 @@ async def test_gateway_enforces_scope_and_audits_each_call(monkeypatch, tmp_path
     rows = [json.loads(line) for line in audit.read_text().splitlines()]
     assert [row["outcome"] for row in rows] == ["ok", "denied"]
     assert all(row["caller"] == "triage-status-demo" for row in rows)
-    assert all(row["claim_number"] == "CLM-2024-88120" for row in rows)
+    assert all(row["claim_number"] == "[CLAIM_ID]" for row in rows)
+    assert "CLM-2024-88120" not in audit.read_text()
     assert status_token not in audit.read_text()
     monkeypatch.setenv("WEEK9_GATEWAY_TOKEN", full_token)
     async with connect(load_config(ROOT / "config/mcp.gateway.json")) as registry:

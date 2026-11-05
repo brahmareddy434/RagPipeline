@@ -71,3 +71,16 @@ def test_private_course_files_not_static():
 def test_authenticated_mode_requires_scoped_credentials():
     with pytest.raises(ValueError):
         Settings(_env_file=None, access_mode="authenticated")
+
+
+def test_tenant_trace_reads_do_not_cross_boundaries(tmp_path):
+    from uuid import uuid4
+    from app.infrastructure.tracing import TraceLogger
+    settings=auth_settings(tmp_path);app=create_app(settings)
+    trace_id=str(uuid4())
+    suffix=hashlib.sha256(b"alpha").hexdigest()[:24]
+    TraceLogger(settings.trace_log_path.parent/(suffix+".jsonl")).write({"trace_id":trace_id,"error":"CLM-2024-88120"})
+    with TestClient(app) as client:
+        assert client.get('/api/v1/traces/'+trace_id,headers={'Authorization':'Bearer test-alpha'}).status_code==200
+        assert client.get('/api/v1/traces/'+trace_id,headers={'Authorization':'Bearer test-beta'}).status_code==404
+        assert client.get('/api/v1/traces').status_code==401

@@ -62,7 +62,7 @@ Existing retrieval tests validate ranking primitives, not this rubric. Add exper
 
 Reusable source/evidence: app/retrieval.py (BM25/RRF/rerank options), /inspect and /evaluate, course/run.py. Existing evidence is largely HR.
 
-Current status: **Mechanisms exist; required 12-question claims experiment not established.** See [cross-week traceability](../docs/architecture/traceability.md). A generic test-suite pass does not replace acceptance evidence.
+Current status: **Fictional 12-question retrieval experiment delivered: semantic and RRF both 12/12; no accuracy gain claimed.** Authentic adjuster questions remain pending. See [cross-week traceability](../docs/architecture/traceability.md).
 
 ## 17. Out-of-scope items
 Model changes, simultaneous hybrid+reranker changes, invented questions labelled real.

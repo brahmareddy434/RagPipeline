@@ -1,17 +1,14 @@
-# Weekly requirements
+﻿# Weekly requirements
 
-These nine documents record the user's 2026-11-05 requirements as draft v0.1. They do not retroactively approve existing implementations or certify completion. The user activated **Implement Week 01** on 2026-11-05; only that theory scope is authorized by this increment. Later weeks remain separate requests.
+These nine documents record the supplied insurance Task D requirements and stable acceptance IDs. On 2026-11-05 the user authorized implementing Weeks 01-09, the backend restructuring and React frontend. Work and evidence are recorded sequentially in the week documents and demos. Implementation does not fabricate learner understanding, mentor review, human labels, authentic adjuster input, peer calls or real-provider access.
 
-Target: insurance claims (Task D). Earlier HR results are not equivalent claims evidence. Week 4's duplicated theory text is resolved using its distinct debugging practical; Week 8's truncated text is limited to the explicit supplied criteria. Critical unknowns block dependent work only.
-
-Each document has the requested 18 sections and stable Wxx-ACnn IDs. Planned Wxx-Vnn checks are not executed tests. Production security controls are release gates, not assertions about current behavior.
+Week 4's duplicated theory text is interpreted through its distinct debugging practical; Week 8's truncated text is limited to its explicit criteria. Production security controls remain release gates, not claims about current behavior.
 
 ## Change control
-- 2026-11-05 continuation: user explicitly authorized completion of all nine weeks, backend/React implementation, testing and validated commits. The original extraction below is historical; missing human and real-provider evidence still requires authentic inputs.
-- 2026-11-05: initial v0.1 extraction from the user syllabus/master instructions; approval pending.
-- 2026-11-05: explicit Week 01 execution instruction received; its criteria are unchanged, execution evidence added and learner/mentor review remains pending. Other specifications remain draft.
-- After approval, record dated amendments with reason, impacted IDs, API/data/UI effects and verification. Never silently change approved scope or historical measurements.
-- Distinguish human notes/labels and authentic traces from assistant-written examples.
+- 2026-11-05: initial v0.1 extraction from the syllabus and master instructions.
+- 2026-11-05: explicit Week 01 execution instruction; scope unchanged, local evidence added, learner/mentor review pending.
+- 2026-11-05: user authorized completion of all nine weeks, backend/React implementation, testing, validated commits and safe cleanup. Subsequent dated amendments record actual execution and outstanding external acceptance.
+- Distinguish human notes/labels and authentic traces from assistant-authored examples.
 
 - [Week 01: How a language model works](week-01.md)
 - [Week 02: Prompting, structured output and tool calling](week-02.md)

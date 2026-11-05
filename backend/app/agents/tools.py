@@ -66,21 +66,7 @@ def sanitize_free_text(text: str) -> str:
     return f"{rendered} {note}".strip()
 
 
-class ToolFailure(ValueError):
-    """A tool rejected its arguments or found nothing. Recoverable: the agent may retry."""
-
-
-@dataclass
-class Observation:
-    """What one tool call produced: text the model reads, plus quotable evidence."""
-    text: str
-    evidence: list[SearchResult]
-
-
-def as_evidence(source: str, text: str, chunk_id: str) -> SearchResult:
-    """Wrap a tool result as a citable pseudo-chunk with the same shape as a retrieved one."""
-    return SearchResult(id=chunk_id, text=text, source=source, page=None, metadata={"origin": "tool"},
-                        score=1.0, rank=1, retrieval_method="tool")
+from app.domain.tools import ToolFailure, Observation, Tool, as_evidence
 
 
 class SearchHandbookArguments(StrictModel):
@@ -103,15 +89,6 @@ class CalculateArguments(StrictModel):
 
 class FinishArguments(StrictModel):
     summary: str = Field(min_length=2, max_length=600)
-
-
-@dataclass(frozen=True)
-class Tool:
-    """One capability. `description` is prompt text, so it is written for the model."""
-    name: str
-    description: str
-    arguments: type[BaseModel]
-    terminal: bool = False
 
 
 class ToolRegistry:

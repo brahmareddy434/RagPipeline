@@ -7,6 +7,9 @@ import { Ask } from '../features/ask/Ask';
 import { Inspection } from '../features/inspection/Inspection';
 import { Traces } from '../features/traces/Traces';
 import { Evaluation } from '../features/evaluation/Evaluation';
+import { Runs } from '../features/runs/Runs';
+import { Mcp } from '../features/mcp/Mcp';
+import { Benchmarks } from '../features/runs/Benchmarks';
 
 type Identity = {tenant: string; role: string};
 export function App() {
@@ -22,7 +25,7 @@ export function App() {
   }, [api]);
   return <HashRouter><div className="layout">
     <aside><a className="brand" href="#/">Claims<br/><strong>Workbench</strong></a><p className="eyebrow">AI ENGINEERING · WEEKS 01–09</p>
-      <nav aria-label="Main navigation"><NavLink to="/">Overview</NavLink><NavLink to="/tools">Structured tools</NavLink><NavLink to="/documents">Documents</NavLink><NavLink to="/ask">Policy Q&amp;A</NavLink><NavLink to="/inspect">Retrieval inspection</NavLink><NavLink to="/traces">Traces</NavLink><NavLink to="/evaluation">Evaluation</NavLink></nav>
+      <nav aria-label="Main navigation"><NavLink to="/">Overview</NavLink><NavLink to="/tools">Structured tools</NavLink><NavLink to="/documents">Documents</NavLink><NavLink to="/ask">Policy Q&amp;A</NavLink><NavLink to="/inspect">Retrieval inspection</NavLink><NavLink to="/traces">Traces</NavLink><NavLink to="/evaluation">Evaluation</NavLink><NavLink to="/runs">Agent comparison</NavLink><NavLink to="/benchmarks">Trajectories</NavLink><NavLink to="/mcp">MCP tools</NavLink></nav>
       <div className="sidebar-note">Fictional training data<br/>Human review required</div>
     </aside>
     <main><header><div><p className="eyebrow">INSURANCE CLAIMS</p><h1>Evidence before answers.</h1></div><span className="badge">{identity ? `${identity.tenant} · ${identity.role}` : 'Connecting'}</span></header>
@@ -37,6 +40,9 @@ export function App() {
           <Route path="/inspect" element={<Inspection api={api}/>}/>
           <Route path="/traces" element={<Traces api={api}/>}/>
           <Route path="/evaluation" element={<Evaluation api={api}/>}/>
+          <Route path="/runs" element={<Runs api={api}/>}/>
+          <Route path="/mcp" element={<Mcp api={api}/>}/>
+          <Route path="/benchmarks" element={<Benchmarks api={api}/>}/>
           <Route path="*" element={<section className="panel"><h2>Page not found</h2><a href="#/">Return to overview</a></section>}/>
         </Routes></div>}
       <footer>Claims Workbench · Read-only training decisions, never payment authorization.</footer>

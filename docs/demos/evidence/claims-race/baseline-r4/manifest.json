@@ -1,0 +1,26 @@
+{
+  "timestamp": "2026-11-05T19:14:50.850193+00:00",
+  "model": "llama3.2:3b",
+  "budget": {
+    "max_steps": 6,
+    "max_seconds": 180.0,
+    "max_tokens": 32000,
+    "max_cost_usd": 0.03,
+    "max_tool_errors": 3,
+    "max_repeats": 2,
+    "scratchpad_chars": 6000
+  },
+  "provenance": "Actual local model runs over ten assistant-authored fictional claims; outcome tests are deterministic proxies, not human acceptance.",
+  "cost": "Modelled reference USD at prompt 0.20 / completion 0.60 per million tokens; not an Ollama invoice.",
+  "source_sha256": {
+    "backend/app/agents/claims.py": "852502e48f500706a4d548cd510d21cae0bde84bca6a1509888576256db16123",
+    "backend/app/agents/loop.py": "a720289d8f09e3010a119ec36ea47043ae1f99678fbe421a4cc9577b0a61ea49",
+    "backend/app/infrastructure/ollama.py": "708ed7fa50f7587c72933e990fda75c4e2919295946f6577371d768bbad6867f",
+    "backend/app/infrastructure/budgets.py": "9dc706162817fdac2cb9a315b2909ac0ef23351c22a9fa7ef51feab0046e815b",
+    "backend/app/repositories/claims.py": "954634d6ebea98cdf89fea27494c34014d4b0f0e07e893847f62491f9c1adba6",
+    "course/claims_trajectories.py": "af0e9b3aa22f7c5673dc6029f8982d75793d3f227a3b6f961db110931b684389",
+    "course/insurance/triage-claims.json": "0d64ba47e4566fd98d14db3dc09b21b63bfb84f029c942a750d357b60b79dab0",
+    "course/insurance/claims-policy-2026.txt": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+  },
+  "mitigation": false
+}
