@@ -1,4 +1,5 @@
 import asyncio
+from app.domain.ports import ChunkSink
 from pathlib import PurePosixPath
 from app.rag.grounding import ABSTENTION, validate_grounded_answer
 from app.schemas import AnswerResponse, GroundedAnswer, RetrievalOptions
@@ -6,7 +7,7 @@ from app.legacy.leave_totals import annual_leave_total
 
 
 class IngestionService:
-    def __init__(self, loader, chunker, store, max_chars=1_000_000):
+    def __init__(self, loader, chunker, store: ChunkSink, max_chars=1_000_000):
         self.loader, self.chunker, self.store, self.max_chars = loader, chunker, store, max_chars
 
     async def ingest(self, files):

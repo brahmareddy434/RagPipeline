@@ -125,7 +125,7 @@ def test_api_validation_upload_source_and_trace(tmp_path,monkeypatch):
         return c
     monkeypatch.setattr(main,"get_settings",lambda:Settings(chroma_path=tmp_path/"db",trace_log_path=tmp_path/"traces.jsonl",collection_name="api_test"))
     monkeypatch.setattr(Container,"build",classmethod(build))
-    with TestClient(main.app) as client:
+    with TestClient(main.app, client=("127.0.0.1", 50000)) as client:
         assert client.post("/ask",json={"question":"  "}).status_code == 422
         assert client.post("/documents",files={"file":("x.exe",b"x")}).status_code == 415
         assert client.post("/documents",files={"file":("x.txt",b"")}).status_code == 400

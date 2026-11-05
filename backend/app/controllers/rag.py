@@ -9,7 +9,7 @@ from app.infrastructure.ollama import OllamaUnavailable, call_metrics
 from app.rag.prompts import PromptBuilder
 
 from fastapi import APIRouter
-from app.controllers.dependencies import container
+from app.controllers.dependencies import container, trace_logger
 
 router = APIRouter()
 
@@ -21,13 +21,13 @@ async def inspect(body: InspectRequest, request: Request):
 
 @router.post("/ask", response_model=AnswerResponse)
 async def ask(body: ChatRequest, request: Request):
-    logger = request.app.state.trace_logger
+    logger = trace_logger(request)
     trace_id = logger.new_trace_id()
     started = perf_counter()
     metrics = []
     token = call_metrics.set(metrics)
     c = container(request)
-    record = {"trace_id": trace_id, "request_id": request.headers.get("X-Request-ID", "")[:128] or logger.new_trace_id(),
+    record = {"trace_id": trace_id, "request_id": request.state.request_id,
               "timestamp": logger.timestamp(), "endpoint": "/ask", "request": body.model_dump(mode="json"),
               "configuration": {"chat_model": c.ollama.chat_model, "embedding_model": c.ollama.embed_model,
                                 "collection": c.store.collection.name,

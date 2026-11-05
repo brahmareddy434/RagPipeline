@@ -7,6 +7,7 @@ Target: insurance claims (Task D). Earlier HR results are not equivalent claims 
 Each document has the requested 18 sections and stable Wxx-ACnn IDs. Planned Wxx-Vnn checks are not executed tests. Production security controls are release gates, not assertions about current behavior.
 
 ## Change control
+- 2026-11-05 continuation: user explicitly authorized completion of all nine weeks, backend/React implementation, testing and validated commits. The original extraction below is historical; missing human and real-provider evidence still requires authentic inputs.
 - 2026-11-05: initial v0.1 extraction from the user syllabus/master instructions; approval pending.
 - 2026-11-05: explicit Week 01 execution instruction received; its criteria are unchanged, execution evidence added and learner/mentor review remains pending. Other specifications remain draft.
 - After approval, record dated amendments with reason, impacted IDs, API/data/UI effects and verification. Never silently change approved scope or historical measurements.

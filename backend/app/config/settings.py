@@ -1,8 +1,14 @@
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
-from pydantic import Field, model_validator
+from pydantic import BaseModel, Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+class Principal(BaseModel):
+    tenant: str = Field(pattern=r"^[A-Za-z0-9_-]{1,64}$")
+    role: Literal["reader", "writer", "admin"] = "reader"
 
 
 class Settings(BaseSettings):
@@ -37,11 +43,21 @@ class Settings(BaseSettings):
     memory_collection_name: str = "agent_memory"
     agent_search_k: int = Field(4, ge=1, le=20)
     workflow_search_k: int = Field(6, ge=1, le=20)
+    access_mode: Literal["local", "authenticated"] = "local"
+    # SHA-256 digests are the keys; plaintext access tokens never belong in config.
+    api_token_hashes: dict[str, Principal] = Field(default_factory=dict, repr=False)
+    allowed_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
+    allowed_hosts: list[str] = ["localhost", "127.0.0.1", "[::1]", "testserver"]
+    requests_per_minute: int = Field(120, ge=1, le=10000)
 
     @model_validator(mode="after")
     def valid_overlap(self):
         if self.chunk_overlap >= self.chunk_size:
             raise ValueError("chunk_overlap must be smaller than chunk_size")
+        if self.access_mode == "authenticated" and not self.api_token_hashes:
+            raise ValueError("Authenticated mode requires API_TOKEN_HASHES with scoped token digests.")
+        if any(len(k) != 64 or any(c not in "0123456789abcdef" for c in k) for k in self.api_token_hashes):
+            raise ValueError("API_TOKEN_HASHES keys must be lowercase SHA-256 hex digests.")
         return self
 
 

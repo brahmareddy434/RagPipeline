@@ -212,7 +212,7 @@ def test_fastapi_discovery_route():
     from fastapi.testclient import TestClient
     from app.main import app
     # This route does not need the HR container or a Chroma/Ollama process.
-    response = TestClient(app).get("/mcp/tools")
+    response = TestClient(app, client=("127.0.0.1", 50000)).get("/mcp/tools")
     assert response.status_code == 200
     body = response.json()
     assert body["count"] == sum(len(p["response"]["tools"]) for p in body["tools_list_responses"])

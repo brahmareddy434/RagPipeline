@@ -49,7 +49,7 @@ async def upload_document(request: Request, file: UploadFile | None = File(None)
     if not uploads or len(uploads) > 10:
         raise HTTPException(400, "Choose between one and ten files.")
     items = []
-    limit = get_settings().max_upload_bytes
+    limit = request.app.state.settings.max_upload_bytes
     try:
         for upload in uploads:
             if not upload.filename:

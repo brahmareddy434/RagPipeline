@@ -71,3 +71,6 @@ An autonomous multi-step agent, vector storage and unnecessary orchestration lib
 Existing tests prove local fixtures and contracts, not production access controls; model retries can still exhaust.
 
 Amend approved scope using [change control](README.md).
+
+## Execution amendment - 2026-11-05
+All nine weeks and backend/React restructuring are authorized. W02-AC01-04 reuse validated schemas/provider retries and restricted tools, adding scoped access, request IDs and tenant-isolated dependencies. W02-AC05 has React tools/API tests. The previous session recorded 176 backend and four frontend tests plus a successful build; fresh verification and review are recorded in docs/architecture/completion-report.md. Enterprise identity/deployment remain separate release gates.

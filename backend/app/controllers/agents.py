@@ -6,13 +6,13 @@ from fastapi.responses import JSONResponse
 from app.schemas import AgentRequest, AgentRunResponse, MemoryRequest, WorkflowRequest, WorkflowRunResponse
 
 from fastapi import APIRouter
-from app.controllers.dependencies import container
+from app.controllers.dependencies import container, trace_logger
 
 router = APIRouter()
 
 async def _trace(request, endpoint, body, result, started, error=None):
     """Agent and workflow runs are traces too: same log, same Week 5 analysis tooling."""
-    logger = request.app.state.trace_logger
+    logger = trace_logger(request)
     record = {"trace_id": logger.new_trace_id(), "timestamp": logger.timestamp(), "endpoint": endpoint,
               "request": body, "latency_ms": round((perf_counter() - started) * 1000, 2)}
     record.update({"status": "failed", "error": str(error), "error_type": type(error).__name__}

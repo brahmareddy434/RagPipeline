@@ -1,4 +1,5 @@
 import asyncio
+from app.domain.ports import StructuredModel, Retriever
 from pathlib import PurePosixPath
 from app.rag.grounding import ABSTENTION, validate_grounded_answer
 from app.schemas import AnswerResponse, GroundedAnswer, RetrievalOptions
@@ -6,7 +7,7 @@ from app.legacy.leave_totals import annual_leave_total
 
 
 class RagService:
-    def __init__(self, retriever, ollama, prompts, min_relevance,
+    def __init__(self, retriever: Retriever, ollama: StructuredModel, prompts, min_relevance,
                  evidence_keep_ratio: float = 0.0, max_context_chunks: int = 0):
         self.retriever, self.ollama, self.prompts, self.min_relevance = retriever, ollama, prompts, min_relevance
         # 0 disables either filter, so the A/B experiment can run both behaviours.

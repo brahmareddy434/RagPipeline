@@ -11,7 +11,10 @@ router = APIRouter()
 
 @router.get("/", response_class=HTMLResponse)
 async def home():
-    return HTMLResponse((ROOT / "backend/app/static/legacy/inspection.html").read_text(encoding="utf-8"))
+    path = ROOT / "frontend/dist/index.html"
+    if not path.is_file():
+        path = ROOT / "backend/app/static/legacy/inspection.html"
+    return HTMLResponse(path.read_text(encoding="utf-8"))
 
 
 @router.get("/agent", response_class=HTMLResponse)

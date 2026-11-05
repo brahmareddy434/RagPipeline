@@ -1,7 +1,7 @@
-# React application destination
+# React application
 
-A React application is required by the target architecture but is not implemented yet. Current screens are ../app/inspection.html and ../app/agent.html.
+Run `npm ci`, `npm run dev` from this directory. Start the backend from the repository root with `.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000`. Open http://127.0.0.1:5173.
 
-Proposed stack: React + TypeScript + Vite, feature routes, a centralized typed API client, reusable accessible controls, and explicit loading/error/empty/success states. Authentication depends on the identity-provider decision; protected routes must be paired with backend authorization.
+React/TypeScript/Vite uses hash routing, one typed client and cancellable requests. `/api` proxies to port 8000; override with `API_PROXY_TARGET`. Local mode checks loopback and browser origin. Protected mode accepts a scoped Bearer token, held only in memory.
 
-The implementation gate is explicit. Week 01 is theory-only. Add UI features in the relevant requested implementation week and migrate existing screens only after feature parity, browser checks and regression evidence. There is currently no npm start command, frontend build result, or React test result to claim.
+`npm run build` type-checks and builds `dist`, served by the backend on restart. `npm test` runs component/client tests. Legacy `/agent` remains available. All nine weeks are authorized; see `docs/demos` for actual acceptance and evidence limitations.
