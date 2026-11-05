@@ -63,8 +63,8 @@ def create_app(settings: Settings | None = None):
     application.add_exception_handler(OllamaUnavailable, ollama_error)
     application.add_exception_handler(ValueError, invalid_value)
     application.add_api_route("/api/v1/session", session, methods=["GET"])
-    from app.controllers import agents, documents, mcp, pages, rag, tools, traces
-    for controller in (agents, documents, mcp, pages, rag, tools, traces):
+    from app.controllers import agents, documents, mcp, pages, rag, tools, traces, claims
+    for controller in (agents, documents, mcp, pages, rag, tools, traces, claims):
         application.include_router(controller.router)
         application.include_router(controller.router, prefix="/api/v1")
     return application

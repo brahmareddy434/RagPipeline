@@ -73,3 +73,6 @@ Operational routing by an unvalidated judge; synthetic human labels; changing th
 HR sealed labels cannot validate claims summaries. Human grading and real claims regressions are required external inputs.
 
 Amend approved scope using [change control](README.md).
+
+## Execution amendment - 2026-11-05
+Implemented 30 synthetic mode-tagged cases, four deterministic criteria and a single binary judge criterion, CLI seal/commit/order guards, disagreement-driven v2 and React mode report. W06-AC02 is implemented/tested. W06-AC01's two real regression cases and W06-AC03-05 authentic blind labels/prediction/analysis remain pending; no agreement is fabricated. See docs/demos/week-06-demo.md. Optional RAGAS not run.

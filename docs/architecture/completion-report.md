@@ -15,3 +15,6 @@ Browser integration and later-week validation will be recorded below as executed
 
 ## Week 05 checkpoint
 27 targeted backend tests passed, including pre-write redaction and seeded 1,100-record synthetic sampling; five frontend tests/build passed. Separate self-review checked raw/error/nested fields, export isolation, replay side effects and source freeze checks. No human coding/labels were authored. Redaction covers the documented fields/patterns/configured names; arbitrary unlabelled personal names and production retention remain release limitations. Raw MCP wire recording remains explicitly restricted to fictional protocol experiments because altering its bytes would invalidate that evidence.
+
+## Week 06 checkpoint
+11 evaluation/trace tests passed; five frontend tests and production build passed. Thirty synthetic cases run in one command: five valid and five semantic-overclaim cases pass mechanical assertions; all 20 cases with invalid IDs/dates/deductibles/clauses fail the intended check. Four deterministic criteria and one pending semantic criterion are explicit. Self-review corrected the v2 examples to exclude deterministic fields. Real regressions, human labels and prediction are pending; no model judge run or agreement score is claimed.
