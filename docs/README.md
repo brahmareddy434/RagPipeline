@@ -8,7 +8,7 @@ This is a working local learning application with HR coursework and a fictional 
 - [Requirements and change control](../requirements/README.md): Weeks 01–09, draft acceptance criteria.
 - [Requirement traceability](architecture/traceability.md): existing evidence, gaps, planned verification.
 - [API compatibility](api/README.md), [data design](database/README.md), [deployment and costs](deployment/README.md).
-- [Demo index](demos/README.md): current guides and initial review.
+- [Demo index](demos/README.md): current guides and recorded experiments.
 - [Project workflow](../AGENTS.md): five reusable skills and the explicit implementation gate.
 
-The user's next implementation trigger is **Implement Week 01**. Week 01 is theory-only; it does not authorize document ingestion, a React implementation, or new APIs. Later weeks extend the existing system after their scope is requested.
+**Week 01 requested and delivered (2026-11-05):** see the [mentor guide](demos/week-01-demo.md) and its dated live experiment evidence. Learner explanations and mentor acceptance remain pending. This theory-only increment adds no runtime features; later weeks and architecture migration require their own requested scope.

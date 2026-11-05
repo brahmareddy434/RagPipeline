@@ -1,10 +1,10 @@
 # Requirements → implementation → verification
 
-Status is for the supplied insurance Task D scope. New specs are draft; module existence alone does not satisfy acceptance.
+Status is for the supplied insurance Task D scope. Week 01 execution is authorized; later specs remain draft. Module existence alone does not satisfy acceptance.
 
 | Requirement group | Existing reusable source / evidence | Current status |
 |---|---|---|
-| [W01](../../requirements/week-01.md#15-acceptance-criteria) | course/guides/01_language_models.md; course/labs/foundations.py (optional existing experiments). | Learning material exists; current learner observations and mentor review pending. |
+| [W01](../../requirements/week-01.md#15-acceptance-criteria) | course/guides/01_language_models.md; course/labs/foundations.py (optional existing experiments). | Theory guide and dated assistant-run evidence delivered: [demo](../demos/week-01-demo.md), [record](../demos/evidence/week-01-experiments.json). Four chat calls, one embedding batch and cost/source checks; learner explanation/mentor review pending. |
 | [W02](../../requirements/week-02.md#15-acceptance-criteria) | app/ollama_client.py, app/tools.py, app/models.py; tests/test_tools.py and tests/test_course.py. | Core local capabilities exist; React and production identity controls pending. |
 | [W03](../../requirements/week-03.md#15-acceptance-criteria) | app/document_loader.py, chunker.py, vector_store.py, retrieval.py, services.py; existing document/ask browser screen. | Working local RAG exists; insurance corpus, tenancy and production file lifecycle pending. |
 | [W04](../../requirements/week-04.md#15-acceptance-criteria) | app/retrieval.py (BM25/RRF/rerank options), /inspect and /evaluate, course/run.py. Existing evidence is largely HR. | Mechanisms exist; required 12-question claims experiment not established. |
@@ -18,3 +18,5 @@ Status is for the supplied insurance Task D scope. New specs are draft; module e
 When a week is requested, map each Wxx-ACnn to its actual test function, command, evidence file or human review. Record timestamp, environment, code/config hashes, dataset, expected/actual outcome and defect. Wxx-Vnn are planned acceptance checks, not executed tests.
 
 Audit findings AUD-01 through AUD-12 track cross-week release risks. Resolve them in an authorized increment and rerun affected access-control/trace/API/UI checks. Authentic human grading, real-provider integration and frontend parity remain explicit gaps.
+
+Week 01 execution (2026-11-05): W01-V01/V02 materials reviewed with human explanation pending; W01-V03 live observations captured; W01-V04 arithmetic checked; W01-V05 source preservation checked. Exact commands, assumptions and outcomes are linked in requirements/week-01.md and the demo/evidence.

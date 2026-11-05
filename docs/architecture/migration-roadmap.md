@@ -1,7 +1,7 @@
 # Migration and product roadmap
 
 ## Execution gate
-The user explicitly requires **Implement Week 01** before the weekly implementation workflow. Initial repository audit, requirements, skills and design are authorized now. Week 01 remains theory-only even after that instruction. A separate requested architecture-migration increment may reorganize existing code; do not treat theory scope as permission to build all nine weeks.
+The user explicitly requires **Implement Week 01** before the weekly implementation workflow. That instruction was received on 2026-11-05; the Week 01 theory/evidence increment is now delivered with learner/mentor review pending. Initial repository audit, requirements, skills and design preceded it. Week 01 remains theory-only even after that instruction. A separate requested architecture-migration increment may reorganize existing code; do not treat theory scope as permission to build all nine weeks.
 
 ## Sequence
 | Increment | Work | Exit condition / rollback |
@@ -19,7 +19,7 @@ Architecture increments are proposed, not completed or auto-approved as weekly f
 ## Week roadmap
 | Week | Scope | Existing reusable capability | Gap for supplied Task D |
 |---|---|---|---|
-| 01 | LM foundations; no code | course/guides/01_language_models.md | Fresh learner explanations and small experiments, with dated model/cost assumptions |
+| 01 | LM foundations; no code | course/guides/01_language_models.md | Assistant-run experiments and dated cost example delivered; learner explanations/mentor acceptance pending |
 | 02 | structured output and safe tool use | OllamaClient, models, tools | React integration and production identity boundaries when relevant |
 | 03 | document RAG and citations | loader, chunker, store, retriever, answer validation | Approved insurance corpus, version metadata, access isolation and source resolution |
 | 04 | one retrieval change on 12 questions | inspect, BM25/RRF, evaluation | Real adjuster questions with known chunk IDs; measured baseline and isolated change |

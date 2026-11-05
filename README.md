@@ -6,6 +6,8 @@ staged migration plan. The active code is still in `app/`; the new structure is
 preparation, not a completed production migration. See [AGENTS.md](AGENTS.md) for
 the explicit weekly implementation gate and reusable skills.
 
+**Week 01 foundations:** [mentor demo and experiment evidence](docs/demos/week-01-demo.md), with local sampling, embeddings and token-cost examples. Theory only; learner review pending.
+
 **Week 9 MCP extension:** see the single [Week 9 demo guide](docs/DEMO_Week9_MCP.md)
 for insurance claims, automatic tool discovery, config-only server addition,
 captured protocol evidence, and a file-by-file walkthrough. The existing HR routes

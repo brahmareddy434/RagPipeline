@@ -1,6 +1,6 @@
 # Weekly requirements
 
-These nine documents record the user's 2026-11-05 requirements as draft v0.1. They do not retroactively approve existing implementations or certify completion. The implementation gate remains **Implement Week 01**, and its scope is theory-only.
+These nine documents record the user's 2026-11-05 requirements as draft v0.1. They do not retroactively approve existing implementations or certify completion. The user activated **Implement Week 01** on 2026-11-05; only that theory scope is authorized by this increment. Later weeks remain separate requests.
 
 Target: insurance claims (Task D). Earlier HR results are not equivalent claims evidence. Week 4's duplicated theory text is resolved using its distinct debugging practical; Week 8's truncated text is limited to the explicit supplied criteria. Critical unknowns block dependent work only.
 
@@ -8,6 +8,7 @@ Each document has the requested 18 sections and stable Wxx-ACnn IDs. Planned Wxx
 
 ## Change control
 - 2026-11-05: initial v0.1 extraction from the user syllabus/master instructions; approval pending.
+- 2026-11-05: explicit Week 01 execution instruction received; its criteria are unchanged, execution evidence added and learner/mentor review remains pending. Other specifications remain draft.
 - After approval, record dated amendments with reason, impacted IDs, API/data/UI effects and verification. Never silently change approved scope or historical measurements.
 - Distinguish human notes/labels and authentic traces from assistant-written examples.
 
