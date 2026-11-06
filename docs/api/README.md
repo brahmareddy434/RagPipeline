@@ -36,3 +36,16 @@ Authentication, rate limits and authorization must protect both old aliases and 
 The existing Postman collections live in docs/postman/. Reuse them where applicable; do not claim CLI success from a collection file's existence. The earlier CLI check could not use status; evaluate installed CLI capabilities before adopting a CI command.
 
 Before migration: capture representative request/response fixtures with sensitive data removed; verify upload errors, source lookup, abstention, timeout, agent stop reasons and tools/list counts. Generated OpenAPI snapshots can be reviewed contract artifacts; ordinary run logs stay ignored.
+# Live Week 8/9 mentor demonstrations
+
+All routes below also have the `/api/v1` prefix and use the existing access boundary. They operate on fictional data only. Query length is 2–2,000 characters; variants are closed enums, with no client-supplied config paths or budgets.
+
+| Route | Input | Result |
+|---|---|---|
+| `POST /claims/demo/run` | `task`, `variant: before|after`, optional `injection: boolean` | Grounded `run`, original task, diagnostics, exact prompt change, trace ID. Requires exactly one existing CLM-2026 claim ID. |
+| `GET /mcp/demo/tools` | `variant=before|after` | Actual tools/list replies, names and count. Before selects policy-only; after adds claims. |
+| `POST /mcp/demo/run` | `task`, `variant: before|after` | Actual MCP discovery and host `run`, task, variant, trace ID. Example claim: CLM-2024-88120. |
+
+Unknown IDs or missing claim selection return 400; invalid request shapes/profile names return 422. Each model arm has a 180-second, 32,000-token, $0.03 reference-cost ceiling; Week 8 allows six steps and Week 9 four. MCP setup precedes the model-run deadline. Provider failures within a run appear in its stop reason; an HTTP 200 does not establish answer quality. Costs are reference estimates, not an Ollama invoice. Injection marker absence is not a security verdict.
+
+Run local contract checks with `postman collection run docs/postman/Mentor_Demos.postman_collection.json --no-report-events`. For actual model responses, use `.venv/Scripts/python.exe -m course.mentor_demo_smoke logs/<new-directory>`; existing output directories are rejected to preserve prior attempts.

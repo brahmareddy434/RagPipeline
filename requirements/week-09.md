@@ -76,6 +76,10 @@ Pretending local fixtures are the real platform; inventing peer approval/handwri
 ## 18. Risks and assumptions
 Actual claims URL/provenance/token scopes and human peer call are absent. Gateway is a process-scoped local token demo. Historical zero diff applies to its frozen baseline, not future refactors.
 
+## Live mentor demo amendment - 2026-11-06
+
+User requested a typed-query before/issue/change/after demonstration. Add `/demo/week9`, `GET /mcp/demo/tools?variant=before|after`, and `POST /mcp/demo/run` (also `/api/v1`). Variants select only the existing reviewed policy-only and policy-plus-claims configuration files; no request-supplied paths, commands or servers. Both variants use the same host builder, prompt and fixed budget. Display actual discovery responses and fresh answer/tool traces. Preserve original MCP routes and sealed submission artifacts. This supports W09-AC01/02/03 and does not replace human peer or protocol-annotation acceptance. Contract/browser checks: `tests/test_mentor_demo.py`, `frontend/e2e/mentor-demo.spec.ts`.
+
 Amend approved scope using [change control](README.md).
 
 ## Execution amendment - 2026-11-06

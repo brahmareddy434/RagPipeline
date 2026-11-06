@@ -10,6 +10,7 @@ import { Evaluation } from '../features/evaluation/Evaluation';
 import { Runs } from '../features/runs/Runs';
 import { Mcp } from '../features/mcp/Mcp';
 import { Benchmarks } from '../features/runs/Benchmarks';
+import { MentorDemo } from '../features/runs/MentorDemo';
 
 type Identity = {tenant: string; role: string};
 export function App() {
@@ -26,6 +27,7 @@ export function App() {
   return <HashRouter><div className="layout">
     <aside><a className="brand" href="#/">Claims<br/><strong>Workbench</strong></a><p className="eyebrow">AI ENGINEERING · WEEKS 01–09</p>
       <nav aria-label="Main navigation"><NavLink to="/">Overview</NavLink><NavLink to="/tools">Structured tools</NavLink><NavLink to="/documents">Documents</NavLink><NavLink to="/ask">Policy Q&amp;A</NavLink><NavLink to="/inspect">Retrieval inspection</NavLink><NavLink to="/traces">Traces</NavLink><NavLink to="/evaluation">Evaluation</NavLink><NavLink to="/runs">Agent comparison</NavLink><NavLink to="/benchmarks">Trajectories</NavLink><NavLink to="/mcp">MCP tools</NavLink></nav>
+      <nav aria-label="Mentor demonstrations"><NavLink to="/demo/week8">Week 8 live demo</NavLink><NavLink to="/demo/week9">Week 9 live demo</NavLink></nav>
       <div className="sidebar-note">Fictional training data<br/>Human review required</div>
     </aside>
     <main><header><div><p className="eyebrow">INSURANCE CLAIMS</p><h1>Evidence before answers.</h1></div><span className="badge">{identity ? `${identity.tenant} · ${identity.role}` : 'Connecting'}</span></header>
@@ -43,6 +45,8 @@ export function App() {
           <Route path="/runs" element={<Runs api={api}/>}/>
           <Route path="/mcp" element={<Mcp api={api}/>}/>
           <Route path="/benchmarks" element={<Benchmarks api={api}/>}/>
+          <Route path="/demo/week8" element={<MentorDemo key="week8" api={api} week={8}/>}/>
+          <Route path="/demo/week9" element={<MentorDemo key="week9" api={api} week={9}/>}/>
           <Route path="*" element={<section className="panel"><h2>Page not found</h2><a href="#/">Return to overview</a></section>}/>
         </Routes></div>}
       <footer>Claims Workbench · Read-only training decisions, never payment authorization.</footer>

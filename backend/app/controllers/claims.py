@@ -11,6 +11,19 @@ from app.services.claims_reports import benchmark_reports,benchmark_case
 
 router=APIRouter()
 
+class DemoRequest(StrictModel):
+    task:str=Field(min_length=2,max_length=2000)
+    variant:Literal["before","after"]
+    injection:bool=False
+
+@router.post("/claims/demo/run")
+async def demo_run(body:DemoRequest,request:Request):
+    started=time.perf_counter()
+    result=await container(request).mentor_demo.run(body.task,body.variant,body.injection,
+        AgentBudget(max_steps=6,max_tokens=32000,max_seconds=180,max_cost_usd=.03))
+    result["trace_id"]=await _trace(request,"/claims/demo/run",body.model_dump(mode="json"),result,started)
+    return result
+
 @router.get("/claims/benchmarks")
 async def benchmarks():return benchmark_reports()
 

@@ -37,6 +37,20 @@ def configured_path():
     return Path(os.environ.get("MCP_CONFIG", str(ROOT / "config/mcp.claims.json")))
 
 
+def demo_config(profile):
+    """Only two reviewed local configs; request data can never supply server commands."""
+    paths = {"before": ROOT / "config/mcp.policy.json", "after": ROOT / "config/mcp.claims.json"}
+    if profile not in paths:
+        raise ValueError("Unknown MCP demo profile.")
+    return paths[profile]
+
+
+async def demo_discovery(profile):
+    async with connect(load_config(demo_config(profile))) as registry:
+        return {"profile": profile, "count": len(registry.tools), "names": list(registry.tools),
+                "tools_list_responses": registry.discovery}
+
+
 async def run_task(task, config_path=None, budget=None):
     settings = get_settings()
     ollama = OllamaClient(settings.ollama_base_url, settings.ollama_chat_model,

@@ -1,10 +1,33 @@
 from app.schemas import AgentRequest
+from typing import Literal
+from pydantic import Field
+from app.schemas import StrictModel, AgentBudget
 
 import time
 from fastapi import APIRouter,Request
 from app.controllers.agents import _trace
 
 router = APIRouter()
+
+class McpDemoRequest(StrictModel):
+    task:str=Field(min_length=2,max_length=2000)
+    variant:Literal["before","after"]
+
+@router.get("/mcp/demo/tools")
+async def demo_tools(variant:Literal["before","after"]):
+    from app.services.mcp_host import demo_discovery
+    return await demo_discovery(variant)
+
+@router.post("/mcp/demo/run")
+async def demo_run(body:McpDemoRequest,request:Request):
+    from app.services.mcp_host import demo_config, run_task
+    started=time.perf_counter()
+    result=await run_task(body.task,config_path=demo_config(body.variant),
+        budget=AgentBudget(max_steps=4,max_seconds=180,max_tokens=32000,max_cost_usd=.03))
+    result.update(variant=body.variant,task=body.task,
+        notice="Fresh MCP host run. The before profile has policy tools only; the after profile adds claims tools. Same host code and prompt.")
+    result["trace_id"]=await _trace(request,"/mcp/demo/run",body.model_dump(mode="json"),result,started)
+    return result
 
 @router.get("/mcp/tools")
 async def mcp_tools():

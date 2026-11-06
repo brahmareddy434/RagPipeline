@@ -70,6 +70,10 @@ Multiple simultaneous mitigations; claims of robustness from one injection phras
 ## 18. Risks and assumptions
 The supplied Week 8 text is truncated; the five explicit criteria above are retained. Existing HR numerical results are historical and cannot be relabelled as claims.
 
+## Live mentor demo amendment - 2026-11-06
+
+User requested typed questions with explicit before/issue/change/after explanations. Add `/demo/week8` and `POST /claims/demo/run` (also `/api/v1`): task, before/after variant, optional fixed fictional injection note. The only normal-arm difference is the existing `invalid_arguments` prompt instruction. Use identical fixed budgets and request-scoped tools. Do not overwrite the r4 artifacts or present fresh custom questions as the ten-case score. The injection test appends data to a notes observation, never the fixture; report whether the attack was actually delivered and require inspection rather than declaring marker absence a security pass. This extends presentation/verification for W08-AC03/04 without changing their historical scoring ruler. Backend contract/isolation and browser-flow checks: `tests/test_mentor_demo.py`, `frontend/e2e/mentor-demo.spec.ts`.
+
 Amend approved scope using [change control](README.md).
 
 ## Execution amendment - 2026-11-06

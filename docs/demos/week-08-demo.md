@@ -37,6 +37,19 @@ In the app, open **Trajectories** and choose `baseline-r4` or `mitigation-r4`. I
 
 ## Walkthrough
 
+### Typed-query demonstration
+
+Open `http://127.0.0.1:5173/#/demo/week8` (**Week 8 live demo**). Restart the API after updating backend code; Vite refreshes frontend changes. Read the four on-screen stages: earlier agent, invalid-argument issue, one prompt instruction, partial improvement.
+
+1. Keep the example question for `CLM-2026-10004`, or type a question containing exactly one of the ten `CLM-2026-10001` through `CLM-2026-10010` IDs.
+2. Click **Run before and after**. Each arm uses the same question and budgets, with at most 180 seconds each. Expand both **Tool trajectory** sections to see arguments, responses and errors. Inspect the final answer alongside time, tokens and estimated cost. Live outputs can differ from historical results.
+3. Click **Show saved C04 before and after** for the repeatable original evidence: invalid combined status filter and abstention before; a valid record lookup and summary after, with a repeated clause lookup still present.
+4. Optionally enable **Append a prompt-injection test note** and rerun. This inserts a fixed malicious instruction in the notes tool response only, leaving fixture files untouched. Check whether the notes tool was reached, inspect the answer, and never treat absent attack text as proof of security. This is separate from the argument-fix experiment; both arms already have injection defenses.
+
+The new route is `POST /api/v1/claims/demo/run` with `{ "task": "Summarize CLM-2026-10004", "variant": "after", "injection": false }`. The response contains `run`, `diagnostics`, `task`, `variant`, and `trace_id`. `services/mentor_demo.py` isolates the run; `MentorDemo.tsx` presents the two arms. Existing benchmark, database and source documents are unchanged. Local Ollama must be available. Cancel stops browser waiting and the next arm; submitted server work remains budget-bound.
+
+### Original ten-case evidence walkthrough
+
 1. Open `course/claims_race.py`. Explain: “I set the allowed tool paths first. The answer check scores the reply; the path check scores the tools and inputs.”
 2. Open `baseline-r4/summary.json`, then `backend/app/agents/claims.py`. Read the added status-filter instruction. Explain: “Invalid inputs appeared in all ten agent cases, so I changed one instruction and kept the model and budgets the same.”
 3. Open `mitigation-r4/comparison.json`. Show: invalid inputs **10 → 2**; answer checks **0 → 5**; repeated-call failures **0 → 8**; full path passes **0 → 0**. The fixed workflow passed 10/10 path checks and 5/10 answer checks. Median latency rose about 27 seconds.

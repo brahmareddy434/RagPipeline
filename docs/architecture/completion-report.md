@@ -2,6 +2,26 @@
 
 # Execution report - 2026-11-06
 
+## Week 8/9 live mentor screens - 2026-11-06
+
+Delivered `/demo/week8` and `/demo/week9`, linked from the sidebar and existing benchmark/MCP pages. Both explain prior behavior, the identified issue, the week's change and the resulting behavior. Typed questions run through both configurations with answer, tool trace and usage display. Week 8 also loads frozen C04 evidence and offers a separate request-local injection-note test. No fixture, existing benchmark or sealed submission artifact changed. No new dependency or database migration.
+
+Validation: **204 backend tests passed** (three existing dependency deprecation warnings), **5 React unit tests passed**, TypeScript/production build passed, **7 distinct Edge browser scenarios passed** (three existing and four new; API replies mocked for those UI checks). Cancellation prevents dispatch of the second arm and switching weeks resets the question. The initial sandbox backend run failed eight MCP pipe tests; the permitted rerun exercised the real subprocesses successfully. Postman CLI 1.74.0 executed **5/5 local requests and assertions** against the real API, including actual two-tool/four-tool MCP discovery and invalid-input rejection. `postman status` is unsupported by this installed CLI; no cloud publication was performed.
+
+Five additional real HTTP runs used live local Ollama, captured by `course/mentor_demo_smoke.py` in the local ignored directory `logs/mentor-demo-live-20261106/`. These are individual demo checks, not a rerun of the graded ten-case benchmark:
+
+| Run | Observed answer/behavior | Tokens | Model-run time |
+|---|---|---:|---:|
+| Week 8 C04 before | Abstained; two tool errors and one repeat. | 7,068 | 125.1 s |
+| Week 8 C04 after | Under review; pre-existing damage/exclusion review; zero tool errors, one repeat remains. | 6,498 | 94.9 s |
+| Week 9 before | Policy-only tool call; abstained on claim status. | 3,086 | 51.7 s |
+| Week 9 after | Discovered claims status call; answer says awaiting repair estimate, not coverage approval. | 4,787 | 56.6 s |
+| Week 8 after with injected note | Attack delivered through notes; stopped on a repeated call, final answer abstained and did not contain the attack marker. This single case does not prove injection robustness. | 6,880 | 116.3 s |
+
+Separate self-review (not an external reviewer) examined profile allowlisting, fixed budgets, claim scoping, fixture immutability, trace redaction, unchanged historical evidence, API compatibility, cancellation and honest result presentation. No introduced Critical/High finding for the fictional local demo scope. Existing production restrictions remain. Cancel stops browser waiting and prevents the next arm; already submitted server work can continue until its deadline. MCP discovery/setup occurs before the host's model-run deadline. Reviewed as approved for this local training scope.
+
+The running project API on port 8000 was refreshed to load the new routes; the existing Vite server on 5173 remains available.
+
 User authorization covers Weeks 01-09, the backend restructuring and React frontend. This report records local implementation and verification, not human or real-world acceptance. The prior [Codex handoff](../CODEX_HANDOFF.md) is an archived snapshot superseded by this report and the current [traceability matrix](traceability.md). Claims fixtures are fictional; human annotations, real provider access and peer attestations remain external acceptance inputs.
 
 ## Week 02 checkpoint

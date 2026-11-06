@@ -18,6 +18,8 @@ Audit findings AUD-01 through AUD-12 remain the release-risk index. Real identit
 
 ## Execution records
 
+2026-11-06 mentor-demo extension: Week 8 `/demo/week8` accepts typed queries with baseline/mitigation and isolated injection-note options; Week 9 `/demo/week9` compares live discovery and queries against the two allowlisted configurations. Both explain prior behavior, identified issue, change and observed result. Historical r4 scores and Week 9 snapshots remain unchanged. New service/route contracts are checked in `tests/test_mentor_demo.py`; interactive and cancellation flows in `frontend/e2e/mentor-demo.spec.ts`; local HTTP discovery/validation assertions in `docs/postman/Mentor_Demos.postman_collection.json`.
+
 When a week is requested, map each Wxx-ACnn to its actual implementation and verification. Planned Wxx-Vnn checks are not executed tests. Dated commands, manifests and evidence are linked from weekly requirements and mentor demos. See [execution report](completion-report.md) for current test results and run limitations.
 
 Week 01 execution (2026-11-05): assistant-run material and live observations recorded; learner explanation and mentor acceptance remain pending. Exact commands and outcomes are in requirements/week-01.md and its demo/evidence.
