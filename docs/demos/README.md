@@ -8,6 +8,6 @@
 - [Week 06 claims assertions and judge gates](week-06-demo.md)
 - [Week 07 claims agent vs fixed workflow](week-07-demo.md)
 - [Week 08 claims trajectory evaluation](week-08-demo.md)
-- [Week 09 claims MCP integration](../DEMO_Week9_MCP.md)
+- [Week 09 claims MCP integration](week-09-demo.md)
 
 Legacy HR guides remain in their historical locations and are labeled as HR evidence. Current architecture and execution status: [traceability](../architecture/traceability.md) and [completion report](../architecture/completion-report.md).
