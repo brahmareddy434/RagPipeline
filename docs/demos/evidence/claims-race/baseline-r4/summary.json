@@ -1,0 +1,39 @@
+{
+  "agent": {
+    "cases": 10,
+    "outcome_pass_rate": 0.0,
+    "trajectory_pass_rate": 0.0,
+    "outcome_minus_trajectory_gap": 0.0,
+    "p50_latency_ms": 47677.14,
+    "total_tokens": 54264,
+    "mean_cost_per_claim_usd": 0.00123716,
+    "cost_p50_usd": 0.0010874,
+    "cost_max_usd": 0.0016084,
+    "tool_choice_accuracy": 1.0,
+    "argument_validity": 0.69,
+    "step_efficiency": 0.935,
+    "modes": {
+      "invalid_arguments": 10
+    },
+    "right_answer_wrong_path": []
+  },
+  "workflow": {
+    "cases": 10,
+    "outcome_pass_rate": 0.5,
+    "trajectory_pass_rate": 1.0,
+    "outcome_minus_trajectory_gap": -0.5,
+    "p50_latency_ms": 33342.515,
+    "total_tokens": 19054,
+    "mean_cost_per_claim_usd": 0.00051024,
+    "cost_p50_usd": 0.0005235999999999999,
+    "cost_max_usd": 0.0007572,
+    "tool_choice_accuracy": 1.0,
+    "argument_validity": 1.0,
+    "step_efficiency": 1,
+    "modes": {
+      "abstention": 5,
+      "pass": 5
+    },
+    "right_answer_wrong_path": []
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "servers": {
+    "policy": {
+      "transport": "stdio",
+      "command": "@python",
+      "args": ["-m", "mcp_servers.policy"],
+      "resources": ["policy://exclusions"]
+    },
+    "claims": {
+      "transport": "stdio",
+      "command": "@python",
+      "args": ["-m", "mcp_servers.claims"]
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "agent": {
+    "cases": 10,
+    "outcome_pass_rate": 0.5,
+    "trajectory_pass_rate": 0.0,
+    "outcome_minus_trajectory_gap": 0.5,
+    "p50_latency_ms": 74757.84,
+    "total_tokens": 62917,
+    "mean_cost_per_claim_usd": 0.00147382,
+    "cost_p50_usd": 0.0014838,
+    "cost_max_usd": 0.0016954,
+    "tool_choice_accuracy": 0.95,
+    "argument_validity": 0.93,
+    "step_efficiency": 0.79,
+    "modes": {
+      "repeated_calls": 8,
+      "invalid_arguments": 2
+    },
+    "right_answer_wrong_path": [
+      "C04",
+      "C06",
+      "C07",
+      "C09",
+      "C10"
+    ]
+  }
+}

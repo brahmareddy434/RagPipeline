@@ -22,10 +22,10 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from app import handbook
-from app.config import get_settings
-from app.dependencies import Container
-from app.models import RetrievalOptions
+from app.legacy import handbook
+from app.config.settings import get_settings
+from app.bootstrap import Container
+from app.schemas import RetrievalOptions
 from course.judge import PolicyAnswerJudge
 
 ROOT = Path(__file__).resolve().parents[2]

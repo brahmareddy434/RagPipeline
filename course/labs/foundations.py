@@ -5,8 +5,8 @@ import json
 import math
 from collections import Counter
 import numpy as np
-from app.config import get_settings
-from app.ollama_client import OllamaClient, call_metrics
+from app.config.settings import get_settings
+from app.infrastructure.ollama import OllamaClient, call_metrics
 
 
 def sampling():

@@ -1,0 +1,2877 @@
+{
+  "chunks": 7,
+  "indexing_ms": 1716.83,
+  "mode": "semantic",
+  "hit_rate_at_3": 1.0,
+  "p50_latency_ms": 3.275,
+  "cases": [
+    {
+      "id": "Q01",
+      "question": "What does EX-WEAR-01 exclude?",
+      "needle": "Gradual deterioration, corrosion and ordinary wear are excluded.",
+      "exact_token": true,
+      "correct_chunk_ids": [
+        "52ee60bb93a5ab751876c636"
+      ],
+      "hit_at_3": true,
+      "latency_ms": 4.54,
+      "label": "hit",
+      "inspection": {
+        "question": "What does EX-WEAR-01 exclude?",
+        "search_query": "What does EX-WEAR-01 exclude?",
+        "options": {
+          "mode": "semantic",
+          "k": 3,
+          "source": null,
+          "rerank": "none",
+          "query_transform": "none"
+        },
+        "semantic": [
+          {
+            "id": "52ee60bb93a5ab751876c636",
+            "text": "FICTIONAL TRAINING POLICY - edition 2026-01. This locally authored wording is not a real insurer contract. Administrative status never establishes coverage or payment authority. EX-WEAR-01. Wear and tear exclusion. Gradual deterioration, corrosion and ordinary wear are excluded. A wear-related loss requires an adjuster to examine this exclusion and the cause evidence before any recommendation. Sudden accidental damage is subject to the remaining terms. EX-FLOOD-02. Flood exclusion. Damage caused by rising external floodwater is excluded by the base home policy.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "page": 0,
+              "chunk_size": 600,
+              "source": "claims-policy-2026.txt",
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.6460334062576294,
+            "rank": 1,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6460334062576294,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "30da765f853875c58ccd4a1b",
+            "text": "later edition must not silently replace the wording relevant to an earlier loss. Cite the exact indexed document version and request clarification for conflicting schedules. EX-PRE-12. Pre-existing damage exclusion. Damage established to have existed before the policy inception is excluded. Compare dated photographs and inception records before recommending an exclusion review. Missing dates require evidence collection, not an invented denial.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "source": "claims-policy-2026.txt",
+              "chunk_overlap": 80,
+              "chunk_size": 600,
+              "embedding_model": "nomic-embed-text:latest",
+              "page": 0,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.6197750568389893,
+            "rank": 2,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6197750568389893,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "9214eca687cc166f844eb933",
+            "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_size": 600,
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.5654407739639282,
+            "rank": 3,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5654407739639282,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "1f4c25eb52fa8f39360e1b9c",
+            "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "page": 0,
+              "chunk_overlap": 80,
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_size": 600
+            },
+            "score": 0.5435466170310974,
+            "rank": 4,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5435466170310974,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "422ab3332c492062e8716c94",
+            "text": "o not invent an estimate or infer an approval from photographs alone. STATUS-10. Administrative status. The valid training status values are received, awaiting_documents, under_review and closed. A closed claim can have several outcomes; closed never means approved by itself. Coverage requires the relevant policy wording and evidence. EDITION-11. Applicable wording. Use the policy edition and endorsements effective on the date of loss. A later edition must not silently replace the wording relevant to an earlier loss.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_size": 600,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_overlap": 80,
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.5365875959396362,
+            "rank": 5,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5365875959396362,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "f852730f703a885af4708a25",
+            "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_overlap": 80,
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600,
+              "page": 0
+            },
+            "score": 0.5122027397155762,
+            "rank": 6,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5122027397155762,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "8c66d4eb576b20f9f355b1a5",
+            "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_size": 600,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.48136115074157715,
+            "rank": 7,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.48136115074157715,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          }
+        ],
+        "keyword": [],
+        "note": "Scores rank evidence; they are not probabilities of answer correctness."
+      },
+      "retrieved": [
+        {
+          "id": "52ee60bb93a5ab751876c636",
+          "text": "FICTIONAL TRAINING POLICY - edition 2026-01. This locally authored wording is not a real insurer contract. Administrative status never establishes coverage or payment authority. EX-WEAR-01. Wear and tear exclusion. Gradual deterioration, corrosion and ordinary wear are excluded. A wear-related loss requires an adjuster to examine this exclusion and the cause evidence before any recommendation. Sudden accidental damage is subject to the remaining terms. EX-FLOOD-02. Flood exclusion. Damage caused by rising external floodwater is excluded by the base home policy.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "page": 0,
+            "chunk_size": 600,
+            "source": "claims-policy-2026.txt",
+            "chunk_overlap": 80,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "embedding_model": "nomic-embed-text:latest"
+          },
+          "score": 0.6460334062576294,
+          "rank": 1,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6460334062576294,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "30da765f853875c58ccd4a1b",
+          "text": "later edition must not silently replace the wording relevant to an earlier loss. Cite the exact indexed document version and request clarification for conflicting schedules. EX-PRE-12. Pre-existing damage exclusion. Damage established to have existed before the policy inception is excluded. Compare dated photographs and inception records before recommending an exclusion review. Missing dates require evidence collection, not an invented denial.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "source": "claims-policy-2026.txt",
+            "chunk_overlap": 80,
+            "chunk_size": 600,
+            "embedding_model": "nomic-embed-text:latest",
+            "page": 0,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+          },
+          "score": 0.6197750568389893,
+          "rank": 2,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6197750568389893,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "9214eca687cc166f844eb933",
+          "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "embedding_model": "nomic-embed-text:latest",
+            "chunk_size": 600,
+            "page": 0,
+            "source": "claims-policy-2026.txt",
+            "chunk_overlap": 80,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+          },
+          "score": 0.5654407739639282,
+          "rank": 3,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.5654407739639282,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        }
+      ]
+    },
+    {
+      "id": "Q02",
+      "question": "Does EX-FLOOD-02 treat a pipe escape as external flooding?",
+      "needle": "An escape from an internal water pipe is a different cause",
+      "exact_token": true,
+      "correct_chunk_ids": [
+        "1f4c25eb52fa8f39360e1b9c"
+      ],
+      "hit_at_3": true,
+      "latency_ms": 4.01,
+      "label": "hit",
+      "inspection": {
+        "question": "Does EX-FLOOD-02 treat a pipe escape as external flooding?",
+        "search_query": "Does EX-FLOOD-02 treat a pipe escape as external flooding?",
+        "options": {
+          "mode": "semantic",
+          "k": 3,
+          "source": null,
+          "rerank": "none",
+          "query_transform": "none"
+        },
+        "semantic": [
+          {
+            "id": "1f4c25eb52fa8f39360e1b9c",
+            "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "embedding_model": "nomic-embed-text:latest",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600,
+              "chunk_overlap": 80
+            },
+            "score": 0.7566866874694824,
+            "rank": 1,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.7566866874694824,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "8c66d4eb576b20f9f355b1a5",
+            "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_size": 600,
+              "chunk_overlap": 80,
+              "page": 0,
+              "embedding_model": "nomic-embed-text:latest",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "source": "claims-policy-2026.txt"
+            },
+            "score": 0.6561651229858398,
+            "rank": 2,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6561651229858398,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "f852730f703a885af4708a25",
+            "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "source": "claims-policy-2026.txt",
+              "chunk_overlap": 80,
+              "chunk_size": 600,
+              "embedding_model": "nomic-embed-text:latest",
+              "page": 0
+            },
+            "score": 0.6238456964492798,
+            "rank": 3,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6238456964492798,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "52ee60bb93a5ab751876c636",
+            "text": "FICTIONAL TRAINING POLICY - edition 2026-01. This locally authored wording is not a real insurer contract. Administrative status never establishes coverage or payment authority. EX-WEAR-01. Wear and tear exclusion. Gradual deterioration, corrosion and ordinary wear are excluded. A wear-related loss requires an adjuster to examine this exclusion and the cause evidence before any recommendation. Sudden accidental damage is subject to the remaining terms. EX-FLOOD-02. Flood exclusion. Damage caused by rising external floodwater is excluded by the base home policy.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_overlap": 80,
+              "embedding_model": "nomic-embed-text:latest",
+              "page": 0,
+              "chunk_size": 600,
+              "source": "claims-policy-2026.txt"
+            },
+            "score": 0.5979803800582886,
+            "rank": 4,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5979803800582886,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "30da765f853875c58ccd4a1b",
+            "text": "later edition must not silently replace the wording relevant to an earlier loss. Cite the exact indexed document version and request clarification for conflicting schedules. EX-PRE-12. Pre-existing damage exclusion. Damage established to have existed before the policy inception is excluded. Compare dated photographs and inception records before recommending an exclusion review. Missing dates require evidence collection, not an invented denial.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_size": 600
+            },
+            "score": 0.5604188442230225,
+            "rank": 5,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5604188442230225,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "9214eca687cc166f844eb933",
+            "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "embedding_model": "nomic-embed-text:latest",
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "page": 0
+            },
+            "score": 0.5086797475814819,
+            "rank": 6,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5086797475814819,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "422ab3332c492062e8716c94",
+            "text": "o not invent an estimate or infer an approval from photographs alone. STATUS-10. Administrative status. The valid training status values are received, awaiting_documents, under_review and closed. A closed claim can have several outcomes; closed never means approved by itself. Coverage requires the relevant policy wording and evidence. EDITION-11. Applicable wording. Use the policy edition and endorsements effective on the date of loss. A later edition must not silently replace the wording relevant to an earlier loss.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600,
+              "chunk_overlap": 80
+            },
+            "score": 0.5029721856117249,
+            "rank": 7,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5029721856117249,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          }
+        ],
+        "keyword": [],
+        "note": "Scores rank evidence; they are not probabilities of answer correctness."
+      },
+      "retrieved": [
+        {
+          "id": "1f4c25eb52fa8f39360e1b9c",
+          "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "page": 0,
+            "source": "claims-policy-2026.txt",
+            "embedding_model": "nomic-embed-text:latest",
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "chunk_size": 600,
+            "chunk_overlap": 80
+          },
+          "score": 0.7566866874694824,
+          "rank": 1,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.7566866874694824,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "8c66d4eb576b20f9f355b1a5",
+          "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "chunk_size": 600,
+            "chunk_overlap": 80,
+            "page": 0,
+            "embedding_model": "nomic-embed-text:latest",
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "source": "claims-policy-2026.txt"
+          },
+          "score": 0.6561651229858398,
+          "rank": 2,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6561651229858398,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "f852730f703a885af4708a25",
+          "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "source": "claims-policy-2026.txt",
+            "chunk_overlap": 80,
+            "chunk_size": 600,
+            "embedding_model": "nomic-embed-text:latest",
+            "page": 0
+          },
+          "score": 0.6238456964492798,
+          "rank": 3,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6238456964492798,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        }
+      ]
+    },
+    {
+      "id": "Q03",
+      "question": "What evidence is needed under EX-DELIB-03?",
+      "needle": "Suspicion alone is not proof of deliberate conduct.",
+      "exact_token": true,
+      "correct_chunk_ids": [
+        "1f4c25eb52fa8f39360e1b9c"
+      ],
+      "hit_at_3": true,
+      "latency_ms": 4.11,
+      "label": "hit",
+      "inspection": {
+        "question": "What evidence is needed under EX-DELIB-03?",
+        "search_query": "What evidence is needed under EX-DELIB-03?",
+        "options": {
+          "mode": "semantic",
+          "k": 3,
+          "source": null,
+          "rerank": "none",
+          "query_transform": "none"
+        },
+        "semantic": [
+          {
+            "id": "30da765f853875c58ccd4a1b",
+            "text": "later edition must not silently replace the wording relevant to an earlier loss. Cite the exact indexed document version and request clarification for conflicting schedules. EX-PRE-12. Pre-existing damage exclusion. Damage established to have existed before the policy inception is excluded. Compare dated photographs and inception records before recommending an exclusion review. Missing dates require evidence collection, not an invented denial.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_size": 600,
+              "source": "claims-policy-2026.txt",
+              "chunk_overlap": 80,
+              "page": 0
+            },
+            "score": 0.6091777086257935,
+            "rank": 1,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6091777086257935,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "1f4c25eb52fa8f39360e1b9c",
+            "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "page": 0,
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600
+            },
+            "score": 0.5679721236228943,
+            "rank": 2,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5679721236228943,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "f852730f703a885af4708a25",
+            "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "page": 0,
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_size": 600,
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "source": "claims-policy-2026.txt"
+            },
+            "score": 0.561653733253479,
+            "rank": 3,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.561653733253479,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "8c66d4eb576b20f9f355b1a5",
+            "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "page": 0,
+              "chunk_size": 600,
+              "source": "claims-policy-2026.txt",
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_overlap": 80
+            },
+            "score": 0.5545250177383423,
+            "rank": 4,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5545250177383423,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "422ab3332c492062e8716c94",
+            "text": "o not invent an estimate or infer an approval from photographs alone. STATUS-10. Administrative status. The valid training status values are received, awaiting_documents, under_review and closed. A closed claim can have several outcomes; closed never means approved by itself. Coverage requires the relevant policy wording and evidence. EDITION-11. Applicable wording. Use the policy edition and endorsements effective on the date of loss. A later edition must not silently replace the wording relevant to an earlier loss.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "page": 0,
+              "chunk_size": 600,
+              "embedding_model": "nomic-embed-text:latest",
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.5399789214134216,
+            "rank": 5,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5399789214134216,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "52ee60bb93a5ab751876c636",
+            "text": "FICTIONAL TRAINING POLICY - edition 2026-01. This locally authored wording is not a real insurer contract. Administrative status never establishes coverage or payment authority. EX-WEAR-01. Wear and tear exclusion. Gradual deterioration, corrosion and ordinary wear are excluded. A wear-related loss requires an adjuster to examine this exclusion and the cause evidence before any recommendation. Sudden accidental damage is subject to the remaining terms. EX-FLOOD-02. Flood exclusion. Damage caused by rising external floodwater is excluded by the base home policy.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_overlap": 80,
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600,
+              "page": 0,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.5139637589454651,
+            "rank": 6,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5139637589454651,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "9214eca687cc166f844eb933",
+            "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_overlap": 80,
+              "embedding_model": "nomic-embed-text:latest",
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600,
+              "page": 0
+            },
+            "score": 0.5131956338882446,
+            "rank": 7,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5131956338882446,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          }
+        ],
+        "keyword": [],
+        "note": "Scores rank evidence; they are not probabilities of answer correctness."
+      },
+      "retrieved": [
+        {
+          "id": "30da765f853875c58ccd4a1b",
+          "text": "later edition must not silently replace the wording relevant to an earlier loss. Cite the exact indexed document version and request clarification for conflicting schedules. EX-PRE-12. Pre-existing damage exclusion. Damage established to have existed before the policy inception is excluded. Compare dated photographs and inception records before recommending an exclusion review. Missing dates require evidence collection, not an invented denial.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "embedding_model": "nomic-embed-text:latest",
+            "chunk_size": 600,
+            "source": "claims-policy-2026.txt",
+            "chunk_overlap": 80,
+            "page": 0
+          },
+          "score": 0.6091777086257935,
+          "rank": 1,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6091777086257935,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "1f4c25eb52fa8f39360e1b9c",
+          "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "embedding_model": "nomic-embed-text:latest",
+            "page": 0,
+            "chunk_overlap": 80,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "source": "claims-policy-2026.txt",
+            "chunk_size": 600
+          },
+          "score": 0.5679721236228943,
+          "rank": 2,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.5679721236228943,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "f852730f703a885af4708a25",
+          "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "page": 0,
+            "embedding_model": "nomic-embed-text:latest",
+            "chunk_size": 600,
+            "chunk_overlap": 80,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "source": "claims-policy-2026.txt"
+          },
+          "score": 0.561653733253479,
+          "rank": 3,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.561653733253479,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        }
+      ]
+    },
+    {
+      "id": "Q04",
+      "question": "What deductible applies with END-GLASS-04?",
+      "needle": "reduces the glass-only deductible to 100 currency units.",
+      "exact_token": true,
+      "correct_chunk_ids": [
+        "9214eca687cc166f844eb933"
+      ],
+      "hit_at_3": true,
+      "latency_ms": 3.38,
+      "label": "hit",
+      "inspection": {
+        "question": "What deductible applies with END-GLASS-04?",
+        "search_query": "What deductible applies with END-GLASS-04?",
+        "options": {
+          "mode": "semantic",
+          "k": 3,
+          "source": null,
+          "rerank": "none",
+          "query_transform": "none"
+        },
+        "semantic": [
+          {
+            "id": "9214eca687cc166f844eb933",
+            "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_size": 600,
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_overlap": 80,
+              "page": 0,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "source": "claims-policy-2026.txt"
+            },
+            "score": 0.7467743158340454,
+            "rank": 1,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.7467743158340454,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "f852730f703a885af4708a25",
+            "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "page": 0,
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_overlap": 80,
+              "chunk_size": 600
+            },
+            "score": 0.6192007660865784,
+            "rank": 2,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6192007660865784,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "52ee60bb93a5ab751876c636",
+            "text": "FICTIONAL TRAINING POLICY - edition 2026-01. This locally authored wording is not a real insurer contract. Administrative status never establishes coverage or payment authority. EX-WEAR-01. Wear and tear exclusion. Gradual deterioration, corrosion and ordinary wear are excluded. A wear-related loss requires an adjuster to examine this exclusion and the cause evidence before any recommendation. Sudden accidental damage is subject to the remaining terms. EX-FLOOD-02. Flood exclusion. Damage caused by rising external floodwater is excluded by the base home policy.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "source": "claims-policy-2026.txt",
+              "embedding_model": "nomic-embed-text:latest",
+              "page": 0,
+              "chunk_size": 600,
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.5335875749588013,
+            "rank": 3,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5335875749588013,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "1f4c25eb52fa8f39360e1b9c",
+            "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600,
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_overlap": 80
+            },
+            "score": 0.532085120677948,
+            "rank": 4,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.532085120677948,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "422ab3332c492062e8716c94",
+            "text": "o not invent an estimate or infer an approval from photographs alone. STATUS-10. Administrative status. The valid training status values are received, awaiting_documents, under_review and closed. A closed claim can have several outcomes; closed never means approved by itself. Coverage requires the relevant policy wording and evidence. EDITION-11. Applicable wording. Use the policy edition and endorsements effective on the date of loss. A later edition must not silently replace the wording relevant to an earlier loss.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_size": 600,
+              "source": "claims-policy-2026.txt",
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "page": 0,
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.5023599863052368,
+            "rank": 5,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5023599863052368,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "30da765f853875c58ccd4a1b",
+            "text": "later edition must not silently replace the wording relevant to an earlier loss. Cite the exact indexed document version and request clarification for conflicting schedules. EX-PRE-12. Pre-existing damage exclusion. Damage established to have existed before the policy inception is excluded. Compare dated photographs and inception records before recommending an exclusion review. Missing dates require evidence collection, not an invented denial.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600,
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.5005365014076233,
+            "rank": 6,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5005365014076233,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "8c66d4eb576b20f9f355b1a5",
+            "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "source": "claims-policy-2026.txt",
+              "page": 0,
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600
+            },
+            "score": 0.4832826852798462,
+            "rank": 7,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.4832826852798462,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          }
+        ],
+        "keyword": [],
+        "note": "Scores rank evidence; they are not probabilities of answer correctness."
+      },
+      "retrieved": [
+        {
+          "id": "9214eca687cc166f844eb933",
+          "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "chunk_size": 600,
+            "embedding_model": "nomic-embed-text:latest",
+            "chunk_overlap": 80,
+            "page": 0,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "source": "claims-policy-2026.txt"
+          },
+          "score": 0.7467743158340454,
+          "rank": 1,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.7467743158340454,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "f852730f703a885af4708a25",
+          "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "source": "claims-policy-2026.txt",
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "page": 0,
+            "embedding_model": "nomic-embed-text:latest",
+            "chunk_overlap": 80,
+            "chunk_size": 600
+          },
+          "score": 0.6192007660865784,
+          "rank": 2,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6192007660865784,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "52ee60bb93a5ab751876c636",
+          "text": "FICTIONAL TRAINING POLICY - edition 2026-01. This locally authored wording is not a real insurer contract. Administrative status never establishes coverage or payment authority. EX-WEAR-01. Wear and tear exclusion. Gradual deterioration, corrosion and ordinary wear are excluded. A wear-related loss requires an adjuster to examine this exclusion and the cause evidence before any recommendation. Sudden accidental damage is subject to the remaining terms. EX-FLOOD-02. Flood exclusion. Damage caused by rising external floodwater is excluded by the base home policy.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "source": "claims-policy-2026.txt",
+            "embedding_model": "nomic-embed-text:latest",
+            "page": 0,
+            "chunk_size": 600,
+            "chunk_overlap": 80,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+          },
+          "score": 0.5335875749588013,
+          "rank": 3,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.5335875749588013,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        }
+      ]
+    },
+    {
+      "id": "Q05",
+      "question": "What is the standard motor deductible?",
+      "needle": "standard accidental vehicle damage deductible is 500 currency units.",
+      "exact_token": false,
+      "correct_chunk_ids": [
+        "9214eca687cc166f844eb933"
+      ],
+      "hit_at_3": true,
+      "latency_ms": 2.98,
+      "label": "hit",
+      "inspection": {
+        "question": "What is the standard motor deductible?",
+        "search_query": "What is the standard motor deductible?",
+        "options": {
+          "mode": "semantic",
+          "k": 3,
+          "source": null,
+          "rerank": "none",
+          "query_transform": "none"
+        },
+        "semantic": [
+          {
+            "id": "9214eca687cc166f844eb933",
+            "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600,
+              "embedding_model": "nomic-embed-text:latest",
+              "page": 0
+            },
+            "score": 0.6700092554092407,
+            "rank": 1,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6700092554092407,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "f852730f703a885af4708a25",
+            "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600,
+              "embedding_model": "nomic-embed-text:latest",
+              "source": "claims-policy-2026.txt",
+              "page": 0
+            },
+            "score": 0.6663354635238647,
+            "rank": 2,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6663354635238647,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "8c66d4eb576b20f9f355b1a5",
+            "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600,
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "page": 0
+            },
+            "score": 0.5049702525138855,
+            "rank": 3,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5049702525138855,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "52ee60bb93a5ab751876c636",
+            "text": "FICTIONAL TRAINING POLICY - edition 2026-01. This locally authored wording is not a real insurer contract. Administrative status never establishes coverage or payment authority. EX-WEAR-01. Wear and tear exclusion. Gradual deterioration, corrosion and ordinary wear are excluded. A wear-related loss requires an adjuster to examine this exclusion and the cause evidence before any recommendation. Sudden accidental damage is subject to the remaining terms. EX-FLOOD-02. Flood exclusion. Damage caused by rising external floodwater is excluded by the base home policy.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "source": "claims-policy-2026.txt",
+              "page": 0,
+              "embedding_model": "nomic-embed-text:latest",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600,
+              "chunk_overlap": 80
+            },
+            "score": 0.4859194755554199,
+            "rank": 4,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.4859194755554199,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "1f4c25eb52fa8f39360e1b9c",
+            "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_overlap": 80,
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600,
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.45423412322998047,
+            "rank": 5,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.45423412322998047,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "30da765f853875c58ccd4a1b",
+            "text": "later edition must not silently replace the wording relevant to an earlier loss. Cite the exact indexed document version and request clarification for conflicting schedules. EX-PRE-12. Pre-existing damage exclusion. Damage established to have existed before the policy inception is excluded. Compare dated photographs and inception records before recommending an exclusion review. Missing dates require evidence collection, not an invented denial.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "page": 0,
+              "chunk_overlap": 80,
+              "embedding_model": "nomic-embed-text:latest",
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600
+            },
+            "score": 0.4499450922012329,
+            "rank": 6,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.4499450922012329,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "422ab3332c492062e8716c94",
+            "text": "o not invent an estimate or infer an approval from photographs alone. STATUS-10. Administrative status. The valid training status values are received, awaiting_documents, under_review and closed. A closed claim can have several outcomes; closed never means approved by itself. Coverage requires the relevant policy wording and evidence. EDITION-11. Applicable wording. Use the policy edition and endorsements effective on the date of loss. A later edition must not silently replace the wording relevant to an earlier loss.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600,
+              "chunk_overlap": 80
+            },
+            "score": 0.44441115856170654,
+            "rank": 7,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.44441115856170654,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          }
+        ],
+        "keyword": [],
+        "note": "Scores rank evidence; they are not probabilities of answer correctness."
+      },
+      "retrieved": [
+        {
+          "id": "9214eca687cc166f844eb933",
+          "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "chunk_overlap": 80,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "source": "claims-policy-2026.txt",
+            "chunk_size": 600,
+            "embedding_model": "nomic-embed-text:latest",
+            "page": 0
+          },
+          "score": 0.6700092554092407,
+          "rank": 1,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6700092554092407,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "f852730f703a885af4708a25",
+          "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "chunk_overlap": 80,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "chunk_size": 600,
+            "embedding_model": "nomic-embed-text:latest",
+            "source": "claims-policy-2026.txt",
+            "page": 0
+          },
+          "score": 0.6663354635238647,
+          "rank": 2,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6663354635238647,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "8c66d4eb576b20f9f355b1a5",
+          "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "embedding_model": "nomic-embed-text:latest",
+            "source": "claims-policy-2026.txt",
+            "chunk_size": 600,
+            "chunk_overlap": 80,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "page": 0
+          },
+          "score": 0.5049702525138855,
+          "rank": 3,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.5049702525138855,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        }
+      ]
+    },
+    {
+      "id": "Q06",
+      "question": "What is the home water damage deductible?",
+      "needle": "home escape-of-water deductible is 750 currency units.",
+      "exact_token": false,
+      "correct_chunk_ids": [
+        "f852730f703a885af4708a25"
+      ],
+      "hit_at_3": true,
+      "latency_ms": 3.46,
+      "label": "hit",
+      "inspection": {
+        "question": "What is the home water damage deductible?",
+        "search_query": "What is the home water damage deductible?",
+        "options": {
+          "mode": "semantic",
+          "k": 3,
+          "source": null,
+          "rerank": "none",
+          "query_transform": "none"
+        },
+        "semantic": [
+          {
+            "id": "f852730f703a885af4708a25",
+            "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "source": "claims-policy-2026.txt",
+              "page": 0,
+              "embedding_model": "nomic-embed-text:latest",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600
+            },
+            "score": 0.7769551277160645,
+            "rank": 1,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.7769551277160645,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "1f4c25eb52fa8f39360e1b9c",
+            "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600,
+              "page": 0,
+              "chunk_overlap": 80,
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.720228910446167,
+            "rank": 2,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.720228910446167,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "8c66d4eb576b20f9f355b1a5",
+            "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600,
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.6750288009643555,
+            "rank": 3,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6750288009643555,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "9214eca687cc166f844eb933",
+            "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_size": 600,
+              "page": 0,
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "source": "claims-policy-2026.txt"
+            },
+            "score": 0.6657171249389648,
+            "rank": 4,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6657171249389648,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "52ee60bb93a5ab751876c636",
+            "text": "FICTIONAL TRAINING POLICY - edition 2026-01. This locally authored wording is not a real insurer contract. Administrative status never establishes coverage or payment authority. EX-WEAR-01. Wear and tear exclusion. Gradual deterioration, corrosion and ordinary wear are excluded. A wear-related loss requires an adjuster to examine this exclusion and the cause evidence before any recommendation. Sudden accidental damage is subject to the remaining terms. EX-FLOOD-02. Flood exclusion. Damage caused by rising external floodwater is excluded by the base home policy.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600,
+              "chunk_overlap": 80,
+              "page": 0
+            },
+            "score": 0.6077301502227783,
+            "rank": 5,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6077301502227783,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "30da765f853875c58ccd4a1b",
+            "text": "later edition must not silently replace the wording relevant to an earlier loss. Cite the exact indexed document version and request clarification for conflicting schedules. EX-PRE-12. Pre-existing damage exclusion. Damage established to have existed before the policy inception is excluded. Compare dated photographs and inception records before recommending an exclusion review. Missing dates require evidence collection, not an invented denial.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "chunk_size": 600,
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.5219744443893433,
+            "rank": 6,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5219744443893433,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "422ab3332c492062e8716c94",
+            "text": "o not invent an estimate or infer an approval from photographs alone. STATUS-10. Administrative status. The valid training status values are received, awaiting_documents, under_review and closed. A closed claim can have several outcomes; closed never means approved by itself. Coverage requires the relevant policy wording and evidence. EDITION-11. Applicable wording. Use the policy edition and endorsements effective on the date of loss. A later edition must not silently replace the wording relevant to an earlier loss.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_size": 600,
+              "chunk_overlap": 80,
+              "page": 0
+            },
+            "score": 0.4489119052886963,
+            "rank": 7,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.4489119052886963,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          }
+        ],
+        "keyword": [],
+        "note": "Scores rank evidence; they are not probabilities of answer correctness."
+      },
+      "retrieved": [
+        {
+          "id": "f852730f703a885af4708a25",
+          "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "chunk_overlap": 80,
+            "source": "claims-policy-2026.txt",
+            "page": 0,
+            "embedding_model": "nomic-embed-text:latest",
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "chunk_size": 600
+          },
+          "score": 0.7769551277160645,
+          "rank": 1,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.7769551277160645,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "1f4c25eb52fa8f39360e1b9c",
+          "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "source": "claims-policy-2026.txt",
+            "chunk_size": 600,
+            "page": 0,
+            "chunk_overlap": 80,
+            "embedding_model": "nomic-embed-text:latest"
+          },
+          "score": 0.720228910446167,
+          "rank": 2,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.720228910446167,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "8c66d4eb576b20f9f355b1a5",
+          "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "chunk_overlap": 80,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "chunk_size": 600,
+            "page": 0,
+            "source": "claims-policy-2026.txt",
+            "embedding_model": "nomic-embed-text:latest"
+          },
+          "score": 0.6750288009643555,
+          "rank": 3,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6750288009643555,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        }
+      ]
+    },
+    {
+      "id": "Q07",
+      "question": "When must accidental motor damage be reported?",
+      "needle": "within seven calendar days of discovery.",
+      "exact_token": false,
+      "correct_chunk_ids": [
+        "f852730f703a885af4708a25"
+      ],
+      "hit_at_3": true,
+      "latency_ms": 2.63,
+      "label": "hit",
+      "inspection": {
+        "question": "When must accidental motor damage be reported?",
+        "search_query": "When must accidental motor damage be reported?",
+        "options": {
+          "mode": "semantic",
+          "k": 3,
+          "source": null,
+          "rerank": "none",
+          "query_transform": "none"
+        },
+        "semantic": [
+          {
+            "id": "8c66d4eb576b20f9f355b1a5",
+            "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_size": 600,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_overlap": 80
+            },
+            "score": 0.6957793831825256,
+            "rank": 1,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6957793831825256,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "f852730f703a885af4708a25",
+            "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_overlap": 80,
+              "page": 0,
+              "chunk_size": 600,
+              "source": "claims-policy-2026.txt",
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.6789870262145996,
+            "rank": 2,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6789870262145996,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "9214eca687cc166f844eb933",
+            "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "source": "claims-policy-2026.txt",
+              "chunk_overlap": 80,
+              "page": 0,
+              "chunk_size": 600,
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.6316675543785095,
+            "rank": 3,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6316675543785095,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "30da765f853875c58ccd4a1b",
+            "text": "later edition must not silently replace the wording relevant to an earlier loss. Cite the exact indexed document version and request clarification for conflicting schedules. EX-PRE-12. Pre-existing damage exclusion. Damage established to have existed before the policy inception is excluded. Compare dated photographs and inception records before recommending an exclusion review. Missing dates require evidence collection, not an invented denial.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "source": "claims-policy-2026.txt",
+              "chunk_overlap": 80,
+              "page": 0,
+              "chunk_size": 600,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.5842429995536804,
+            "rank": 4,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5842429995536804,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "52ee60bb93a5ab751876c636",
+            "text": "FICTIONAL TRAINING POLICY - edition 2026-01. This locally authored wording is not a real insurer contract. Administrative status never establishes coverage or payment authority. EX-WEAR-01. Wear and tear exclusion. Gradual deterioration, corrosion and ordinary wear are excluded. A wear-related loss requires an adjuster to examine this exclusion and the cause evidence before any recommendation. Sudden accidental damage is subject to the remaining terms. EX-FLOOD-02. Flood exclusion. Damage caused by rising external floodwater is excluded by the base home policy.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_size": 600,
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_overlap": 80
+            },
+            "score": 0.5786686539649963,
+            "rank": 5,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5786686539649963,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "1f4c25eb52fa8f39360e1b9c",
+            "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600,
+              "page": 0,
+              "chunk_overlap": 80,
+              "embedding_model": "nomic-embed-text:latest",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.5699430704116821,
+            "rank": 6,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5699430704116821,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "422ab3332c492062e8716c94",
+            "text": "o not invent an estimate or infer an approval from photographs alone. STATUS-10. Administrative status. The valid training status values are received, awaiting_documents, under_review and closed. A closed claim can have several outcomes; closed never means approved by itself. Coverage requires the relevant policy wording and evidence. EDITION-11. Applicable wording. Use the policy edition and endorsements effective on the date of loss. A later edition must not silently replace the wording relevant to an earlier loss.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_size": 600,
+              "chunk_overlap": 80,
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.5694390535354614,
+            "rank": 7,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5694390535354614,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          }
+        ],
+        "keyword": [],
+        "note": "Scores rank evidence; they are not probabilities of answer correctness."
+      },
+      "retrieved": [
+        {
+          "id": "8c66d4eb576b20f9f355b1a5",
+          "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "chunk_size": 600,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "page": 0,
+            "source": "claims-policy-2026.txt",
+            "embedding_model": "nomic-embed-text:latest",
+            "chunk_overlap": 80
+          },
+          "score": 0.6957793831825256,
+          "rank": 1,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6957793831825256,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "f852730f703a885af4708a25",
+          "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "chunk_overlap": 80,
+            "page": 0,
+            "chunk_size": 600,
+            "source": "claims-policy-2026.txt",
+            "embedding_model": "nomic-embed-text:latest"
+          },
+          "score": 0.6789870262145996,
+          "rank": 2,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6789870262145996,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "9214eca687cc166f844eb933",
+          "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "source": "claims-policy-2026.txt",
+            "chunk_overlap": 80,
+            "page": 0,
+            "chunk_size": 600,
+            "embedding_model": "nomic-embed-text:latest"
+          },
+          "score": 0.6316675543785095,
+          "rank": 3,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6316675543785095,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        }
+      ]
+    },
+    {
+      "id": "Q08",
+      "question": "When must a home pipe leak be reported?",
+      "needle": "within fourteen calendar days of discovery.",
+      "exact_token": false,
+      "correct_chunk_ids": [
+        "8c66d4eb576b20f9f355b1a5"
+      ],
+      "hit_at_3": true,
+      "latency_ms": 2.66,
+      "label": "hit",
+      "inspection": {
+        "question": "When must a home pipe leak be reported?",
+        "search_query": "When must a home pipe leak be reported?",
+        "options": {
+          "mode": "semantic",
+          "k": 3,
+          "source": null,
+          "rerank": "none",
+          "query_transform": "none"
+        },
+        "semantic": [
+          {
+            "id": "8c66d4eb576b20f9f355b1a5",
+            "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600,
+              "chunk_overlap": 80,
+              "page": 0,
+              "embedding_model": "nomic-embed-text:latest",
+              "source": "claims-policy-2026.txt"
+            },
+            "score": 0.7196585536003113,
+            "rank": 1,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.7196585536003113,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "1f4c25eb52fa8f39360e1b9c",
+            "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "source": "claims-policy-2026.txt",
+              "page": 0,
+              "chunk_size": 600,
+              "chunk_overlap": 80,
+              "embedding_model": "nomic-embed-text:latest",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.6534088253974915,
+            "rank": 2,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6534088253974915,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "f852730f703a885af4708a25",
+            "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600,
+              "source": "claims-policy-2026.txt",
+              "page": 0,
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.6341687440872192,
+            "rank": 3,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6341687440872192,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "52ee60bb93a5ab751876c636",
+            "text": "FICTIONAL TRAINING POLICY - edition 2026-01. This locally authored wording is not a real insurer contract. Administrative status never establishes coverage or payment authority. EX-WEAR-01. Wear and tear exclusion. Gradual deterioration, corrosion and ordinary wear are excluded. A wear-related loss requires an adjuster to examine this exclusion and the cause evidence before any recommendation. Sudden accidental damage is subject to the remaining terms. EX-FLOOD-02. Flood exclusion. Damage caused by rising external floodwater is excluded by the base home policy.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "page": 0,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "embedding_model": "nomic-embed-text:latest",
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600
+            },
+            "score": 0.5587350130081177,
+            "rank": 4,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5587350130081177,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "422ab3332c492062e8716c94",
+            "text": "o not invent an estimate or infer an approval from photographs alone. STATUS-10. Administrative status. The valid training status values are received, awaiting_documents, under_review and closed. A closed claim can have several outcomes; closed never means approved by itself. Coverage requires the relevant policy wording and evidence. EDITION-11. Applicable wording. Use the policy edition and endorsements effective on the date of loss. A later edition must not silently replace the wording relevant to an earlier loss.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_size": 600,
+              "chunk_overlap": 80,
+              "source": "claims-policy-2026.txt",
+              "page": 0,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.5119942426681519,
+            "rank": 5,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5119942426681519,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "30da765f853875c58ccd4a1b",
+            "text": "later edition must not silently replace the wording relevant to an earlier loss. Cite the exact indexed document version and request clarification for conflicting schedules. EX-PRE-12. Pre-existing damage exclusion. Damage established to have existed before the policy inception is excluded. Compare dated photographs and inception records before recommending an exclusion review. Missing dates require evidence collection, not an invented denial.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_size": 600,
+              "chunk_overlap": 80,
+              "page": 0,
+              "embedding_model": "nomic-embed-text:latest",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "source": "claims-policy-2026.txt"
+            },
+            "score": 0.5081601738929749,
+            "rank": 6,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5081601738929749,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "9214eca687cc166f844eb933",
+            "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_size": 600,
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "page": 0,
+              "chunk_overlap": 80,
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.48058605194091797,
+            "rank": 7,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.48058605194091797,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          }
+        ],
+        "keyword": [],
+        "note": "Scores rank evidence; they are not probabilities of answer correctness."
+      },
+      "retrieved": [
+        {
+          "id": "8c66d4eb576b20f9f355b1a5",
+          "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "chunk_size": 600,
+            "chunk_overlap": 80,
+            "page": 0,
+            "embedding_model": "nomic-embed-text:latest",
+            "source": "claims-policy-2026.txt"
+          },
+          "score": 0.7196585536003113,
+          "rank": 1,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.7196585536003113,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "1f4c25eb52fa8f39360e1b9c",
+          "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "source": "claims-policy-2026.txt",
+            "page": 0,
+            "chunk_size": 600,
+            "chunk_overlap": 80,
+            "embedding_model": "nomic-embed-text:latest",
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+          },
+          "score": 0.6534088253974915,
+          "rank": 2,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6534088253974915,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "f852730f703a885af4708a25",
+          "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "chunk_overlap": 80,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "chunk_size": 600,
+            "source": "claims-policy-2026.txt",
+            "page": 0,
+            "embedding_model": "nomic-embed-text:latest"
+          },
+          "score": 0.6341687440872192,
+          "rank": 3,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6341687440872192,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        }
+      ]
+    },
+    {
+      "id": "Q09",
+      "question": "What documents are needed for a motor repair claim?",
+      "needle": "damage photographs and an itemized repair estimate.",
+      "exact_token": false,
+      "correct_chunk_ids": [
+        "8c66d4eb576b20f9f355b1a5"
+      ],
+      "hit_at_3": true,
+      "latency_ms": 3.67,
+      "label": "hit",
+      "inspection": {
+        "question": "What documents are needed for a motor repair claim?",
+        "search_query": "What documents are needed for a motor repair claim?",
+        "options": {
+          "mode": "semantic",
+          "k": 3,
+          "source": null,
+          "rerank": "none",
+          "query_transform": "none"
+        },
+        "semantic": [
+          {
+            "id": "8c66d4eb576b20f9f355b1a5",
+            "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_overlap": 80,
+              "chunk_size": 600,
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.7180613875389099,
+            "rank": 1,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.7180613875389099,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "f852730f703a885af4708a25",
+            "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "page": 0,
+              "chunk_size": 600,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "embedding_model": "nomic-embed-text:latest",
+              "source": "claims-policy-2026.txt"
+            },
+            "score": 0.6114600896835327,
+            "rank": 2,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6114600896835327,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "9214eca687cc166f844eb933",
+            "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "source": "claims-policy-2026.txt",
+              "page": 0,
+              "chunk_size": 600,
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.607564389705658,
+            "rank": 3,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.607564389705658,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "422ab3332c492062e8716c94",
+            "text": "o not invent an estimate or infer an approval from photographs alone. STATUS-10. Administrative status. The valid training status values are received, awaiting_documents, under_review and closed. A closed claim can have several outcomes; closed never means approved by itself. Coverage requires the relevant policy wording and evidence. EDITION-11. Applicable wording. Use the policy edition and endorsements effective on the date of loss. A later edition must not silently replace the wording relevant to an earlier loss.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_overlap": 80,
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600
+            },
+            "score": 0.6016627550125122,
+            "rank": 4,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6016627550125122,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "30da765f853875c58ccd4a1b",
+            "text": "later edition must not silently replace the wording relevant to an earlier loss. Cite the exact indexed document version and request clarification for conflicting schedules. EX-PRE-12. Pre-existing damage exclusion. Damage established to have existed before the policy inception is excluded. Compare dated photographs and inception records before recommending an exclusion review. Missing dates require evidence collection, not an invented denial.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_size": 600,
+              "chunk_overlap": 80,
+              "page": 0,
+              "embedding_model": "nomic-embed-text:latest",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "source": "claims-policy-2026.txt"
+            },
+            "score": 0.5749051570892334,
+            "rank": 5,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5749051570892334,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "52ee60bb93a5ab751876c636",
+            "text": "FICTIONAL TRAINING POLICY - edition 2026-01. This locally authored wording is not a real insurer contract. Administrative status never establishes coverage or payment authority. EX-WEAR-01. Wear and tear exclusion. Gradual deterioration, corrosion and ordinary wear are excluded. A wear-related loss requires an adjuster to examine this exclusion and the cause evidence before any recommendation. Sudden accidental damage is subject to the remaining terms. EX-FLOOD-02. Flood exclusion. Damage caused by rising external floodwater is excluded by the base home policy.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "page": 0,
+              "chunk_overlap": 80,
+              "chunk_size": 600,
+              "source": "claims-policy-2026.txt",
+              "embedding_model": "nomic-embed-text:latest",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.5702666640281677,
+            "rank": 6,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5702666640281677,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "1f4c25eb52fa8f39360e1b9c",
+            "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_size": 600,
+              "chunk_overlap": 80,
+              "embedding_model": "nomic-embed-text:latest",
+              "source": "claims-policy-2026.txt",
+              "page": 0,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.5003718137741089,
+            "rank": 7,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5003718137741089,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          }
+        ],
+        "keyword": [],
+        "note": "Scores rank evidence; they are not probabilities of answer correctness."
+      },
+      "retrieved": [
+        {
+          "id": "8c66d4eb576b20f9f355b1a5",
+          "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "page": 0,
+            "source": "claims-policy-2026.txt",
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "chunk_overlap": 80,
+            "chunk_size": 600,
+            "embedding_model": "nomic-embed-text:latest"
+          },
+          "score": 0.7180613875389099,
+          "rank": 1,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.7180613875389099,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "f852730f703a885af4708a25",
+          "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "chunk_overlap": 80,
+            "page": 0,
+            "chunk_size": 600,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "embedding_model": "nomic-embed-text:latest",
+            "source": "claims-policy-2026.txt"
+          },
+          "score": 0.6114600896835327,
+          "rank": 2,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6114600896835327,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "9214eca687cc166f844eb933",
+          "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "embedding_model": "nomic-embed-text:latest",
+            "source": "claims-policy-2026.txt",
+            "page": 0,
+            "chunk_size": 600,
+            "chunk_overlap": 80,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+          },
+          "score": 0.607564389705658,
+          "rank": 3,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.607564389705658,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "question": "Does a closed claim mean coverage is approved?",
+      "needle": "closed never means approved by itself.",
+      "exact_token": false,
+      "correct_chunk_ids": [
+        "422ab3332c492062e8716c94"
+      ],
+      "hit_at_3": true,
+      "latency_ms": 2.7,
+      "label": "hit",
+      "inspection": {
+        "question": "Does a closed claim mean coverage is approved?",
+        "search_query": "Does a closed claim mean coverage is approved?",
+        "options": {
+          "mode": "semantic",
+          "k": 3,
+          "source": null,
+          "rerank": "none",
+          "query_transform": "none"
+        },
+        "semantic": [
+          {
+            "id": "422ab3332c492062e8716c94",
+            "text": "o not invent an estimate or infer an approval from photographs alone. STATUS-10. Administrative status. The valid training status values are received, awaiting_documents, under_review and closed. A closed claim can have several outcomes; closed never means approved by itself. Coverage requires the relevant policy wording and evidence. EDITION-11. Applicable wording. Use the policy edition and endorsements effective on the date of loss. A later edition must not silently replace the wording relevant to an earlier loss.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600,
+              "embedding_model": "nomic-embed-text:latest",
+              "page": 0,
+              "chunk_overlap": 80
+            },
+            "score": 0.7598591446876526,
+            "rank": 1,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.7598591446876526,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "9214eca687cc166f844eb933",
+            "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "embedding_model": "nomic-embed-text:latest",
+              "page": 0,
+              "chunk_size": 600,
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.55568528175354,
+            "rank": 2,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.55568528175354,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "52ee60bb93a5ab751876c636",
+            "text": "FICTIONAL TRAINING POLICY - edition 2026-01. This locally authored wording is not a real insurer contract. Administrative status never establishes coverage or payment authority. EX-WEAR-01. Wear and tear exclusion. Gradual deterioration, corrosion and ordinary wear are excluded. A wear-related loss requires an adjuster to examine this exclusion and the cause evidence before any recommendation. Sudden accidental damage is subject to the remaining terms. EX-FLOOD-02. Flood exclusion. Damage caused by rising external floodwater is excluded by the base home policy.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "page": 0,
+              "chunk_overlap": 80,
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_size": 600,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "source": "claims-policy-2026.txt"
+            },
+            "score": 0.5523207783699036,
+            "rank": 3,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5523207783699036,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "8c66d4eb576b20f9f355b1a5",
+            "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600,
+              "page": 0,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_overlap": 80
+            },
+            "score": 0.5490378141403198,
+            "rank": 4,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5490378141403198,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "30da765f853875c58ccd4a1b",
+            "text": "later edition must not silently replace the wording relevant to an earlier loss. Cite the exact indexed document version and request clarification for conflicting schedules. EX-PRE-12. Pre-existing damage exclusion. Damage established to have existed before the policy inception is excluded. Compare dated photographs and inception records before recommending an exclusion review. Missing dates require evidence collection, not an invented denial.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "page": 0,
+              "source": "claims-policy-2026.txt",
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600
+            },
+            "score": 0.49665969610214233,
+            "rank": 5,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.49665969610214233,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "1f4c25eb52fa8f39360e1b9c",
+            "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "page": 0,
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600
+            },
+            "score": 0.49254268407821655,
+            "rank": 6,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.49254268407821655,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "f852730f703a885af4708a25",
+            "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_overlap": 80,
+              "page": 0,
+              "chunk_size": 600,
+              "embedding_model": "nomic-embed-text:latest",
+              "source": "claims-policy-2026.txt"
+            },
+            "score": 0.48600053787231445,
+            "rank": 7,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.48600053787231445,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          }
+        ],
+        "keyword": [],
+        "note": "Scores rank evidence; they are not probabilities of answer correctness."
+      },
+      "retrieved": [
+        {
+          "id": "422ab3332c492062e8716c94",
+          "text": "o not invent an estimate or infer an approval from photographs alone. STATUS-10. Administrative status. The valid training status values are received, awaiting_documents, under_review and closed. A closed claim can have several outcomes; closed never means approved by itself. Coverage requires the relevant policy wording and evidence. EDITION-11. Applicable wording. Use the policy edition and endorsements effective on the date of loss. A later edition must not silently replace the wording relevant to an earlier loss.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "source": "claims-policy-2026.txt",
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "chunk_size": 600,
+            "embedding_model": "nomic-embed-text:latest",
+            "page": 0,
+            "chunk_overlap": 80
+          },
+          "score": 0.7598591446876526,
+          "rank": 1,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.7598591446876526,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "9214eca687cc166f844eb933",
+          "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "chunk_overlap": 80,
+            "embedding_model": "nomic-embed-text:latest",
+            "page": 0,
+            "chunk_size": 600,
+            "source": "claims-policy-2026.txt",
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+          },
+          "score": 0.55568528175354,
+          "rank": 2,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.55568528175354,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "52ee60bb93a5ab751876c636",
+          "text": "FICTIONAL TRAINING POLICY - edition 2026-01. This locally authored wording is not a real insurer contract. Administrative status never establishes coverage or payment authority. EX-WEAR-01. Wear and tear exclusion. Gradual deterioration, corrosion and ordinary wear are excluded. A wear-related loss requires an adjuster to examine this exclusion and the cause evidence before any recommendation. Sudden accidental damage is subject to the remaining terms. EX-FLOOD-02. Flood exclusion. Damage caused by rising external floodwater is excluded by the base home policy.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "page": 0,
+            "chunk_overlap": 80,
+            "embedding_model": "nomic-embed-text:latest",
+            "chunk_size": 600,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "source": "claims-policy-2026.txt"
+          },
+          "score": 0.5523207783699036,
+          "rank": 3,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.5523207783699036,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "question": "Which policy edition applies to an earlier loss?",
+      "needle": "effective on the date of loss.",
+      "exact_token": false,
+      "correct_chunk_ids": [
+        "422ab3332c492062e8716c94"
+      ],
+      "hit_at_3": true,
+      "latency_ms": 3.17,
+      "label": "hit",
+      "inspection": {
+        "question": "Which policy edition applies to an earlier loss?",
+        "search_query": "Which policy edition applies to an earlier loss?",
+        "options": {
+          "mode": "semantic",
+          "k": 3,
+          "source": null,
+          "rerank": "none",
+          "query_transform": "none"
+        },
+        "semantic": [
+          {
+            "id": "30da765f853875c58ccd4a1b",
+            "text": "later edition must not silently replace the wording relevant to an earlier loss. Cite the exact indexed document version and request clarification for conflicting schedules. EX-PRE-12. Pre-existing damage exclusion. Damage established to have existed before the policy inception is excluded. Compare dated photographs and inception records before recommending an exclusion review. Missing dates require evidence collection, not an invented denial.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_size": 600,
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "page": 0,
+              "source": "claims-policy-2026.txt"
+            },
+            "score": 0.7666177153587341,
+            "rank": 1,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.7666177153587341,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "422ab3332c492062e8716c94",
+            "text": "o not invent an estimate or infer an approval from photographs alone. STATUS-10. Administrative status. The valid training status values are received, awaiting_documents, under_review and closed. A closed claim can have several outcomes; closed never means approved by itself. Coverage requires the relevant policy wording and evidence. EDITION-11. Applicable wording. Use the policy edition and endorsements effective on the date of loss. A later edition must not silently replace the wording relevant to an earlier loss.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "source": "claims-policy-2026.txt",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "page": 0,
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_overlap": 80,
+              "chunk_size": 600
+            },
+            "score": 0.6671282649040222,
+            "rank": 2,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6671282649040222,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "52ee60bb93a5ab751876c636",
+            "text": "FICTIONAL TRAINING POLICY - edition 2026-01. This locally authored wording is not a real insurer contract. Administrative status never establishes coverage or payment authority. EX-WEAR-01. Wear and tear exclusion. Gradual deterioration, corrosion and ordinary wear are excluded. A wear-related loss requires an adjuster to examine this exclusion and the cause evidence before any recommendation. Sudden accidental damage is subject to the remaining terms. EX-FLOOD-02. Flood exclusion. Damage caused by rising external floodwater is excluded by the base home policy.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "source": "claims-policy-2026.txt",
+              "page": 0,
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_size": 600,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.6536265015602112,
+            "rank": 3,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6536265015602112,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "9214eca687cc166f844eb933",
+            "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "page": 0,
+              "embedding_model": "nomic-embed-text:latest",
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600,
+              "chunk_overlap": 80
+            },
+            "score": 0.6437972784042358,
+            "rank": 4,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6437972784042358,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "8c66d4eb576b20f9f355b1a5",
+            "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "page": 0,
+              "chunk_size": 600,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "source": "claims-policy-2026.txt",
+              "chunk_overlap": 80,
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.5937111973762512,
+            "rank": 5,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5937111973762512,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "1f4c25eb52fa8f39360e1b9c",
+            "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "chunk_size": 600,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "embedding_model": "nomic-embed-text:latest",
+              "source": "claims-policy-2026.txt",
+              "page": 0
+            },
+            "score": 0.5649317502975464,
+            "rank": 6,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5649317502975464,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "f852730f703a885af4708a25",
+            "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_overlap": 80,
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600,
+              "page": 0,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.5570712089538574,
+            "rank": 7,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5570712089538574,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          }
+        ],
+        "keyword": [],
+        "note": "Scores rank evidence; they are not probabilities of answer correctness."
+      },
+      "retrieved": [
+        {
+          "id": "30da765f853875c58ccd4a1b",
+          "text": "later edition must not silently replace the wording relevant to an earlier loss. Cite the exact indexed document version and request clarification for conflicting schedules. EX-PRE-12. Pre-existing damage exclusion. Damage established to have existed before the policy inception is excluded. Compare dated photographs and inception records before recommending an exclusion review. Missing dates require evidence collection, not an invented denial.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "embedding_model": "nomic-embed-text:latest",
+            "chunk_size": 600,
+            "chunk_overlap": 80,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "page": 0,
+            "source": "claims-policy-2026.txt"
+          },
+          "score": 0.7666177153587341,
+          "rank": 1,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.7666177153587341,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "422ab3332c492062e8716c94",
+          "text": "o not invent an estimate or infer an approval from photographs alone. STATUS-10. Administrative status. The valid training status values are received, awaiting_documents, under_review and closed. A closed claim can have several outcomes; closed never means approved by itself. Coverage requires the relevant policy wording and evidence. EDITION-11. Applicable wording. Use the policy edition and endorsements effective on the date of loss. A later edition must not silently replace the wording relevant to an earlier loss.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "source": "claims-policy-2026.txt",
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "page": 0,
+            "embedding_model": "nomic-embed-text:latest",
+            "chunk_overlap": 80,
+            "chunk_size": 600
+          },
+          "score": 0.6671282649040222,
+          "rank": 2,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6671282649040222,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "52ee60bb93a5ab751876c636",
+          "text": "FICTIONAL TRAINING POLICY - edition 2026-01. This locally authored wording is not a real insurer contract. Administrative status never establishes coverage or payment authority. EX-WEAR-01. Wear and tear exclusion. Gradual deterioration, corrosion and ordinary wear are excluded. A wear-related loss requires an adjuster to examine this exclusion and the cause evidence before any recommendation. Sudden accidental damage is subject to the remaining terms. EX-FLOOD-02. Flood exclusion. Damage caused by rising external floodwater is excluded by the base home policy.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "chunk_overlap": 80,
+            "source": "claims-policy-2026.txt",
+            "page": 0,
+            "embedding_model": "nomic-embed-text:latest",
+            "chunk_size": 600,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+          },
+          "score": 0.6536265015602112,
+          "rank": 3,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6536265015602112,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "question": "How should pre-existing damage be checked?",
+      "needle": "Compare dated photographs and inception records",
+      "exact_token": false,
+      "correct_chunk_ids": [
+        "30da765f853875c58ccd4a1b"
+      ],
+      "hit_at_3": true,
+      "latency_ms": 2.94,
+      "label": "hit",
+      "inspection": {
+        "question": "How should pre-existing damage be checked?",
+        "search_query": "How should pre-existing damage be checked?",
+        "options": {
+          "mode": "semantic",
+          "k": 3,
+          "source": null,
+          "rerank": "none",
+          "query_transform": "none"
+        },
+        "semantic": [
+          {
+            "id": "30da765f853875c58ccd4a1b",
+            "text": "later edition must not silently replace the wording relevant to an earlier loss. Cite the exact indexed document version and request clarification for conflicting schedules. EX-PRE-12. Pre-existing damage exclusion. Damage established to have existed before the policy inception is excluded. Compare dated photographs and inception records before recommending an exclusion review. Missing dates require evidence collection, not an invented denial.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "source": "claims-policy-2026.txt",
+              "chunk_size": 600,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "page": 0,
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.7188769578933716,
+            "rank": 1,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.7188769578933716,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "8c66d4eb576b20f9f355b1a5",
+            "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "embedding_model": "nomic-embed-text:latest",
+              "source": "claims-policy-2026.txt",
+              "page": 0,
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600
+            },
+            "score": 0.6112006306648254,
+            "rank": 2,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.6112006306648254,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "1f4c25eb52fa8f39360e1b9c",
+            "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_overlap": 80,
+              "chunk_size": 600,
+              "source": "claims-policy-2026.txt",
+              "embedding_model": "nomic-embed-text:latest",
+              "page": 0,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+            },
+            "score": 0.57865971326828,
+            "rank": 3,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.57865971326828,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "422ab3332c492062e8716c94",
+            "text": "o not invent an estimate or infer an approval from photographs alone. STATUS-10. Administrative status. The valid training status values are received, awaiting_documents, under_review and closed. A closed claim can have several outcomes; closed never means approved by itself. Coverage requires the relevant policy wording and evidence. EDITION-11. Applicable wording. Use the policy edition and endorsements effective on the date of loss. A later edition must not silently replace the wording relevant to an earlier loss.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "chunk_size": 600,
+              "source": "claims-policy-2026.txt",
+              "page": 0,
+              "chunk_overlap": 80,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.5733115673065186,
+            "rank": 4,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5733115673065186,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "f852730f703a885af4708a25",
+            "text": "e deductible, floored at zero, and is never payment authorization. BASE-HOME-06. Home deductible. The standard home escape-of-water deductible is 750 currency units. Evidence must establish the cause and the affected property. External floodwater and gradual corrosion require separate exclusion review before a recommendation. NOTICE-MOTOR-07. Reporting period. Report accidental motor damage within seven calendar days of discovery. Record the discovery date and report date. Late reporting requires human assessment and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "source": "claims-policy-2026.txt",
+              "chunk_overlap": 80,
+              "embedding_model": "nomic-embed-text:latest",
+              "chunk_size": 600,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "page": 0
+            },
+            "score": 0.5496532917022705,
+            "rank": 5,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5496532917022705,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "52ee60bb93a5ab751876c636",
+            "text": "FICTIONAL TRAINING POLICY - edition 2026-01. This locally authored wording is not a real insurer contract. Administrative status never establishes coverage or payment authority. EX-WEAR-01. Wear and tear exclusion. Gradual deterioration, corrosion and ordinary wear are excluded. A wear-related loss requires an adjuster to examine this exclusion and the cause evidence before any recommendation. Sudden accidental damage is subject to the remaining terms. EX-FLOOD-02. Flood exclusion. Damage caused by rising external floodwater is excluded by the base home policy.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "source": "claims-policy-2026.txt",
+              "chunk_overlap": 80,
+              "page": 0,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_size": 600,
+              "embedding_model": "nomic-embed-text:latest"
+            },
+            "score": 0.5423534512519836,
+            "rank": 6,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5423534512519836,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          },
+          {
+            "id": "9214eca687cc166f844eb933",
+            "text": "applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement. An attached glass endorsement reduces the glass-only deductible to 100 currency units. The endorsement must be listed on the policy schedule for the loss date. Other vehicle damage keeps the standard deductible. BASE-MOTOR-05. Motor deductible. The standard accidental vehicle damage deductible is 500 currency units. A deductible applies once per covered event. A payable illustration is the repair estimate less the applicable deductible, floored at zero, and is never payment authorization. BASE-HOME-06.",
+            "source": "claims-policy-2026.txt",
+            "page": null,
+            "metadata": {
+              "source": "claims-policy-2026.txt",
+              "embedding_model": "nomic-embed-text:latest",
+              "page": 0,
+              "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+              "chunk_overlap": 80,
+              "chunk_size": 600
+            },
+            "score": 0.5299301743507385,
+            "rank": 7,
+            "retrieval_method": "semantic",
+            "semantic_score": 0.5299301743507385,
+            "keyword_score": 0.0,
+            "fusion_score": 0.0,
+            "rerank_score": null
+          }
+        ],
+        "keyword": [],
+        "note": "Scores rank evidence; they are not probabilities of answer correctness."
+      },
+      "retrieved": [
+        {
+          "id": "30da765f853875c58ccd4a1b",
+          "text": "later edition must not silently replace the wording relevant to an earlier loss. Cite the exact indexed document version and request clarification for conflicting schedules. EX-PRE-12. Pre-existing damage exclusion. Damage established to have existed before the policy inception is excluded. Compare dated photographs and inception records before recommending an exclusion review. Missing dates require evidence collection, not an invented denial.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "chunk_overlap": 80,
+            "source": "claims-policy-2026.txt",
+            "chunk_size": 600,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "page": 0,
+            "embedding_model": "nomic-embed-text:latest"
+          },
+          "score": 0.7188769578933716,
+          "rank": 1,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.7188769578933716,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "8c66d4eb576b20f9f355b1a5",
+          "text": "and does not by itself authorize the assistant to deny a claim. NOTICE-HOME-08. Reporting period. Report home escape-of-water damage within fourteen calendar days of discovery. Request photographs and the plumber report. The report should distinguish sudden pipe failure from gradual wear and external flooding. DOCS-MOTOR-09. Evidence requirements. A motor repair claim needs damage photographs and an itemized repair estimate. If the estimate is absent, record awaiting_documents and request the estimate. Do not invent an estimate or infer an approval from photographs alone. STATUS-10.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "embedding_model": "nomic-embed-text:latest",
+            "source": "claims-policy-2026.txt",
+            "page": 0,
+            "chunk_overlap": 80,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+            "chunk_size": 600
+          },
+          "score": 0.6112006306648254,
+          "rank": 2,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.6112006306648254,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        },
+        {
+          "id": "1f4c25eb52fa8f39360e1b9c",
+          "text": "Damage caused by rising external floodwater is excluded by the base home policy. An escape from an internal water pipe is a different cause and must not automatically be classified as external flooding. Review the cause of water ingress. EX-DELIB-03. Deliberate damage exclusion. Damage deliberately caused by the insured is excluded. Suspicion alone is not proof of deliberate conduct. Request supporting evidence and human review before applying this exclusion to an individual claim. END-GLASS-04. Glass endorsement.",
+          "source": "claims-policy-2026.txt",
+          "page": null,
+          "metadata": {
+            "chunk_overlap": 80,
+            "chunk_size": 600,
+            "source": "claims-policy-2026.txt",
+            "embedding_model": "nomic-embed-text:latest",
+            "page": 0,
+            "document_version": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604"
+          },
+          "score": 0.57865971326828,
+          "rank": 3,
+          "retrieval_method": "semantic",
+          "semantic_score": 0.57865971326828,
+          "keyword_score": 0.0,
+          "fusion_score": 0.0,
+          "rerank_score": null
+        }
+      ]
+    }
+  ]
+}

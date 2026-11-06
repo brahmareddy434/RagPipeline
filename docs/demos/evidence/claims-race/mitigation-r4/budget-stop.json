@@ -1,0 +1,39 @@
+{
+  "task": "Summarize status and unresolved issues for CLM-2026-10001, including any exclusion review needed. Cite the relevant policy clauses. Do not decide coverage.",
+  "session_id": null,
+  "answer": "I don't know based on the uploaded documents.",
+  "citations": [],
+  "confidence": "low",
+  "abstained": true,
+  "validation_issues": [],
+  "evidence": [],
+  "steps": [],
+  "stop_reason": "token_budget",
+  "stop_detail": "Budget exhausted before or during a model call.",
+  "completed": false,
+  "recalled_memory": [],
+  "memory_summarisations": 0,
+  "scratchpad_summary": "",
+  "budget": {
+    "max_steps": 4,
+    "max_seconds": 180.0,
+    "max_tokens": 500,
+    "max_cost_usd": 0.02,
+    "max_tool_errors": 3,
+    "max_repeats": 2,
+    "scratchpad_chars": 6000
+  },
+  "usage": {
+    "steps": 0,
+    "model_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_tokens": 0,
+    "cost_usd": 0.0,
+    "tool_errors": 0,
+    "repeated_calls": 0,
+    "provider_calls": [],
+    "usage_complete": true,
+    "latency_ms": 2.87
+  }
+}

@@ -1,6 +1,6 @@
 import pytest
 
-from app.tools import Calculator, OrderRepository
+from app.services.tools import Calculator, OrderRepository
 
 
 def test_calculator():

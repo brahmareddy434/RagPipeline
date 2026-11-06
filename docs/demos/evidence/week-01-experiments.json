@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "started_at_utc": "2026-11-05T13:26:21.595777+00:00",
+  "operator": "Codex assistant; not learner-authored observations",
+  "purpose": "Week 01 theory experiment using unchanged existing helpers; fictional/public prompts only",
+  "python": "3.11.9",
+  "ollama": {
+    "version": "0.40.14"
+  },
+  "source_revision": "7f7e01cb185be79826d73b21fcbd6e91fe6388bb",
+  "source_sha256": {
+    "course/labs/foundations.py": "981bac0a5d69c86e378dab8b00273bed0341eaa39a3230f297b8c1c134c45ceb",
+    "app/ollama_client.py": "38ee49e812123e5de30e7e51cfe36c4d9a9900e19c38a878402eebdeff78f637",
+    "app/config.py": "f9550cda845f7e0d2801acf131e2c83b36f2c08b420f041aaf5fec8e85db2196"
+  },
+  "models": [
+    {
+      "name": "llama3.2:3b",
+      "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72"
+    },
+    {
+      "name": "nomic-embed-text:latest",
+      "digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f"
+    }
+  ],
+  "chat_model_parameters": "stop                           \"<|start_header_id|>\"\nstop                           \"<|end_header_id|>\"\nstop                           \"<|eot_id|>\"",
+  "chat_template_sha256": "966de95ca8a62200913e3f8bfbf84c8494536f1b94b49166851e76644e966396",
+  "temperature_protocol": {
+    "command": ".\\.venv\\Scripts\\python.exe -m course.labs.foundations temperature",
+    "prompt": "Name a fictional bakery in three words.",
+    "temperatures_in_order": [
+      0,
+      0,
+      0.8,
+      0.8
+    ],
+    "options": {
+      "top_p": 0.9,
+      "top_k": 40,
+      "num_predict": 60
+    },
+    "seed": "not specified; runtime default",
+    "num_ctx": "not overridden; runtime/model default",
+    "repeatability_limit": "Two samples per setting, sequential order, no seed override. This is a small variability demonstration, not a reproducibility or latency benchmark."
+  },
+  "temperature_results": [
+    {
+      "temperature": 0,
+      "answer": "\"Sweet Delight Bakery\"",
+      "actual_ollama_counts": [
+        {
+          "endpoint": "/api/chat",
+          "model": "llama3.2:3b",
+          "prompt_eval_count": 33,
+          "eval_count": 7,
+          "total_duration": 10082443900,
+          "load_duration": 8997797300
+        }
+      ]
+    },
+    {
+      "temperature": 0,
+      "answer": "\"Sweet Delight Bakery\"",
+      "actual_ollama_counts": [
+        {
+          "endpoint": "/api/chat",
+          "model": "llama3.2:3b",
+          "prompt_eval_count": 33,
+          "eval_count": 7,
+          "total_duration": 941423800,
+          "load_duration": 104137500
+        }
+      ]
+    },
+    {
+      "temperature": 0.8,
+      "answer": "Mystic Sweet Delights",
+      "actual_ollama_counts": [
+        {
+          "endpoint": "/api/chat",
+          "model": "llama3.2:3b",
+          "prompt_eval_count": 33,
+          "eval_count": 7,
+          "total_duration": 668646200,
+          "load_duration": 6304700
+        }
+      ]
+    },
+    {
+      "temperature": 0.8,
+      "answer": "\"Moonlit Sweet Delights\"",
+      "actual_ollama_counts": [
+        {
+          "endpoint": "/api/chat",
+          "model": "llama3.2:3b",
+          "prompt_eval_count": 33,
+          "eval_count": 8,
+          "total_duration": 833790000,
+          "load_duration": 24303000
+        }
+      ]
+    }
+  ],
+  "embedding_results": {
+    "texts": [
+      "Annual leave allowance",
+      "How much vacation do I receive?",
+      "A bicycle has two wheels."
+    ],
+    "dimensions": 768,
+    "cosine_similarity": [
+      [
+        0.9999999999999997,
+        0.5058624644148784,
+        0.3219864772329595
+      ],
+      [
+        0.5058624644148784,
+        0.9999999999999998,
+        0.3587029852033173
+      ],
+      [
+        0.3219864772329595,
+        0.3587029852033173,
+        0.9999999999999999
+      ]
+    ]
+  },
+  "sampling_illustration": {
+    "illustrative_logits": [
+      3.0,
+      2.0,
+      1.0,
+      0.0
+    ],
+    "temperature_probabilities": {
+      "0.2": {
+        "cat": 0.9932620550481802,
+        "dog": 0.00669254708311735,
+        "bird": 4.509402753492875e-05,
+        "car": 3.0384116750565056e-07
+      },
+      "1.0": {
+        "cat": 0.6439142598879724,
+        "dog": 0.23688281808991013,
+        "bird": 0.08714431874203257,
+        "car": 0.03205860328008499
+      },
+      "2.0": {
+        "cat": 0.45505423392341127,
+        "dog": 0.27600434470659363,
+        "bird": 0.16740509727844333,
+        "car": 0.1015363240915518
+      }
+    },
+    "greedy": "cat",
+    "note": "Invented four-token distribution, not model output. top-k keeps k candidates; top-p keeps a probability prefix."
+  },
+  "cost_exercise": {
+    "as_of": "2026-11-05",
+    "currency": "USD",
+    "input_tokens": 2000,
+    "output_tokens": 500,
+    "input_rate_per_million": 1,
+    "output_rate_per_million": 4,
+    "cost_per_call": 0.004,
+    "cost_for_1000_calls": 4.0,
+    "rates_are_hypothetical_not_vendor_prices": true,
+    "local_inference_note": "No hosted token fee for these local calls; hardware/electricity/time not measured."
+  },
+  "completed_at_utc": "2026-11-05T13:26:36.324550+00:00",
+  "execution_method": "Inline Python called unchanged course.labs.foundations.live for temperature/embeddings and sampling/cost helpers. The documented CLI commands reproduce the same helper tasks; sampling and cost CLI commands were also executed successfully.",
+  "worktree_note": "Source revision is the starting HEAD, with pre-existing uncommitted Week 9 changes. Individual helper hashes and the starting-working-tree comparison describe the actual experiment source. No pre-existing Week 9 changes belong to the Week 01 commit.",
+  "verification": {
+    "verified_at_utc": "2026-11-05T13:31:12.839446+00:00",
+    "method": "Executed Python assertions over captured results, source hashes, Markdown link targets and scoped secret patterns; separate documentation self-review; git diff --check. No new test source or application code.",
+    "checks": {
+      "chat": "PASS: four responses, 132 input and 29 output tokens; unique counts 1/2 and 2/2",
+      "embeddings": "PASS: 768 dimensions; finite 3-by-3 symmetric cosine matrix with unit diagonal; related pair exceeds unrelated pair",
+      "sampling": "PASS: all three illustrative distributions sum to one",
+      "cost": "PASS: 0.004 USD per hypothetical call; 4 USD per 1000; 0.000248 USD for measured chat counts at example rates",
+      "local_links": "PASS: zero missing local Markdown link targets in eight changed documentation files",
+      "secret_patterns": "PASS: no PAT, common API-key or private-key marker in scoped files; pattern scan is not a guarantee",
+      "whitespace": "PASS: git diff --check",
+      "source_preservation": "PASS: 195 pre-existing files outside the eight edited documents retain identical SHA-256 hashes"
+    },
+    "source_preservation": {
+      "baseline_files": 203,
+      "unchanged_files": 195,
+      "allowed_changed_files": [
+        "README.md",
+        "docs/README.md",
+        "docs/architecture/migration-roadmap.md",
+        "docs/architecture/traceability.md",
+        "docs/demos/README.md",
+        "docs/demos/week-01-demo.md",
+        "requirements/README.md",
+        "requirements/week-01.md"
+      ],
+      "fingerprint_algorithm": "SHA256 of UTF-8 JSON mapping relative paths to SHA256 hex, sort_keys=True, separators=(comma,colon)",
+      "before_sha256": "e0651921a5224d543fb08253a56909e8e87fbf30b22d52ccf226599d75fe80a8",
+      "after_sha256": "e0651921a5224d543fb08253a56909e8e87fbf30b22d52ccf226599d75fe80a8"
+    },
+    "review": {
+      "type": "separate self-review",
+      "scope": "Week 01 documentation/evidence only",
+      "new_critical_or_high_findings": 0,
+      "residual_risks": "Existing AUD-01 through AUD-05 remain production blockers; learner explanation and mentor sign-off pending.",
+      "decision": "Accept scoped documentation/evidence; not production or learner certification"
+    },
+    "regression_scope": "Runtime APIs, HTML screens, CLI helpers, tests, stored fixtures and dependencies unchanged by this increment. Full pytest/API/UI/database regression suite not rerun; source-preservation checks used for documentation-only scope."
+  }
+}

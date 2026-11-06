@@ -1,0 +1,31 @@
+{
+  "info": {
+    "name": "Week 9 MCP host demo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Host HTTP routes. Raw MCP initialize/list/call is captured separately by course.week9_demo over stdio. Claims are fictional. Start run_week9.ps1 -Serve."
+  },
+  "variable": [{"key": "base_url", "value": "http://127.0.0.1:8003"}],
+  "item": [
+    {
+      "name": "1. Discover tools from MCP servers",
+      "request": {"method": "GET", "url": "{{base_url}}/mcp/tools"},
+      "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+        "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+        "pm.test('Counts match actual tools/list', () => { const r = pm.response.json(); const n = r.tools_list_responses.reduce((sum, page) => sum + page.response.tools.length, 0); pm.expect(r.count).to.equal(n); pm.expect(r.names.length).to.equal(n); });"
+      ]}}]
+    },
+    {
+      "name": "2. Ask claims status through discovered tools",
+      "request": {
+        "method": "POST", "url": "{{base_url}}/mcp/agent/run",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"task\":\"What is the current status of claim CLM-2024-88120?\",\"budget\":{\"max_steps\":4,\"max_seconds\":600}}"}
+      },
+      "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+        "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+        "pm.test('Claim tool used successfully', () => pm.expect(pm.response.json().run.steps.some(s => s.tool === 'claims__get_claim_status' && s.ok)).to.equal(true));",
+        "pm.test('Grounded response', () => { const r = pm.response.json().run; pm.expect(r.abstained).to.equal(false); pm.expect(r.validation_issues).to.eql([]); });"
+      ]}}]
+    }
+  ]
+}

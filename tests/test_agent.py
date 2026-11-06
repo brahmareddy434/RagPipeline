@@ -4,15 +4,15 @@ import asyncio
 
 import pytest
 
-from app.agent import PolicyAgent, decision_schema
-from app.agent_tools import Observation, ToolFailure, ToolRegistry, as_evidence
-from app.answer_quality import ABSTENTION
-from app.memory import AgentStepRecord, Scratchpad, VectorMemory
-from app.models import AgentBudget, GroundedAnswer, SearchResult
-from app.prompts import PromptBuilder
-from app.tools import Calculator
-from app.vector_store import VectorStore
-from app.workflow import FixedWorkflow
+from app.agents.loop import PolicyAgent, decision_schema
+from app.agents.tools import Observation, ToolFailure, ToolRegistry, as_evidence
+from app.rag.grounding import ABSTENTION
+from app.agents.memory import AgentStepRecord, Scratchpad, VectorMemory
+from app.schemas import AgentBudget, GroundedAnswer, SearchResult
+from app.rag.prompts import PromptBuilder
+from app.services.tools import Calculator
+from app.repositories.vector_store import VectorStore
+from app.agents.workflow import FixedWorkflow
 
 EMPLOYEES = {"EMP-1001": {"employee_id": "EMP-1001", "name": "Asha Rao", "reporting_manager": "Devan Pillai",
                           "project_code": "ORCHID-77", "jurisdiction": "IN", "hire_date": "2022-03-14",
@@ -348,7 +348,7 @@ def test_the_three_tools_do_not_overlap_in_what_they_claim_to_do():
 
 
 def test_cost_budget_is_a_real_ceiling_not_a_constant():
-    from app.models import AgentBudget, usd_cost
+    from app.schemas import AgentBudget, usd_cost
     budget = AgentBudget()
     assert budget.max_cost_usd > 0
     assert usd_cost(1_000_000, 0) == pytest.approx(0.20)
@@ -360,7 +360,7 @@ async def test_cost_budget_stops_the_run():
     """A run that blows the cost ceiling must stop, not merely record the number."""
     class CostlyOllama(FakeOllama):
         async def structured(self, messages, schema, retries=2, temperature=0):
-            from app.ollama_client import call_metrics
+            from app.infrastructure.ollama import call_metrics
             metrics = call_metrics.get()
             if metrics is not None:
                 metrics.append({"prompt_eval_count": 1000, "eval_count": 1000})

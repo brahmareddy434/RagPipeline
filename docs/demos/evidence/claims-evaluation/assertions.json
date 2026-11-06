@@ -1,0 +1,394 @@
+{
+  "provenance": "30 synthetic claims fixtures; two required real regression cases pending",
+  "deterministic_criteria": 4,
+  "judge_criteria": 1,
+  "modes": {
+    "valid": {
+      "passed": 5,
+      "total": 5
+    },
+    "invalid_id": {
+      "passed": 0,
+      "total": 5
+    },
+    "invalid_date": {
+      "passed": 0,
+      "total": 5
+    },
+    "invalid_deductible": {
+      "passed": 0,
+      "total": 5
+    },
+    "missing_clause": {
+      "passed": 0,
+      "total": 5
+    },
+    "coverage_overclaim": {
+      "passed": 5,
+      "total": 5
+    }
+  },
+  "cases": [
+    {
+      "id": "E01",
+      "mode": "valid",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": true,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E02",
+      "mode": "invalid_id",
+      "assertions": {
+        "claim_id_format": false,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E03",
+      "mode": "invalid_date",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": false,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E04",
+      "mode": "invalid_deductible",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": false,
+        "denial_clause": true
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E05",
+      "mode": "missing_clause",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": false
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E06",
+      "mode": "coverage_overclaim",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": true,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E07",
+      "mode": "valid",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": true,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E08",
+      "mode": "invalid_id",
+      "assertions": {
+        "claim_id_format": false,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E09",
+      "mode": "invalid_date",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": false,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E10",
+      "mode": "invalid_deductible",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": false,
+        "denial_clause": true
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E11",
+      "mode": "missing_clause",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": false
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E12",
+      "mode": "coverage_overclaim",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": true,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E13",
+      "mode": "valid",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": true,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E14",
+      "mode": "invalid_id",
+      "assertions": {
+        "claim_id_format": false,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E15",
+      "mode": "invalid_date",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": false,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E16",
+      "mode": "invalid_deductible",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": false,
+        "denial_clause": true
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E17",
+      "mode": "missing_clause",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": false
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E18",
+      "mode": "coverage_overclaim",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": true,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E19",
+      "mode": "valid",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": true,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E20",
+      "mode": "invalid_id",
+      "assertions": {
+        "claim_id_format": false,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E21",
+      "mode": "invalid_date",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": false,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E22",
+      "mode": "invalid_deductible",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": false,
+        "denial_clause": true
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E23",
+      "mode": "missing_clause",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": false
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E24",
+      "mode": "coverage_overclaim",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": true,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E25",
+      "mode": "valid",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": true,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E26",
+      "mode": "invalid_id",
+      "assertions": {
+        "claim_id_format": false,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E27",
+      "mode": "invalid_date",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": false,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E28",
+      "mode": "invalid_deductible",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": false,
+        "denial_clause": true
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E29",
+      "mode": "missing_clause",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": false
+      },
+      "passed": false,
+      "judge": "pending blind human labels"
+    },
+    {
+      "id": "E30",
+      "mode": "coverage_overclaim",
+      "assertions": {
+        "claim_id_format": true,
+        "date_of_loss": true,
+        "numeric_deductible": true,
+        "denial_clause": true
+      },
+      "passed": true,
+      "judge": "pending blind human labels"
+    }
+  ],
+  "notice": "Assertion pass is not semantic correctness. Coverage-overclaim cases require the separate judge/human criterion."
+}

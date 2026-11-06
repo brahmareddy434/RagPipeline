@@ -11,12 +11,12 @@ from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 import httpx
-from app.config import get_settings
-from app.dependencies import Container
-from app.models import GroundedAnswer, RetrievalOptions
-from app.answer_quality import ABSTENTION, validate_grounded_answer
-from app.prompts import PromptBuilder
-from app.ollama_client import call_metrics
+from app.config.settings import get_settings
+from app.bootstrap import Container
+from app.schemas import GroundedAnswer, RetrievalOptions
+from app.rag.grounding import ABSTENTION, validate_grounded_answer
+from app.rag.prompts import PromptBuilder
+from app.infrastructure.ollama import call_metrics
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"course"/"results"

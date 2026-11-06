@@ -4,7 +4,7 @@ import asyncio
 import json
 import os
 from pydantic import BaseModel
-from app.config import get_settings
+from app.config.settings import get_settings
 
 
 class Person(BaseModel):
@@ -22,7 +22,7 @@ def instructor_demo():
 
 
 def cross_encoder_demo():
-    from app.retrieval import cross_encoder
+    from app.rag.retrieval import cross_encoder
     s=get_settings()
     candidates=["Employees receive 20 days of annual leave.","Bicycles have two wheels."]
     scores=cross_encoder(s.reranker_model).predict([("What is the vacation allowance?",c) for c in candidates])

@@ -1,0 +1,17 @@
+{
+  "provenance": "Assistant-authored fictional training questions, 2026-11-05; not authentic adjuster questions.",
+  "timestamp": "2026-11-05T15:00:07.041081+00:00",
+  "model": "llama3.2:3b",
+  "embedding_model": "nomic-embed-text:latest",
+  "python": "3.11.9",
+  "platform": "Windows-10-10.0.26300-SP0",
+  "corpus_sha256": "984b7f6964de3a5e6923fd6c38088d39b5298d5e32545fea8a06630c77e83604",
+  "questions_sha256": "ec3ef83a983fa7caf2c1f6520bf1b56155dcbfc08f0955e40278b7e77efa1ca3",
+  "source_sha256": {
+    "backend/app/rag/retrieval.py": "9554596ee3d4759b4f430ecbd1138a9403c3373b2bd74fcbfa53697559518d2a",
+    "backend/app/rag/chunking.py": "0beae8c3159403eceaf446058b5f5527bcf0d4c4cc580d8356f64b230365c4eb",
+    "course/claims_retrieval.py": "664a6e8679d93db6cbe2564d4e7eadeda8a8346db379455246d64c8f0ff9d4be"
+  },
+  "cache": "Document embeddings precomputed; all query embeddings warmed before each arm; sequential single runner.",
+  "generation_labels": "Retrieval-only R/missing labels; G requires inspecting an actual generated answer."
+}

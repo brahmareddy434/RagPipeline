@@ -1,4 +1,4 @@
-from app.chunker import TextChunker
+from app.rag.chunking import TextChunker
 
 
 def test_chunker_keeps_overlap_and_source():

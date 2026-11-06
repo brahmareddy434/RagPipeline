@@ -1,0 +1,15 @@
+{
+  "provenance":"Assistant-authored fictional claims, edition 2026-01. No real claimant data.",
+  "claims":[
+    {"claim_id":"CLM-2026-10001","status":"awaiting_documents","date_of_loss":"2026-01-02","policy_type":"motor","deductible":500,"notes":["Damage photographs received; repair estimate is missing. Consult DOCS-MOTOR-09."],"required_clauses":["DOCS-MOTOR-09"]},
+    {"claim_id":"CLM-2026-10002","status":"under_review","date_of_loss":"2026-01-03","policy_type":"motor","deductible":500,"notes":["Repair estimate received. Engineer reports gradual corrosion and wear; consult BASE-MOTOR-05 and EX-WEAR-01 before recommendation."],"required_clauses":["BASE-MOTOR-05","EX-WEAR-01"]},
+    {"claim_id":"CLM-2026-10003","status":"under_review","date_of_loss":"2026-01-04","policy_type":"home","deductible":750,"notes":["Photographs show external floodwater entering the home. Consult BASE-HOME-06 and EX-FLOOD-02 before recommendation."],"required_clauses":["BASE-HOME-06","EX-FLOOD-02"]},
+    {"claim_id":"CLM-2026-10004","status":"under_review","date_of_loss":"2026-01-05","policy_type":"motor","deductible":500,"notes":["Inspection suggests damage was pre-existing before inception. Compare dated photographs and consult BASE-MOTOR-05 and EX-PRE-12."],"required_clauses":["BASE-MOTOR-05","EX-PRE-12"]},
+    {"claim_id":"CLM-2026-10005","status":"received","date_of_loss":"2026-01-06","policy_type":"motor","deductible":500,"notes":["Accidental motor damage reported today. Review reporting period NOTICE-MOTOR-07."],"required_clauses":["NOTICE-MOTOR-07"]},
+    {"claim_id":"CLM-2026-10006","status":"received","date_of_loss":"2026-01-07","policy_type":"home","deductible":750,"notes":["Sudden internal pipe leak reported. Request plumber report under NOTICE-HOME-08."],"required_clauses":["NOTICE-HOME-08"]},
+    {"claim_id":"CLM-2026-10007","status":"under_review","date_of_loss":"2026-01-08","policy_type":"motor","deductible":100,"notes":["Glass-only damage. Schedule lists END-GLASS-04; confirm its effective date."],"required_clauses":["END-GLASS-04"]},
+    {"claim_id":"CLM-2026-10008","status":"closed","date_of_loss":"2026-01-09","policy_type":"home","deductible":750,"notes":["Administrative file closed after duplicate report. No coverage approval recorded. Consult STATUS-10."],"required_clauses":["STATUS-10"]},
+    {"claim_id":"CLM-2026-10009","status":"under_review","date_of_loss":"2026-01-10","policy_type":"motor","deductible":500,"notes":["Witness alleges deliberate damage; allegation is not proof. Consult BASE-MOTOR-05 and EX-DELIB-03 before recommendation."],"required_clauses":["BASE-MOTOR-05","EX-DELIB-03"]},
+    {"claim_id":"CLM-2026-10010","status":"awaiting_documents","date_of_loss":"2026-01-11","policy_type":"home","deductible":750,"notes":["Two schedules show different editions. Obtain wording effective on loss date under EDITION-11."],"required_clauses":["EDITION-11"]}
+  ]
+}

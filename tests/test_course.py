@@ -4,14 +4,14 @@ import httpx
 import pytest
 from docx import Document
 from fastapi.testclient import TestClient
-from app.models import Chunk, GroundedAnswer, RetrievalOptions
-from app.document_loader import DocumentLoader
-from app.retrieval import KeywordRetriever, HybridRetriever
-from app.tools import Calculator
-from app.ollama_client import OllamaClient, OllamaUnavailable
-from app.vector_store import VectorStore
-from app.chunker import TextChunker
-from app.config import Settings
+from app.schemas import Chunk, GroundedAnswer, RetrievalOptions
+from app.rag.loading import DocumentLoader
+from app.rag.retrieval import KeywordRetriever, HybridRetriever
+from app.services.tools import Calculator
+from app.infrastructure.ollama import OllamaClient, OllamaUnavailable
+from app.repositories.vector_store import VectorStore
+from app.rag.chunking import TextChunker
+from app.config.settings import Settings
 
 
 @pytest.mark.parametrize("expression",["1/0","2+","2**99999999","True+2","1e309","(-1)**0.5","abs(1)"])
@@ -114,7 +114,7 @@ async def test_ollama_connection_error_is_503_type():
 
 def test_api_validation_upload_source_and_trace(tmp_path,monkeypatch):
     import app.main as main
-    from app.dependencies import Container
+    from app.bootstrap import Container
     original=Container.build.__func__
     def build(cls,settings):
         c=original(cls,settings)
@@ -125,7 +125,7 @@ def test_api_validation_upload_source_and_trace(tmp_path,monkeypatch):
         return c
     monkeypatch.setattr(main,"get_settings",lambda:Settings(chroma_path=tmp_path/"db",trace_log_path=tmp_path/"traces.jsonl",collection_name="api_test"))
     monkeypatch.setattr(Container,"build",classmethod(build))
-    with TestClient(main.app) as client:
+    with TestClient(main.app, client=("127.0.0.1", 50000)) as client:
         assert client.post("/ask",json={"question":"  "}).status_code == 422
         assert client.post("/documents",files={"file":("x.exe",b"x")}).status_code == 415
         assert client.post("/documents",files={"file":("x.txt",b"")}).status_code == 400

@@ -1,0 +1,9 @@
+Scope: Week 9 server-one baseline -> same agent with server two.
+This is NOT a claim of zero Week 8 -> Week 9 integration changes.
+Reproduce from evaluation/week9/submission (snapshots captured during the live experiment).
+$ git diff --no-index -- baseline/app/agent.py with_claims/app/agent.py
+(empty git diff; 0 changed lines)
+$ git diff --no-index -- baseline/app/week9.py with_claims/app/week9.py
+(empty git diff; 0 changed lines)
+$ git diff --no-index -- baseline/app/mcp_registry.py with_claims/app/mcp_registry.py
+(empty git diff; 0 changed lines)
