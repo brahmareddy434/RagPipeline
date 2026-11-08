@@ -1,6 +1,6 @@
 ﻿# Requirements -> implementation -> verification
 
-Status covers the supplied insurance Task D scope. On 2026-11-05 the user authorized Weeks 01-09 and the React frontend. This matrix distinguishes locally implemented work from human, real-data, peer and production acceptance inputs. A passing test suite does not replace those inputs.
+Status covers the supplied insurance Task D scope. On 2026-11-05 the user authorized Weeks 01-09 and React; on 2026-11-08 the user authorized Week 10 and the live Weeks 8–10 mentor demonstrations. This matrix distinguishes local implementation from human, real-data, peer, cohort and production inputs. A passing test suite does not replace those inputs.
 
 | Week | Local implementation and evidence | Remaining acceptance boundary |
 |---|---|---|
@@ -13,6 +13,7 @@ Status covers the supplied insurance Task D scope. On 2026-11-05 the user author
 | [W07](../../requirements/week-07.md#15-acceptance-criteria) | Claims agent/fixed workflow, typed read-only tools, hard provider budgets, race runner and React comparison. | Final live local-model race results and verdict limited to fictional cases. |
 | [W08](../../requirements/week-08.md#15-acceptance-criteria) | Expected paths, fixture ID validation, outcome/trajectory metrics and one measured prompt mitigation. | Baseline/mitigation local-model runs; no general robustness claim. |
 | [W09](../../requirements/week-09.md#15-acceptance-criteria) | Claims MCP server/config, host discovery, React inventory/traces; existing wire/gateway evidence. | Actual claims platform, human annotation, peer call and production isolation. |
+| [W10](../../requirements/week-10.md#15-acceptance-criteria) | Typed manager/two-specialist implementation, shared usage budget, failure fixture, paired runner and React live page; provisional live race evidence and [mentor guide](../demos/week-10-demo.md). | Exact Week-6 Task D cohort and judge remain missing, so W10-AC01 is blocked; provisional Week-7/8 run is not a substitute for rubric completion. |
 
 Audit findings AUD-01 through AUD-12 remain the release-risk index. Real identity, real claimant data, authentic human review, peer call and production deployment are not represented as complete.
 
@@ -23,3 +24,5 @@ Audit findings AUD-01 through AUD-12 remain the release-risk index. Real identit
 When a week is requested, map each Wxx-ACnn to its actual implementation and verification. Planned Wxx-Vnn checks are not executed tests. Dated commands, manifests and evidence are linked from weekly requirements and mentor demos. See [execution report](completion-report.md) for current test results and run limitations.
 
 Week 01 execution (2026-11-05): assistant-run material and live observations recorded; learner explanation and mentor acceptance remain pending. Exact commands and outcomes are in requirements/week-01.md and its demo/evidence.
+
+Week 10 execution (2026-11-08): live local-model race completed on unchanged fictional Week-7/8 C01–C10 inputs with the same Week-8 deterministic assessor. Single/team outcome proxy pass rates were 0%/90%, p50 48.2s/18.9s, p99 70.1s/31.1s, total tokens 54,284/6,780, and estimated mean cost/claim $0.001239/$0.000207. Token multiplier 0.1x; largest measured team hand-off `manager->coverage_worker`, 53.2% of team tokens. The injected in-process 500 produced an abstention with no retry or coverage assertion. These are dated, actual local-model observations, not invoice cost or the required Week-6 claims comparison. The exact Week-6 Task D cohort and judge remain missing; W10-AC01 is blocked. A live sample response was grounded and non-abstaining; judge scoring is represented by the paired race, not inferred separately for that sample.

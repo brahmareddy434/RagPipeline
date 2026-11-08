@@ -1,0 +1,43 @@
+case_id | claim_id | handoff | prompt_tokens | completion_tokens | total_tokens | status | usage_status
+C01 | CLM-2026-10001 | manager_planning | 104 | 28 | 132 | completed | provider
+C01 | CLM-2026-10001 | manager->coverage_worker | 237 | 89 | 326 | completed | provider
+C01 | CLM-2026-10001 | manager->notes_worker | 130 | 49 | 179 | completed | provider
+C01 | CLM-2026-10001 | manager_synthesis | 0 | 0 | 0 | deterministic verified-quote synthesis | no model call
+C02 | CLM-2026-10002 | manager_planning | 104 | 49 | 153 | completed | provider
+C02 | CLM-2026-10002 | manager->coverage_worker | 315 | 130 | 445 | completed | provider
+C02 | CLM-2026-10002 | manager->notes_worker | 151 | 52 | 203 | completed | provider
+C02 | CLM-2026-10002 | manager_synthesis | 0 | 0 | 0 | deterministic verified-quote synthesis | no model call
+C03 | CLM-2026-10003 | manager_planning | 104 | 25 | 129 | completed | provider
+C03 | CLM-2026-10003 | manager->coverage_worker | 292 | 110 | 402 | completed | provider
+C03 | CLM-2026-10003 | manager->notes_worker | 138 | 53 | 191 | completed | provider
+C03 | CLM-2026-10003 | manager_synthesis | 0 | 0 | 0 | deterministic verified-quote synthesis | no model call
+C04 | CLM-2026-10004 | manager_planning | 104 | 28 | 132 | completed | provider
+C04 | CLM-2026-10004 | manager->coverage_worker | 294 | 80 | 374 | completed | provider
+C04 | CLM-2026-10004 | manager->notes_worker | 140 | 46 | 186 | completed | provider
+C04 | CLM-2026-10004 | manager_synthesis | 0 | 0 | 0 | deterministic verified-quote synthesis | no model call
+C05 | CLM-2026-10005 | manager_planning | 104 | 25 | 129 | completed | provider
+C05 | CLM-2026-10005 | manager->coverage_worker | 231 | 84 | 315 | completed | provider
+C05 | CLM-2026-10005 | manager->notes_worker | 129 | 37 | 166 | completed | provider
+C05 | CLM-2026-10005 | manager_synthesis | 0 | 0 | 0 | deterministic verified-quote synthesis | no model call
+C06 | CLM-2026-10006 | manager_planning | 104 | 26 | 130 | completed | provider
+C06 | CLM-2026-10006 | manager->notes_worker | 130 | 38 | 168 | completed | provider
+C06 | CLM-2026-10006 | manager->coverage_worker | 229 | 63 | 292 | completed | provider
+C06 | CLM-2026-10006 | manager_synthesis | 0 | 0 | 0 | deterministic verified-quote synthesis | no model call
+C07 | CLM-2026-10007 | manager_planning | 104 | 28 | 132 | completed | provider
+C07 | CLM-2026-10007 | manager->coverage_worker | 234 | 84 | 318 | completed | provider
+C07 | CLM-2026-10007 | manager->notes_worker | 131 | 61 | 192 | completed | provider
+C07 | CLM-2026-10007 | manager_synthesis | 0 | 0 | 0 | deterministic verified-quote synthesis | no model call
+C08 | CLM-2026-10008 | manager_planning | 104 | 28 | 132 | completed | provider
+C08 | CLM-2026-10008 | manager->coverage_worker | 233 | 88 | 321 | completed | provider
+C08 | CLM-2026-10008 | manager->notes_worker | 131 | 34 | 165 | completed | provider
+C08 | CLM-2026-10008 | manager_synthesis | 0 | 0 | 0 | deterministic verified-quote synthesis | no model call
+C09 | CLM-2026-10009 | manager_planning | 104 | 28 | 132 | completed | provider
+C09 | CLM-2026-10009 | manager->coverage_worker | 294 | 224 | 518 | completed | provider
+C09 | CLM-2026-10009 | manager->notes_worker | 139 | 56 | 195 | completed | provider
+C09 | CLM-2026-10009 | manager_synthesis | 0 | 0 | 0 | deterministic verified-quote synthesis | no model call
+C10 | CLM-2026-10010 | manager_planning | 104 | 28 | 132 | completed | provider
+C10 | CLM-2026-10010 | manager->coverage_worker | 238 | 58 | 296 | completed | provider
+C10 | CLM-2026-10010 | manager->notes_worker | 131 | 64 | 195 | completed | provider
+C10 | CLM-2026-10010 | manager_synthesis | 0 | 0 | 0 | deterministic verified-quote synthesis | no model call
+
+Context re-send multiplier: 0.1x (team/single tokens). Dominant hand-off: manager->coverage_worker, 3607 tokens, 53.2% of team tokens.

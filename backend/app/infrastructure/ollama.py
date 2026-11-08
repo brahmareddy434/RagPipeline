@@ -10,6 +10,7 @@ from app.infrastructure.budgets import active_budget
 
 T = TypeVar("T", bound=BaseModel)
 call_metrics: ContextVar[list | None] = ContextVar("call_metrics", default=None)
+provider_call_group: ContextVar[str] = ContextVar("provider_call_group", default="unattributed")
 
 
 class OllamaUnavailable(RuntimeError):
@@ -33,9 +34,9 @@ class OllamaClient:
 
     async def _request(self, path, payload=None):
         guard=active_budget.get()
-        reserved_prompt=reserved_output=0
+        reserved_prompt=reserved_output=0;reservation=None;settled=False
         if guard and payload is not None:
-            payload,reserved_prompt,reserved_output=guard.admit(path,payload)
+            payload,reserved_prompt,reserved_output,reservation=guard.admit(path,payload)
         try:
             async with self._semaphore:
                 response = await (self.http.get(self.base_url + path) if payload is None else self.http.post(self.base_url + path, json=payload))
@@ -43,24 +44,40 @@ class OllamaClient:
             data = response.json()
             if not isinstance(data, dict):
                 raise ValueError("Expected JSON object")
+            actual_prompt=data.get("prompt_eval_count")
+            actual_output=data.get("eval_count")
+            settled_prompt=actual_prompt if isinstance(actual_prompt,int) else reserved_prompt
+            settled_output=actual_output if isinstance(actual_output,int) else reserved_output
+            if guard:guard.settle(reservation,settled_prompt,settled_output)
+            settled=True
             metrics = call_metrics.get()
             if metrics is not None:
                 metrics.append({"endpoint": path, "model": (payload or {}).get("model"),
                                 "request": payload, "response": data,
-                                **{k: data.get(k) for k in ("prompt_eval_count", "eval_count", "total_duration", "load_duration")}})
+                                "call_group":provider_call_group.get(),
+                                "usage_status":"provider" if isinstance(actual_prompt,int) and isinstance(actual_output,int) else "reserved_upper_bound",
+                                "prompt_eval_count":settled_prompt,"eval_count":settled_output,
+                                **{k: data.get(k) for k in ("total_duration", "load_duration")}})
             return data
         except asyncio.CancelledError:
+            if guard:guard.settle(reservation,reserved_prompt,reserved_output)
+            settled=True
             metrics=call_metrics.get()
             if metrics is not None:
-                metrics.append({"endpoint":path,"status":"cancelled","usage_status":"reserved_upper_bound",
+                metrics.append({"endpoint":path,"status":"cancelled","call_group":provider_call_group.get(),"usage_status":"reserved_upper_bound",
                                 "prompt_eval_count":reserved_prompt,"eval_count":reserved_output})
             raise
         except (httpx.HTTPError, ValueError) as exc:
+            if guard:guard.settle(reservation,reserved_prompt,reserved_output)
+            settled=True
             metrics=call_metrics.get()
             if metrics is not None:
-                metrics.append({"endpoint":path,"status":"failed","usage_status":"reserved_upper_bound",
+                metrics.append({"endpoint":path,"status":"failed","call_group":provider_call_group.get(),"usage_status":"reserved_upper_bound",
                                 "prompt_eval_count":reserved_prompt,"eval_count":reserved_output})
             raise OllamaUnavailable(f"Ollama request failed at {path}: {type(exc).__name__}. Check service and model availability.") from exc
+        finally:
+            if guard and reservation is not None and not settled:
+                guard.settle(reservation,reserved_prompt,reserved_output)
 
     async def health(self):
         return await self._request("/api/tags")

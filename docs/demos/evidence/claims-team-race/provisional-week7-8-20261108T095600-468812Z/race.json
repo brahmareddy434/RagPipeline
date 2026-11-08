@@ -1,0 +1,116 @@
+{
+  "generated_at_utc": "2026-11-08T09:56:00.468812+00:00",
+  "model": "llama3.2:3b",
+  "budget": {
+    "max_steps": 6,
+    "max_seconds": 300.0,
+    "max_tokens": 64000,
+    "max_cost_usd": 0.08,
+    "max_tool_errors": 3,
+    "max_repeats": 2,
+    "scratchpad_chars": 6000
+  },
+  "cost_basis": "Reference estimate from app.schemas.usd_cost; not a provider invoice.",
+  "manifest": {
+    "case_count": 10,
+    "case_ids": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05",
+      "C06",
+      "C07",
+      "C08",
+      "C09",
+      "C10"
+    ],
+    "claim_ids": [
+      "CLM-2026-10001",
+      "CLM-2026-10002",
+      "CLM-2026-10003",
+      "CLM-2026-10004",
+      "CLM-2026-10005",
+      "CLM-2026-10006",
+      "CLM-2026-10007",
+      "CLM-2026-10008",
+      "CLM-2026-10009",
+      "CLM-2026-10010"
+    ],
+    "cohort_sha256": "8b5a6e817c03b4ae09fb192cbfd1cab144fcb84a0ecaac7202af75229b1895e8",
+    "fixture_sha256": "df721dba8fb3e2c80f9d2fd5328ab2972db6babe8aba882095a64cd86cd7121a",
+    "judge_sha256": "bb41210b9a7d7c172cf404ed65c0024d33a0cd6acb36e0fcb7684fc0124752a3",
+    "exact_week6_cohort": false,
+    "cohort_provenance": "Existing ten fictional Week-7/8 claims and predeclared trajectory cases; provisional Week 10 substitute, not the missing Week-6 claims cohort.",
+    "judge": "course.claims_trajectories.assess (unchanged Week-8 deterministic outcome and trajectory checks)"
+  },
+  "same_ten_case_ids": [
+    "C01",
+    "C02",
+    "C03",
+    "C04",
+    "C05",
+    "C06",
+    "C07",
+    "C08",
+    "C09",
+    "C10"
+  ],
+  "execution_order": "Alternated single-first/team-first by paired case to reduce fixed order bias.",
+  "judge": "course.claims_trajectories.assess",
+  "single": {
+    "cases": 10,
+    "outcome_pass_rate": 0.0,
+    "trajectory_pass_rate": 0.0,
+    "outcome_minus_trajectory_gap": 0.0,
+    "p50_latency_ms": 48157.03,
+    "total_tokens": 54284,
+    "mean_cost_per_claim_usd": 0.00123876,
+    "cost_p50_usd": 0.0010829,
+    "cost_max_usd": 0.0016252,
+    "tool_choice_accuracy": 1.0,
+    "argument_validity": 0.69,
+    "step_efficiency": 0.935,
+    "modes": {
+      "invalid_arguments": 10
+    },
+    "right_answer_wrong_path": [],
+    "p99_latency_ms": 70102.08,
+    "cost_per_claim_usd": 0.00123876
+  },
+  "team": {
+    "cases": 10,
+    "outcome_pass_rate": 0.9,
+    "trajectory_pass_rate": 1.0,
+    "outcome_minus_trajectory_gap": -0.1,
+    "p50_latency_ms": 18870.760000000002,
+    "total_tokens": 6780,
+    "mean_cost_per_claim_usd": 0.00020732,
+    "cost_p50_usd": 0.00019569999999999999,
+    "cost_max_usd": 0.0002922,
+    "tool_choice_accuracy": 1.0,
+    "argument_validity": 1.0,
+    "step_efficiency": 1,
+    "modes": {
+      "pass": 9,
+      "abstention": 1
+    },
+    "right_answer_wrong_path": [],
+    "p99_latency_ms": 31117.64,
+    "cost_per_claim_usd": 0.00020732
+  },
+  "context_resend_multiplier": 0.1,
+  "dominant_handoff": "manager->coverage_worker",
+  "dominant_handoff_tokens": 3607,
+  "dominant_handoff_share_percent": 53.2,
+  "failure_case_id": "C01",
+  "failure_stop_reason": "worker_error",
+  "failure_answer": "Could not complete the exclusions review (HTTP 500). Claim coverage remains undetermined; adjuster review is required.",
+  "failure_record": [
+    {
+      "worker": "coverage/exclusions",
+      "status_code": 500,
+      "injection": "in-process Week 10 fault fixture"
+    }
+  ]
+}

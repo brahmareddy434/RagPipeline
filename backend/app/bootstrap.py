@@ -12,6 +12,7 @@ from app.services.tools import Calculator, OrderRepository, ToolService
 from app.repositories.vector_store import VectorStore
 from app.agents.workflow import FixedWorkflow
 from app.agents.claims import ClaimsTools, ClaimsWorkflow, claims_agent
+from app.agents.claims_team import ClaimsTeam
 from app.repositories.claims import FictionalClaims
 from app.services.mentor_demo import MentorDemo
 
@@ -31,6 +32,7 @@ class Container:
     claims_registry: ClaimsTools
     claims_agent: PolicyAgent
     claims_workflow: ClaimsWorkflow
+    claims_team: ClaimsTeam
     mentor_demo: MentorDemo
 
     @classmethod
@@ -58,4 +60,5 @@ class Container:
             workflow=FixedWorkflow(retriever, ollama, prompts, registry, settings.workflow_search_k),
             memory=memory, registry=registry, claims_registry=claims_registry,
             claims_agent=claims_agent(ollama,claims_registry), claims_workflow=ClaimsWorkflow(ollama,claims_registry),
+            claims_team=ClaimsTeam(ollama,claims_registry),
             mentor_demo=MentorDemo(ollama,claims_registry.repository))
