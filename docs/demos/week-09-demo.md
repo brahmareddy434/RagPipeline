@@ -1,80 +1,78 @@
-﻿# Week 9 MCP demo
+﻿# Week 9 mentor guide — give the host more tools through MCP
 
-**Purpose:** Show the app discovering tools from MCP servers. Add claims tools through configuration without changing the agent.
+**Purpose:** Show that the model host can discover claims tools from an MCP server added through configuration.
 
-**Start with:** “The host runs the model and discovers tools from servers. I’ll show two policy tools, then add two claims tools through configuration.”
+- **Open the app:** `http://127.0.0.1:5173/#/demo/week9`
+- **MCP inventory:** `http://127.0.0.1:5173/#/mcp`
 
-## Start the demo
+## Before Week 9
 
-Open three PowerShell terminals at the repository root. Use `.venv`, installed frontend packages, and local Ollama with `llama3.2:3b`.
+The host connected to the policy MCP server and discovered two tools: search policy documents and read a policy. That was enough for policy questions, but not for a question like “What is the status of claim CLM-2024-88120?” The host had no claims-status or adjuster-notes tool to call. Policy wording cannot tell us the current status of one claim.
 
-**Terminal 1 — API**
+## What we changed and why
 
-```powershell
-.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
-```
+We added a local fictional claims MCP server and connected it in the host configuration. The host now discovers two more tools for claim status and adjuster notes. The model still runs in the host; the MCP server returns data. In the recorded server-one-to-server-two comparison, the agent files were byte-identical. This shows configuration-based tool discovery, not a real insurer integration.
 
-Check `http://127.0.0.1:8000/docs`.
+## Main files to show
 
-**Terminal 2 — Frontend**
+The key Week 9 additions are the claims server, its config entry, protocol tests and saved evidence. The host/React files show how the wider app uses it.
 
-```powershell
-cd frontend
-npm run dev
-```
-
-**Terminal 3 — App and saved results**
-
-```powershell
-Start-Process "http://127.0.0.1:5173/#/mcp"
-notepad evaluation/week9/submission/tool_counts.json
-notepad evaluation/week9/submission/agent_diff.txt
-notepad evaluation/week9/submission/claim_query.json
-```
-
-In the app, choose **MCP tools**. If port 5173 is busy, use Vite's printed address.
-
-## Walkthrough
-
-### Typed-query demonstration
-
-Open `http://127.0.0.1:5173/#/demo/week9` (**Week 9 live demo**). Restart the API after updating backend code. Read the four on-screen stages: policy-only tools, missing claim-record access, adding claims server configuration, discovered claim lookups.
-
-1. Click **Discover before and after tools**. Show actual `tools/list` responses: two policy tools before, four tools after. Host-local `finish` is excluded.
-2. Ask **What is the current status of claim CLM-2024-88120?** and click **Run before and after**. The same prompt and host code run against the two configurations. Explain why the before arm lacks claim-status evidence; inspect what it actually says rather than assuming success or abstention.
-3. Expand **Tool trajectory** in the after result. Show the discovered `claims__get_claim_status` call, its server observation and the grounded answer. Explain that the model runs in the host. Each arm has a 180-second model-run budget; MCP setup occurs first.
-4. Week 9 uses the older `CLM-2024` MCP fixture; Week 8 uses the separate `CLM-2026` triage fixture. Use the page's example so identifiers match its tools.
-
-New contracts: `GET /api/v1/mcp/demo/tools?variant=before|after`, and `POST /api/v1/mcp/demo/run` with `{ "task": "What is the current status of claim CLM-2024-88120?", "variant": "after" }`. Responses contain real discovery or `run`, `variant`, `task`, and `trace_id`. The config selector in `services/mcp_host.py` accepts only the two fixed files. The model, fixtures, database and original submission snapshots are unchanged. `MentorDemo.tsx` displays fresh runs; the existing MCP page remains usable.
-
-### Original protocol evidence walkthrough
-
-1. Open `config/mcp.policy.json` and `config/mcp.claims.json`, then `evaluation/week9/submission/config_diff.txt`. Explain: “The second config adds the claims server.”
-2. Click **Discover tools** or open `tool_counts.json`. Show two tools before and four after: `policy__search_policy_documents`, `policy__read_policy`, `claims__get_claim_status`, `claims__get_adjuster_notes`. The host-only `finish` action is not counted.
-3. Open `agent_diff.txt`. Explain: “In this server-one-to-server-two comparison, the agent source did not change.”
-4. In the question box, run: “What is the current status of claim CLM-2024-88120?” Show `claims__get_claim_status` in the trace and open `claim_query.json`. The saved answer says “awaiting repair estimate.”
-5. Open `wire.json`. Explain simply: “The host asks for tools, then calls one. The model runs in the host, not in the MCP server.”
-6. Open `error_before_after.md`. The same invalid policy lookup gets a clearer error after the change. The saved model runs recovered a tool call, but both final answers abstained.
-
-## Files to show
-
-| Path | Purpose |
+| File | Status and reason |
 |---|---|
-| `config/mcp.policy.json`, `config/mcp.claims.json` | Policy setup and claims-server configuration. |
-| `mcp_servers/policy.py`, `mcp_servers/claims.py` | Local MCP servers with fictional data. |
-| `backend/app/services/mcp_host.py`, `frontend/src/features/mcp/Mcp.tsx` | Host tool calls and React discovery page. |
-| `evaluation/week9/submission/tool_counts.json`, `agent_diff.txt` | Before/after tools and agent source comparison. |
-| `evaluation/week9/submission/wire.json`, `claim_query.json` | Captured MCP messages and saved model run. |
-| `evaluation/week9/submission/error_before_after.md`, `risk_note.md` | Error recovery and five-line risk note. |
+| `mcp_servers/claims.py` | **Added:** exposes fictional claim status and adjuster-note tools. |
+| `config/mcp.claims.json` | **Added:** registers the claims server next to policy. |
+| `mcp_servers/policy.py`, `config/mcp.policy.json` | **Existing:** the before-state policy-only server. |
+| `backend/app/infrastructure/mcp/registry.py` | **Host support:** connects and discovers tool schemas. |
+| `backend/app/services/mcp_host.py` | **Host support:** lets the model choose discovered tools. |
+| `backend/app/controllers/mcp.py` | **Updated:** exposes discovery and bounded demo requests. |
+| `frontend/src/features/mcp/Mcp.tsx` | **UI:** displays inventory and MCP traces. |
+| `frontend/src/features/runs/MentorDemo.tsx` | **Added:** provides the typed Week 9 before/after flow. |
+| `tests/test_week9_mcp.py`, `tests/test_mentor_demo.py` | **Tests:** check local MCP and demo contracts. |
+| `evaluation/week9/submission/` | **Evidence:** saved wire, tool-list, config and model-run records. |
 
-## Limits and optional rerun
+## Start the frontend and backend
 
-The data is fictional; no real claims platform is connected. A personal explanation of the wire notes and a separate person's agent call are still needed. The gateway demo is local and does not prove production security.
+Use two PowerShell terminals at the repository root. The local MCP servers start as configured by the backend. This demo uses fictional records and needs local Ollama.
 
-To run again with Ollama, check `ollama list`. This writes timestamped files under `course/results/week9/`:
+**Terminal 1 — backend API**
 
 ```powershell
-.\.venv\Scripts\python.exe -m course.week9_demo --live --output course/results/week9
+.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-Validation already recorded: 199 backend tests, 5 frontend tests, production build, 5/5 browser journeys, and 6/6 local Postman requests passed. Postman cloud publishing was not run.
+Check `http://127.0.0.1:8000/docs`. The host process starts and connects to the configured MCP servers.
+
+**Terminal 2 — React frontend**
+
+```powershell
+Set-Location frontend
+$env:API_PROXY_TARGET = 'http://127.0.0.1:8000'
+npm run dev -- --host 127.0.0.1 --port 5173
+```
+
+## Show the mentor
+
+1. Open **Week 9 live demo** and read the Before / Issue / Change / After story.
+2. Click **Discover before and after tools**. Show two tools before and four after; expand the actual `tools/list` replies.
+3. Ask **What is the current status of claim CLM-2024-88120?** and click **Run before and after**.
+4. Expand each trace. In the after trace, show `claims__get_claim_status`, its returned observation and the cited answer.
+5. Open **MCP tools** to show the configured server inventory and host-run trace.
+6. For protocol proof, open `evaluation/week9/submission/wire.json` and point out initialize, tools/list and tools/call messages.
+
+The API routes are `GET /api/v1/mcp/demo/tools?variant=before|after` and `POST /api/v1/mcp/demo/run`. Example body:
+
+```json
+{"task":"What is the current status of claim CLM-2024-88120?","variant":"after"}
+```
+
+The after response includes a `run` with `answer`, `steps`, and citations, plus `task`, `variant` and `trace_id`. Compare what the live run actually says; model answers can vary.
+
+## Evidence and what it means
+
+`evaluation/week9/submission/tool_counts.json` records **2 → 4** discovered tools. `agent_diff.txt` records no agent-file change for the server-one-to-server-two comparison. `claim_query.json` records a live local-model answer: the claim is awaiting a repair estimate. `wire.json` stores the protocol exchange. `error_before_after.md` and `risk_note.md` preserve separate error and risk evidence. The current backend suite (including local MCP tests) has 218 passing tests; five frontend unit tests and the production build pass. See `docs/architecture/completion-report.md` for the full validation record.
+
+The claims MCP server is fictional and local. Saved wire notes need the learner's own explanation; no independent peer-agent call or real platform credentials/data are claimed. MCP gives a standard way for a host to discover and call tools; it does not guarantee a better answer by itself.
+
+## Simple talk track
+
+“Before Week 9 the host could read policy tools, but it could not look up this claim's status. I added a claims server in configuration. The host discovers two new tools and calls the status tool. The model stays in the host, while the server supplies the claim data. This is a local demo, not a connection to a real insurer.”

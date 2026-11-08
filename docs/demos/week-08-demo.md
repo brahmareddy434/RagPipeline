@@ -1,81 +1,79 @@
-﻿# Week 8 claims agent demo
+﻿# Week 8 mentor guide — check the answer and the path
 
-**Purpose:** Compare the agent's answer with the steps it used. Measure one prompt change on ten fictional claims.
+**Purpose:** Show how the claims agent behaved before Week 8, the one change made in Week 8, and what the saved evidence proves.
 
-**Start with:** “I tested ten fictional claims. Five answers passed after one prompt change, but none of the agent runs passed the full path check. I’ll show one example.”
+- **Open the app:** `http://127.0.0.1:5173/#/demo/week8`
+- **Benchmark screen:** `http://127.0.0.1:5173/#/benchmarks`
 
-## Start the demo
+## Before Week 8
 
-Open three PowerShell terminals at the repository root (the folder with `course`, `backend` and `frontend`). Use `.venv` and the installed frontend packages.
+The earlier claims agent could read claim records, adjuster notes and policy clauses. It chose tool names and arguments itself. In the ten-case baseline, it combined several possible statuses into one invalid filter on every case. The record lookup failed, so it often could not produce a useful answer. The baseline had 0/10 answer passes and 0/10 expected-path passes.
 
-**Terminal 1 — API**
+## What we changed and why
 
-```powershell
-.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
-```
+We measured the common failure first, then changed one prompt instruction: omit the optional status filter unless the question needs it; if needed, send one valid status. The model, ten claims, tools and budget stayed fixed. We added expected tool paths and checks so the final answer and the steps are scored separately. This tests whether the prompt fix addresses the observed problem without hiding regressions.
 
-Check `http://127.0.0.1:8000/docs`. If `app` cannot be imported, retry with `\.venv\Scripts\python.exe -m uvicorn app.main:app --app-dir backend --host 127.0.0.1 --port 8000`.
+## Main files to show
 
-**Terminal 2 — Frontend**
+Added for this work are marked **new**; existing files changed for the week are marked **updated**; reused files are marked **reuse**.
 
-```powershell
-cd frontend
-npm run dev
-```
-
-**Terminal 3 — Results**
-
-```powershell
-Start-Process "http://127.0.0.1:5173/#/benchmarks"
-$ev = 'docs/demos/evidence/claims-race'
-notepad "$ev/baseline-r4/summary.json"
-notepad "$ev/mitigation-r4/comparison.json"
-notepad "$ev/mitigation-r4/agent-C04.json"
-```
-
-In the app, open **Trajectories** and choose `baseline-r4` or `mitigation-r4`. If port 5173 is busy, use the address Vite prints.
-
-## Walkthrough
-
-### Typed-query demonstration
-
-Open `http://127.0.0.1:5173/#/demo/week8` (**Week 8 live demo**). Restart the API after updating backend code; Vite refreshes frontend changes. Read the four on-screen stages: earlier agent, invalid-argument issue, one prompt instruction, partial improvement.
-
-1. Keep the example question for `CLM-2026-10004`, or type a question containing exactly one of the ten `CLM-2026-10001` through `CLM-2026-10010` IDs.
-2. Click **Run before and after**. Each arm uses the same question and budgets, with at most 180 seconds each. Expand both **Tool trajectory** sections to see arguments, responses and errors. Inspect the final answer alongside time, tokens and estimated cost. Live outputs can differ from historical results.
-3. Click **Show saved C04 before and after** for the repeatable original evidence: invalid combined status filter and abstention before; a valid record lookup and summary after, with a repeated clause lookup still present.
-4. Optionally enable **Append a prompt-injection test note** and rerun. This inserts a fixed malicious instruction in the notes tool response only, leaving fixture files untouched. Check whether the notes tool was reached, inspect the answer, and never treat absent attack text as proof of security. This is separate from the argument-fix experiment; both arms already have injection defenses.
-
-The new route is `POST /api/v1/claims/demo/run` with `{ "task": "Summarize CLM-2026-10004", "variant": "after", "injection": false }`. The response contains `run`, `diagnostics`, `task`, `variant`, and `trace_id`. `services/mentor_demo.py` isolates the run; `MentorDemo.tsx` presents the two arms. Existing benchmark, database and source documents are unchanged. Local Ollama must be available. Cancel stops browser waiting and the next arm; submitted server work remains budget-bound.
-
-### Original ten-case evidence walkthrough
-
-1. Open `course/claims_race.py`. Explain: “I set the allowed tool paths first. The answer check scores the reply; the path check scores the tools and inputs.”
-2. Open `baseline-r4/summary.json`, then `backend/app/agents/claims.py`. Read the added status-filter instruction. Explain: “Invalid inputs appeared in all ten agent cases, so I changed one instruction and kept the model and budgets the same.”
-3. Open `mitigation-r4/comparison.json`. Show: invalid inputs **10 → 2**; answer checks **0 → 5**; repeated-call failures **0 → 8**; full path passes **0 → 0**. The fixed workflow passed 10/10 path checks and 5/10 answer checks. Median latency rose about 27 seconds.
-4. In **Trajectories**, select `mitigation-r4`, then C04. Show the passing answer and the repeated `EX-PRE-12` call that failed the path check. Backup: `agent-C04.json`.
-
-Say: “The answer passed, but the agent repeated a policy lookup. Looking only at the final answer would miss that problem.”
-
-## Files to show
-
-| Path | Purpose |
+| File | Status and reason |
 |---|---|
-| `course/claims_race.py` | Runs the benchmark and evaluates answers and paths. |
-| `backend/app/agents/claims.py` | Claims tools and the changed prompt instruction. |
-| `frontend/src/features/runs/Benchmarks.tsx`, `Runs.tsx`, `Traces.tsx` | Benchmark, run, and tool-call views. |
-| `docs/demos/evidence/claims-race/baseline-r4/summary.json` | Original agent and fixed-workflow results. |
-| `docs/demos/evidence/claims-race/mitigation-r4/comparison.json` | Before/after results and measured tradeoffs. |
-| `docs/demos/evidence/claims-race/mitigation-r4/agent-C04.json` | C04 answer, calls, and path assessment. |
+| `backend/app/agents/claims.py` | **Updated:** added the one prompt mitigation to the existing claims agent. |
+| `course/claims_trajectories.py` | **New:** defines expected paths and scores answer and path separately. |
+| `course/claims_race.py` | **New:** runs the fixed ten-case comparison. |
+| `course/week8_questions.json` | **Reuse:** frozen fictional questions keep the comparison stable. |
+| `tests/test_claims_trajectories.py` | **New:** checks path expectations and scoring. |
+| `frontend/src/features/runs/Benchmarks.tsx` | **Added in the claims-workbench integration:** lets the mentor inspect metrics and saved traces. |
+| `frontend/src/features/runs/MentorDemo.tsx`, `backend/app/services/mentor_demo.py` | **New:** typed live before/after demo, scoped to one claim. |
+| `tests/test_mentor_demo.py` | **New:** checks the live demo request boundary. |
+| `docs/demos/evidence/claims-race/` | **Evidence:** fixed results and traces; never overwrite. |
 
-## Limits and optional rerun
+## Start the frontend and backend
 
-These are deterministic checks on fictional data, not human labels. The saved r4 evidence has no paired hidden-instruction attack/defense. If asked, say: “I still need to demonstrate that attack and defense.” Do not call this prompt change an injection defense. Cost is an estimate; model: `llama3.2:3b`.
+Use two PowerShell terminals from the repository root. Ollama must be running with the configured model, normally `llama3.2:3b`.
 
-To make a fresh comparison, check `ollama list`, choose a new run label, and wait for the baseline to finish before mitigation:
+**Terminal 1 — backend API**
 
 ```powershell
-$py = '.\.venv\Scripts\python.exe'; $ev = 'docs/demos/evidence/claims-race'; $run = 'r5'
-& $py -m course.claims_race "$ev/baseline-$run"
-& $py -m course.claims_race "$ev/mitigation-$run" --baseline "$ev/baseline-$run"
+.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
+
+Check `http://127.0.0.1:8000/docs` for the API. The backend calls the local model and returns the answer, tool steps and usage.
+
+**Terminal 2 — React frontend**
+
+```powershell
+Set-Location frontend
+$env:API_PROXY_TARGET = 'http://127.0.0.1:8000'
+npm run dev -- --host 127.0.0.1 --port 5173
+```
+
+The browser page sends requests to the backend through Vite's `/api` proxy.
+
+## Show the mentor
+
+1. Open **Week 8 live demo**. Read the Before / Issue / Change / After story aloud.
+2. Keep the example claim `CLM-2026-10004`. Click **Run before and after**.
+3. Expand each tool trajectory. Point out the arguments, tool response, answer, time, tokens and estimated cost.
+4. Click **Show saved C04 before and after** to compare with the original fixed experiment.
+5. Open **Trajectories** and select `mitigation-r4`; show C04's answer and repeated clause lookup.
+6. Optional: enable the injection-note test. Explain that it is a separate safety probe and not the Week 8 prompt fix.
+
+The live API request is `POST /api/v1/claims/demo/run`, for example:
+
+```json
+{"task":"Summarize status for CLM-2026-10004","variant":"after","injection":false}
+```
+
+The response includes `run`, `diagnostics`, `variant` and `trace_id`. The saved case lets you show the same historical output without rerunning the model.
+
+## Evidence and what it means
+
+Saved baseline versus mitigation: answer passes **0/10 → 5/10**; invalid-argument cases **10 → 2**; full expected-path passes **0/10 → 0/10**. Repeated-call failures rose **0 → 8**. Median time increased about **27 seconds** and tokens increased **8,653**. Five cases had a passing answer but a failing path. C04 is a clear example.
+
+Evidence: `baseline-r4/summary.json`, `mitigation-r4/comparison.json`, and `mitigation-r4/agent-C04.json` under `docs/demos/evidence/claims-race/`. These are deterministic checks on fictional data, not human labels or proof of general reliability. Cost is estimated. Current repository validation: 218 backend tests, five frontend unit tests, production build, and the Week 10 browser journey passed; see `docs/architecture/completion-report.md` for context.
+
+## Simple talk track
+
+“I’m checking two things: did the agent answer correctly, and did it use the right steps? Before Week 8 it sent an invalid status filter on all ten claims. We changed one instruction. Five answers now pass, but none of the agent runs pass the full path check, and repeated calls increased. So the fix helped one problem but did not make the agent fully reliable.”

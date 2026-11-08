@@ -84,3 +84,6 @@ Amend approved scope using [change control](README.md).
 
 ## Execution amendment - 2026-11-06
 User-authorized integration adds claims benchmark/run APIs and React MCP inventory plus discovered-tool run traces while retaining the separately reviewed Week 09 local SDK evidence and zero-agent-diff snapshot. Local MCP fixture and gateway behavior are covered by integration tests. Real platform credentials/data, personal annotation and a separate person's peer call remain pending.
+
+## Mentor handoff documentation amendment - 2026-11-08
+Keep `docs/demos/week-09-demo.md` as the single Week 9 mentor guide. It must explain the pre-Week-9 tools and access gap, state the configuration change, name the main files and their purposes, include frontend and backend demo steps, point to saved protocol evidence, and provide a short observer-friendly spoken explanation. Keep it near 70 lines and distinguish local fixtures from a real claims platform.
