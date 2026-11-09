@@ -9,6 +9,8 @@
 
 One claims agent read the record, notes and clauses, then chose tools and wrote the answer. That is simple, but it gives one prompt the whole job. Our first live team sample also showed a risk: free-form synthesis attached a missing-estimate detail to the wrong numeric claim context and abstained.
 
+**Everyday example:** One employee used to check the whole claim alone. Now a manager asks one helper to check exclusions and another to summarize the adjuster's note, then checks their sources before answering. The sample claim `CLM-2026-10001` is fictional training data.
+
 ## What we changed and why
 
 We added one manager and two narrow specialists: coverage/exclusions and adjuster notes. They run concurrently on relevant read-only evidence. The manager checks exact source quotations and builds a grounded summary. We then raced that team against the original agent using identical questions and the same deterministic Week 8 judge. A separate injected 500 checks the failure path. We report the bill as well as the pass rate.
@@ -74,3 +76,5 @@ This race used fictional Week-7/8 cases and the unchanged Week 8 assessor; the e
 ## Simple talk track
 
 “Before Week 10, one agent did every step. We added a manager with two focused helpers and measured whether that helped. On this provisional test, the team scored better and was faster, used fewer tokens, and had a lower estimated cost. When the coverage helper failed, the manager stopped safely. I still need the exact Week-6 claims questions and judge before I can call this the final required comparison.”
+
+**If they ask why use a team:** “Use a team only if the measured result is better enough to justify its cost. This test says the team did better on these cases; it does not prove every team will be better.”

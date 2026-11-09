@@ -9,6 +9,8 @@
 
 The host connected to the policy MCP server and discovered two tools: search policy documents and read a policy. That was enough for policy questions, but not for a question like “What is the status of claim CLM-2024-88120?” The host had no claims-status or adjuster-notes tool to call. Policy wording cannot tell us the current status of one claim.
 
+**Everyday example:** Imagine a receptionist who has a policy handbook but no phone number for the claims desk. The receptionist cannot look up a claim until we connect that department. MCP is the agreed plug that lets the AI host discover and use its tools. This is a realistic fictional claim, not a real customer record.
+
 ## What we changed and why
 
 We added a local fictional claims MCP server and connected it in the host configuration. The host now discovers two more tools for claim status and adjuster notes. The model still runs in the host; the MCP server returns data. In the recorded server-one-to-server-two comparison, the agent files were byte-identical. This shows configuration-based tool discovery, not a real insurer integration.
@@ -76,3 +78,5 @@ The claims MCP server is fictional and local. Saved wire notes need the learner'
 ## Simple talk track
 
 “Before Week 9 the host could read policy tools, but it could not look up this claim's status. I added a claims server in configuration. The host discovers two new tools and calls the status tool. The model stays in the host, while the server supplies the claim data. This is a local demo, not a connection to a real insurer.”
+
+**If they ask what MCP does:** “It is a standard way for an AI app to find out which tools another service offers and how to call them. It connects the app to tools; it does not make the answer automatically correct.”

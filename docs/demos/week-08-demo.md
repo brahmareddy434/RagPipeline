@@ -9,6 +9,8 @@
 
 The earlier claims agent could read claim records, adjuster notes and policy clauses. It chose tool names and arguments itself. In the ten-case baseline, it combined several possible statuses into one invalid filter on every case. The record lookup failed, so it often could not produce a useful answer. The baseline had 0/10 answer passes and 0/10 expected-path passes.
 
+**Everyday example:** It is like a form that asks you to select one claim status. The AI typed every possible status into the box, so the form rejected it. In this demo, `CLM-2026-10004` is a realistic training example, not a real person's claim.
+
 ## What we changed and why
 
 We measured the common failure first, then changed one prompt instruction: omit the optional status filter unless the question needs it; if needed, send one valid status. The model, ten claims, tools and budget stayed fixed. We added expected tool paths and checks so the final answer and the steps are scored separately. This tests whether the prompt fix addresses the observed problem without hiding regressions.
@@ -77,3 +79,5 @@ Evidence: `baseline-r4/summary.json`, `mitigation-r4/comparison.json`, and `miti
 ## Simple talk track
 
 “I’m checking two things: did the agent answer correctly, and did it use the right steps? Before Week 8 it sent an invalid status filter on all ten claims. We changed one instruction. Five answers now pass, but none of the agent runs pass the full path check, and repeated calls increased. So the fix helped one problem but did not make the agent fully reliable.”
+
+**If they ask what “path” means:** “The answer is what the AI said. The path is the steps it took to get that answer. Like math class: a correct final number does not prove the student used the right method.”
